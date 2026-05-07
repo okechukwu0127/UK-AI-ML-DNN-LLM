@@ -1,0 +1,918 @@
+[
+  {
+    "timestamp": "2026-05-05T12:47:03.931832",
+    "route": "/api/search",
+    "method": "GET",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "candidates": [
+        {
+          "source": "header_User-Agent",
+          "value_preview": "Thunder Client (https://www.thunderclient.com)"
+        }
+      ]
+    },
+    "prediction": {
+      "is_malicious": true,
+      "confidence": 0.8131,
+      "attack_type": "Unknown",
+      "details": [
+        {
+          "is_malicious": "True",
+          "confidence": 0.8131,
+          "prediction_score": 0.8131,
+          "attack_type": "Unknown",
+          "explanation": "Detected Unknown SQL injection pattern | Medium confidence detection (81%)"
+        }
+      ]
+    },
+    "is_malicious": true,
+    "confidence": 0.8131,
+    "attack_type": "Unknown",
+    "blocked": true
+  },
+  {
+    "timestamp": "2026-05-05T12:51:07.125977",
+    "route": "/api/search",
+    "method": "GET",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "candidates": [
+        {
+          "source": "query_param_q",
+          "value_preview": "1 UNION SELECT * FROM users"
+        },
+        {
+          "source": "header_User-Agent",
+          "value_preview": "Thunder Client (https://www.thunderclient.com)"
+        }
+      ]
+    },
+    "prediction": {
+      "is_malicious": true,
+      "confidence": 0.8131,
+      "attack_type": "Unknown",
+      "details": [
+        {
+          "is_malicious": "True",
+          "confidence": 0.6523,
+          "prediction_score": 0.6523,
+          "attack_type": "Union-based",
+          "explanation": "Detected Union-based SQL injection pattern | UNION SELECT pattern detected - common for data extraction"
+        },
+        {
+          "is_malicious": "True",
+          "confidence": 0.8131,
+          "prediction_score": 0.8131,
+          "attack_type": "Unknown",
+          "explanation": "Detected Unknown SQL injection pattern | Medium confidence detection (81%)"
+        }
+      ]
+    },
+    "is_malicious": true,
+    "confidence": 0.8131,
+    "attack_type": "Unknown",
+    "blocked": true
+  },
+  {
+    "timestamp": "2026-05-05T12:57:35.001492",
+    "route": "/api/login",
+    "method": "POST",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "candidates": [
+        {
+          "source": "header_User-Agent",
+          "value_preview": "Thunder Client (https://www.thunderclient.com)"
+        }
+      ]
+    },
+    "prediction": {
+      "is_malicious": true,
+      "confidence": 0.8131,
+      "attack_type": "Unknown",
+      "details": [
+        {
+          "is_malicious": "True",
+          "confidence": 0.8131,
+          "prediction_score": 0.8131,
+          "attack_type": "Unknown",
+          "explanation": "Detected Unknown SQL injection pattern | Medium confidence detection (81%)"
+        }
+      ]
+    },
+    "is_malicious": true,
+    "confidence": 0.8131,
+    "attack_type": "Unknown",
+    "blocked": true
+  },
+  {
+    "timestamp": "2026-05-05T12:57:48.518204",
+    "route": "/api/login",
+    "method": "POST",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "candidates": [
+        {
+          "source": "header_User-Agent",
+          "value_preview": "Thunder Client (https://www.thunderclient.com)"
+        }
+      ]
+    },
+    "prediction": {
+      "is_malicious": true,
+      "confidence": 0.8131,
+      "attack_type": "Unknown",
+      "details": [
+        {
+          "is_malicious": "True",
+          "confidence": 0.8131,
+          "prediction_score": 0.8131,
+          "attack_type": "Unknown",
+          "explanation": "Detected Unknown SQL injection pattern | Medium confidence detection (81%)"
+        }
+      ]
+    },
+    "is_malicious": true,
+    "confidence": 0.8131,
+    "attack_type": "Unknown",
+    "blocked": true
+  },
+  {
+    "timestamp": "2026-05-05T13:00:31.890947",
+    "route": "/api/orders",
+    "method": "POST",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "candidates": [
+        {
+          "source": "form_order_id",
+          "value_preview": "1'; DROP TABLE orders;--"
+        },
+        {
+          "source": "header_User-Agent",
+          "value_preview": "Thunder Client (https://www.thunderclient.com)"
+        }
+      ]
+    },
+    "prediction": {
+      "is_malicious": true,
+      "confidence": 0.9641,
+      "attack_type": "Stack-queries-based",
+      "details": [
+        {
+          "is_malicious": "True",
+          "confidence": 0.9641,
+          "prediction_score": 0.9641,
+          "attack_type": "Stack-queries-based",
+          "explanation": "Detected Stack-queries-based SQL injection pattern | Stacked query detected - multiple SQL statements | SQL comment detected - may be attempting to truncate query | High confidence detection (96%)"
+        },
+        {
+          "is_malicious": "True",
+          "confidence": 0.8131,
+          "prediction_score": 0.8131,
+          "attack_type": "Unknown",
+          "explanation": "Detected Unknown SQL injection pattern | Medium confidence detection (81%)"
+        }
+      ]
+    },
+    "is_malicious": true,
+    "confidence": 0.9641,
+    "attack_type": "Stack-queries-based",
+    "blocked": true
+  },
+  {
+    "timestamp": "2026-05-05T13:00:49.724020",
+    "route": "/api/orders",
+    "method": "POST",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "candidates": [
+        {
+          "source": "header_User-Agent",
+          "value_preview": "Thunder Client (https://www.thunderclient.com)"
+        }
+      ]
+    },
+    "prediction": {
+      "is_malicious": true,
+      "confidence": 0.8131,
+      "attack_type": "Unknown",
+      "details": [
+        {
+          "is_malicious": "True",
+          "confidence": 0.8131,
+          "prediction_score": 0.8131,
+          "attack_type": "Unknown",
+          "explanation": "Detected Unknown SQL injection pattern | Medium confidence detection (81%)"
+        }
+      ]
+    },
+    "is_malicious": true,
+    "confidence": 0.8131,
+    "attack_type": "Unknown",
+    "blocked": true
+  },
+  {
+    "timestamp": "2026-05-05T13:01:01.062260",
+    "route": "/api/orders",
+    "method": "POST",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "candidates": [
+        {
+          "source": "form_order_id",
+          "value_preview": "1'; DROP TABLE orders;--"
+        },
+        {
+          "source": "header_User-Agent",
+          "value_preview": "Thunder Client (https://www.thunderclient.com)"
+        }
+      ]
+    },
+    "prediction": {
+      "is_malicious": true,
+      "confidence": 0.9641,
+      "attack_type": "Stack-queries-based",
+      "details": [
+        {
+          "is_malicious": "True",
+          "confidence": 0.9641,
+          "prediction_score": 0.9641,
+          "attack_type": "Stack-queries-based",
+          "explanation": "Detected Stack-queries-based SQL injection pattern | Stacked query detected - multiple SQL statements | SQL comment detected - may be attempting to truncate query | High confidence detection (96%)"
+        },
+        {
+          "is_malicious": "True",
+          "confidence": 0.8131,
+          "prediction_score": 0.8131,
+          "attack_type": "Unknown",
+          "explanation": "Detected Unknown SQL injection pattern | Medium confidence detection (81%)"
+        }
+      ]
+    },
+    "is_malicious": true,
+    "confidence": 0.9641,
+    "attack_type": "Stack-queries-based",
+    "blocked": true
+  },
+  {
+    "timestamp": "2026-05-05T13:01:17.119902",
+    "route": "/api/orders",
+    "method": "POST",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "candidates": [
+        {
+          "source": "header_User-Agent",
+          "value_preview": "Thunder Client (https://www.thunderclient.com)"
+        }
+      ]
+    },
+    "prediction": {
+      "is_malicious": true,
+      "confidence": 0.8131,
+      "attack_type": "Unknown",
+      "details": [
+        {
+          "is_malicious": "True",
+          "confidence": 0.8131,
+          "prediction_score": 0.8131,
+          "attack_type": "Unknown",
+          "explanation": "Detected Unknown SQL injection pattern | Medium confidence detection (81%)"
+        }
+      ]
+    },
+    "is_malicious": true,
+    "confidence": 0.8131,
+    "attack_type": "Unknown",
+    "blocked": true
+  },
+  {
+    "timestamp": "2026-05-05T13:01:21.217939",
+    "route": "/api/orders",
+    "method": "POST",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "candidates": [
+        {
+          "source": "form_order_id",
+          "value_preview": "1'; DROP TABLE orders;--"
+        },
+        {
+          "source": "header_User-Agent",
+          "value_preview": "Thunder Client (https://www.thunderclient.com)"
+        }
+      ]
+    },
+    "prediction": {
+      "is_malicious": true,
+      "confidence": 0.9641,
+      "attack_type": "Stack-queries-based",
+      "details": [
+        {
+          "is_malicious": "True",
+          "confidence": 0.9641,
+          "prediction_score": 0.9641,
+          "attack_type": "Stack-queries-based",
+          "explanation": "Detected Stack-queries-based SQL injection pattern | Stacked query detected - multiple SQL statements | SQL comment detected - may be attempting to truncate query | High confidence detection (96%)"
+        },
+        {
+          "is_malicious": "True",
+          "confidence": 0.8131,
+          "prediction_score": 0.8131,
+          "attack_type": "Unknown",
+          "explanation": "Detected Unknown SQL injection pattern | Medium confidence detection (81%)"
+        }
+      ]
+    },
+    "is_malicious": true,
+    "confidence": 0.9641,
+    "attack_type": "Stack-queries-based",
+    "blocked": true
+  },
+  {
+    "timestamp": "2026-05-05T13:12:04.466822",
+    "route": "/api/products/1",
+    "method": "GET",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "candidates": [
+        {
+          "source": "header_User-Agent",
+          "value_preview": "Thunder Client (https://www.thunderclient.com)"
+        }
+      ]
+    },
+    "prediction": {
+      "is_malicious": true,
+      "confidence": 0.8131,
+      "attack_type": "Unknown",
+      "details": [
+        {
+          "is_malicious": "True",
+          "confidence": 0.8131,
+          "prediction_score": 0.8131,
+          "attack_type": "Unknown",
+          "explanation": "Detected Unknown SQL injection pattern | Medium confidence detection (81%)"
+        }
+      ]
+    },
+    "is_malicious": true,
+    "confidence": 0.8131,
+    "attack_type": "Unknown",
+    "blocked": true
+  },
+  {
+    "timestamp": "2026-05-05T13:12:17.870968",
+    "route": "/api/products/1",
+    "method": "GET",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "candidates": [
+        {
+          "source": "header_User-Agent",
+          "value_preview": "Thunder Client (https://www.thunderclient.com)"
+        }
+      ]
+    },
+    "prediction": {
+      "is_malicious": true,
+      "confidence": 0.8131,
+      "attack_type": "Unknown",
+      "details": [
+        {
+          "is_malicious": "True",
+          "confidence": 0.8131,
+          "prediction_score": 0.8131,
+          "attack_type": "Unknown",
+          "explanation": "Detected Unknown SQL injection pattern | Medium confidence detection (81%)"
+        }
+      ]
+    },
+    "is_malicious": true,
+    "confidence": 0.8131,
+    "attack_type": "Unknown",
+    "blocked": true
+  },
+  {
+    "timestamp": "2026-05-05T13:13:33.339719",
+    "route": "/api/products/1",
+    "method": "GET",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "candidates": [
+        {
+          "source": "header_User-Agent",
+          "value_preview": "Thunder Client (https://www.thunderclient.com)"
+        }
+      ]
+    },
+    "prediction": {
+      "is_malicious": true,
+      "confidence": 0.8131,
+      "attack_type": "Unknown",
+      "details": [
+        {
+          "is_malicious": "True",
+          "confidence": 0.8131,
+          "prediction_score": 0.8131,
+          "attack_type": "Unknown",
+          "explanation": "Detected Unknown SQL injection pattern | Medium confidence detection (81%)"
+        }
+      ]
+    },
+    "is_malicious": true,
+    "confidence": 0.8131,
+    "attack_type": "Unknown",
+    "blocked": true
+  },
+  {
+    "timestamp": "2026-05-05T13:51:30.930824",
+    "route": "/api/users",
+    "method": "GET",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "candidates": [
+        {
+          "source": "header_User-Agent",
+          "value_preview": "PostmanRuntime/7.39.1"
+        }
+      ]
+    },
+    "prediction": {
+      "is_malicious": true,
+      "confidence": 0.8717,
+      "attack_type": "Unknown",
+      "details": [
+        {
+          "is_malicious": "True",
+          "confidence": 0.8717,
+          "prediction_score": 0.8717,
+          "attack_type": "Unknown",
+          "explanation": "Detected Unknown SQL injection pattern | Medium confidence detection (87%)"
+        }
+      ]
+    },
+    "is_malicious": true,
+    "confidence": 0.8717,
+    "attack_type": "Unknown",
+    "blocked": true
+  },
+  {
+    "timestamp": "2026-05-05T13:51:48.474604",
+    "route": "/api/login",
+    "method": "POST",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "candidates": [
+        {
+          "source": "header_User-Agent",
+          "value_preview": "PostmanRuntime/7.39.1"
+        }
+      ]
+    },
+    "prediction": {
+      "is_malicious": true,
+      "confidence": 0.8717,
+      "attack_type": "Unknown",
+      "details": [
+        {
+          "is_malicious": "True",
+          "confidence": 0.8717,
+          "prediction_score": 0.8717,
+          "attack_type": "Unknown",
+          "explanation": "Detected Unknown SQL injection pattern | Medium confidence detection (87%)"
+        }
+      ]
+    },
+    "is_malicious": true,
+    "confidence": 0.8717,
+    "attack_type": "Unknown",
+    "blocked": true
+  },
+  {
+    "timestamp": "2026-05-05T13:53:07.558608",
+    "route": "/api/users",
+    "method": "GET",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "candidates": [
+        {
+          "source": "header_User-Agent",
+          "value_preview": "PostmanRuntime/7.39.1"
+        }
+      ]
+    },
+    "prediction": {
+      "is_malicious": true,
+      "confidence": 0.8717,
+      "attack_type": "Unknown",
+      "details": [
+        {
+          "is_malicious": "True",
+          "confidence": 0.8717,
+          "prediction_score": 0.8717,
+          "attack_type": "Unknown",
+          "explanation": "Detected Unknown SQL injection pattern | Medium confidence detection (87%)"
+        }
+      ]
+    },
+    "is_malicious": true,
+    "confidence": 0.8717,
+    "attack_type": "Unknown",
+    "blocked": true
+  },
+  {
+    "timestamp": "2026-05-05T13:53:32.851557",
+    "route": "/api/login",
+    "method": "POST",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "candidates": [
+        {
+          "source": "header_User-Agent",
+          "value_preview": "PostmanRuntime/7.39.1"
+        }
+      ]
+    },
+    "prediction": {
+      "is_malicious": true,
+      "confidence": 0.8717,
+      "attack_type": "Unknown",
+      "details": [
+        {
+          "is_malicious": "True",
+          "confidence": 0.8717,
+          "prediction_score": 0.8717,
+          "attack_type": "Unknown",
+          "explanation": "Detected Unknown SQL injection pattern | Medium confidence detection (87%)"
+        }
+      ]
+    },
+    "is_malicious": true,
+    "confidence": 0.8717,
+    "attack_type": "Unknown",
+    "blocked": true
+  },
+  {
+    "timestamp": "2026-05-05T14:47:03.127845",
+    "route": "/api/users",
+    "method": "GET",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "candidates": [
+        {
+          "source": "header_User-Agent",
+          "value_preview": "PostmanRuntime/7.39.1"
+        }
+      ]
+    },
+    "prediction": {
+      "is_malicious": true,
+      "confidence": 0.9287,
+      "attack_type": "Unknown",
+      "details": [
+        {
+          "is_malicious": "True",
+          "confidence": 0.9287,
+          "prediction_score": 0.9287,
+          "attack_type": "Unknown",
+          "explanation": "Detected Unknown SQL injection pattern | High confidence detection (93%)"
+        }
+      ]
+    },
+    "is_malicious": true,
+    "confidence": 0.9287,
+    "attack_type": "Unknown",
+    "blocked": true
+  },
+  {
+    "timestamp": "2026-05-05T14:50:38.612479",
+    "route": "/api/users",
+    "method": "GET",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "candidates": [
+        {
+          "source": "query_param_id",
+          "value_preview": "1 UNION SELECT * FROM users"
+        },
+        {
+          "source": "header_User-Agent",
+          "value_preview": "PostmanRuntime/7.39.1"
+        }
+      ]
+    },
+    "prediction": {
+      "is_malicious": true,
+      "confidence": 0.9287,
+      "attack_type": "Unknown",
+      "details": [
+        {
+          "is_malicious": "True",
+          "confidence": 0.6702,
+          "prediction_score": 0.6702,
+          "attack_type": "Union-based",
+          "explanation": "Detected Union-based SQL injection pattern | UNION SELECT pattern detected - common for data extraction"
+        },
+        {
+          "is_malicious": "True",
+          "confidence": 0.9287,
+          "prediction_score": 0.9287,
+          "attack_type": "Unknown",
+          "explanation": "Detected Unknown SQL injection pattern | High confidence detection (93%)"
+        }
+      ]
+    },
+    "is_malicious": true,
+    "confidence": 0.9287,
+    "attack_type": "Unknown",
+    "blocked": true
+  },
+  {
+    "timestamp": "2026-05-05T14:51:11.050526",
+    "route": "/api/products/1' OR '1'='1",
+    "method": "GET",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "candidates": [
+        {
+          "source": "header_User-Agent",
+          "value_preview": "PostmanRuntime/7.39.1"
+        }
+      ]
+    },
+    "prediction": {
+      "is_malicious": true,
+      "confidence": 0.9287,
+      "attack_type": "Unknown",
+      "details": [
+        {
+          "is_malicious": "True",
+          "confidence": 0.9287,
+          "prediction_score": 0.9287,
+          "attack_type": "Unknown",
+          "explanation": "Detected Unknown SQL injection pattern | High confidence detection (93%)"
+        }
+      ]
+    },
+    "is_malicious": true,
+    "confidence": 0.9287,
+    "attack_type": "Unknown",
+    "blocked": true
+  },
+  {
+    "timestamp": "2026-05-05T14:51:27.923967",
+    "route": "/api/login",
+    "method": "POST",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "candidates": [
+        {
+          "source": "header_User-Agent",
+          "value_preview": "PostmanRuntime/7.39.1"
+        }
+      ]
+    },
+    "prediction": {
+      "is_malicious": true,
+      "confidence": 0.9287,
+      "attack_type": "Unknown",
+      "details": [
+        {
+          "is_malicious": "True",
+          "confidence": 0.9287,
+          "prediction_score": 0.9287,
+          "attack_type": "Unknown",
+          "explanation": "Detected Unknown SQL injection pattern | High confidence detection (93%)"
+        }
+      ]
+    },
+    "is_malicious": true,
+    "confidence": 0.9287,
+    "attack_type": "Unknown",
+    "blocked": true
+  },
+  {
+    "timestamp": "2026-05-05T14:51:51.773584",
+    "route": "/api/orders",
+    "method": "POST",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "candidates": [
+        {
+          "source": "json_body_order_id",
+          "value_preview": "1; DROP TABLE orders;--"
+        },
+        {
+          "source": "header_User-Agent",
+          "value_preview": "PostmanRuntime/7.39.1"
+        }
+      ]
+    },
+    "prediction": {
+      "is_malicious": true,
+      "confidence": 0.9424,
+      "attack_type": "Stack-queries-based",
+      "details": [
+        {
+          "is_malicious": "True",
+          "confidence": 0.9424,
+          "prediction_score": 0.9424,
+          "attack_type": "Stack-queries-based",
+          "explanation": "Detected Stack-queries-based SQL injection pattern | Stacked query detected - multiple SQL statements | SQL comment detected - may be attempting to truncate query | High confidence detection (94%)"
+        },
+        {
+          "is_malicious": "True",
+          "confidence": 0.9287,
+          "prediction_score": 0.9287,
+          "attack_type": "Unknown",
+          "explanation": "Detected Unknown SQL injection pattern | High confidence detection (93%)"
+        }
+      ]
+    },
+    "is_malicious": true,
+    "confidence": 0.9424,
+    "attack_type": "Stack-queries-based",
+    "blocked": true
+  },
+  {
+    "timestamp": "2026-05-05T15:26:46.323883",
+    "route": "/api/users",
+    "method": "GET",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "candidate_count": 2,
+      "sql_like_candidate_count": 0,
+      "candidates": []
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.0,
+      "attack_type": null,
+      "details": []
+    },
+    "is_malicious": false,
+    "confidence": 0.0,
+    "attack_type": null,
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-05T15:27:19.301783",
+    "route": "/api/login",
+    "method": "POST",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "candidate_count": 1,
+      "sql_like_candidate_count": 0,
+      "candidates": []
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.0,
+      "attack_type": null,
+      "details": []
+    },
+    "is_malicious": false,
+    "confidence": 0.0,
+    "attack_type": null,
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-05T15:27:29.256010",
+    "route": "/api/users",
+    "method": "GET",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "candidate_count": 1,
+      "sql_like_candidate_count": 1,
+      "candidates": [
+        {
+          "source": "query_param_id",
+          "value_preview": "1 UNION SELECT * FROM users"
+        }
+      ]
+    },
+    "prediction": {
+      "is_malicious": true,
+      "confidence": 0.6609,
+      "attack_type": "Union-based",
+      "details": [
+        {
+          "is_malicious": true,
+          "confidence": 0.6609,
+          "prediction_score": 0.6609,
+          "attack_type": "Union-based",
+          "explanation": "Detected Union-based SQL injection pattern | UNION SELECT pattern detected - common for data extraction"
+        }
+      ]
+    },
+    "is_malicious": true,
+    "confidence": 0.6609,
+    "attack_type": "Union-based",
+    "blocked": true
+  },
+  {
+    "timestamp": "2026-05-05T15:27:54.105296",
+    "route": "/api/products/1' OR '1'='1",
+    "method": "GET",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "candidate_count": 1,
+      "sql_like_candidate_count": 1,
+      "candidates": [
+        {
+          "source": "path_param_product_id",
+          "value_preview": "1' OR '1'='1"
+        }
+      ]
+    },
+    "prediction": {
+      "is_malicious": true,
+      "confidence": 0.9497,
+      "attack_type": "Boolean-based",
+      "details": [
+        {
+          "is_malicious": true,
+          "confidence": 0.9497,
+          "prediction_score": 0.9497,
+          "attack_type": "Boolean-based",
+          "explanation": "Detected Boolean-based SQL injection pattern | Boolean tautology pattern detected - attempts to bypass authentication | High confidence detection (95%)"
+        }
+      ]
+    },
+    "is_malicious": true,
+    "confidence": 0.9497,
+    "attack_type": "Boolean-based",
+    "blocked": true
+  },
+  {
+    "timestamp": "2026-05-05T15:28:05.382343",
+    "route": "/api/login",
+    "method": "POST",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "candidate_count": 2,
+      "sql_like_candidate_count": 1,
+      "candidates": [
+        {
+          "source": "json_body_username",
+          "value_preview": "admin'--"
+        }
+      ]
+    },
+    "prediction": {
+      "is_malicious": true,
+      "confidence": 0.9666,
+      "attack_type": "Comment-based",
+      "details": [
+        {
+          "is_malicious": true,
+          "confidence": 0.9666,
+          "prediction_score": 0.9666,
+          "attack_type": "Comment-based",
+          "explanation": "Detected Comment-based SQL injection pattern | SQL comment detected - may be attempting to truncate query | High confidence detection (97%)"
+        }
+      ]
+    },
+    "is_malicious": true,
+    "confidence": 0.9666,
+    "attack_type": "Comment-based",
+    "blocked": true
+  },
+  {
+    "timestamp": "2026-05-05T15:28:32.180798",
+    "route": "/api/orders",
+    "method": "POST",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "candidate_count": 1,
+      "sql_like_candidate_count": 1,
+      "candidates": [
+        {
+          "source": "json_body_order_id",
+          "value_preview": "1; DROP TABLE orders;--"
+        }
+      ]
+    },
+    "prediction": {
+      "is_malicious": true,
+      "confidence": 0.9455,
+      "attack_type": "Stack-queries-based",
+      "details": [
+        {
+          "is_malicious": true,
+          "confidence": 0.9455,
+          "prediction_score": 0.9455,
+          "attack_type": "Stack-queries-based",
+          "explanation": "Detected Stack-queries-based SQL injection pattern | Stacked query detected - multiple SQL statements | SQL comment detected - may be attempting to truncate query | High confidence detection (95%)"
+        }
+      ]
+    },
+    "is_malicious": true,
+    "confidence": 0.9455,
+    "attack_type": "Stack-queries-based",
+    "blocked": true
+  }
+]

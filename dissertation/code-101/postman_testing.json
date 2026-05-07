@@ -1,0 +1,201 @@
+{
+  "info": {
+    "name": "SQL Injection Detection Tests",
+    "description": "Test suite for SQL injection detection middleware",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "BENIGN REQUESTS",
+      "item": [
+        {
+          "name": "GET Users - Normal",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:5000/api/users?user_id=123&name=john",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "users"],
+              "query": [
+                { "key": "user_id", "value": "123" },
+                { "key": "name", "value": "john" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST Login - Normal",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "http://localhost:5000/api/login",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "login"]
+            },
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"username\": \"admin\", \"password\": \"secret123\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "MALICIOUS REQUESTS - Union Based",
+      "item": [
+        {
+          "name": "Union Injection in Query Param",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:5000/api/users?id=1 UNION SELECT * FROM users",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "users"],
+              "query": [{ "key": "id", "value": "1 UNION SELECT * FROM users" }]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "MALICIOUS REQUESTS - Boolean Based",
+      "item": [
+        {
+          "name": "OR 1=1 Injection",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:5000/api/products/1%27%20OR%20%271%27=%271",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "products", "1%27%20OR%20%271%27=%271"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "MALICIOUS REQUESTS - Login Bypass",
+      "item": [
+        {
+          "name": "Authentication Bypass",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "http://localhost:5000/api/login",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "login"]
+            },
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"username\": \"admin'--\", \"password\": \"anything\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "MALICIOUS REQUESTS - Stacked Queries",
+      "item": [
+        {
+          "name": "DROP Table Injection",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "http://localhost:5000/api/orders",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "orders"]
+            },
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"order_id\": \"1; DROP TABLE orders;--\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "MONITORING ENDPOINTS",
+      "item": [
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:5000/health",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["health"]
+            }
+          }
+        },
+        {
+          "name": "View Statistics",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:5000/admin/stats",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["admin", "stats"]
+            }
+          }
+        },
+        {
+          "name": "Single Detection Test",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "http://localhost:5000/detect_single",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["detect_single"]
+            },
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"sql_query\": \"SELECT * FROM users WHERE id = 1' OR '1'='1\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

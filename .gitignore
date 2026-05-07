@@ -1,0 +1,12 @@
+# OSX
+#
+.DS_Store
+#
+7CS036-Intelligent Agents/
+dissertation/code-101/sqli/
+7CS033-Data Mining & Informatics/workshop_5/.ipynb_checkpoints/UK_online_retail-checkpoint.csv
+7CS033-Data Mining & Informatics/workshop_5/UK_online_retail.csv
+7CS033-Data Mining & Informatics/workshop_6/Reviews.csv
+dissertation/code-101/rbsqli_dataset.csv
+dissertation/code-101/rbsqli_dataset_1k.csv
+dissertation/sqli_guard/rbsqli_dataset.csv
