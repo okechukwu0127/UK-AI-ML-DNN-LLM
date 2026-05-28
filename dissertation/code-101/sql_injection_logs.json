@@ -914,5 +914,5405 @@
     "confidence": 0.9455,
     "attack_type": "Stack-queries-based",
     "blocked": true
+  },
+  {
+    "timestamp": "2026-05-28T18:10:35.876890",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "EXEC COUNT(*) FROM employees WHERE email LIKE NULL AND email LIKE 'pending'",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9998,
+      "attack_type": "Boolean-based",
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9998,
+          "prediction_score": 0.0002,
+          "attack_type": "Boolean-based",
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0002
+    },
+    "is_malicious": false,
+    "confidence": 0.9998,
+    "attack_type": "Boolean-based",
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:35.893737",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "INSERT MAX(price) FROM accounts WHERE updated_at < 'test@example.com' AND updated_at < 'active'",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9998,
+      "attack_type": "Boolean-based",
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9998,
+          "prediction_score": 0.0002,
+          "attack_type": "Boolean-based",
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0002
+    },
+    "is_malicious": false,
+    "confidence": 0.9998,
+    "attack_type": "Boolean-based",
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:35.909697",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "UPDATE created_at, updated_at FROM users WHERE product_id < 'safe' OR product_id < '2024-01-01'",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9998,
+      "attack_type": "Boolean-based",
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9998,
+          "prediction_score": 0.0002,
+          "attack_type": "Boolean-based",
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0002
+    },
+    "is_malicious": false,
+    "confidence": 0.9998,
+    "attack_type": "Boolean-based",
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:35.931504",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "EXEC price, status FROM passwords WHERE created_at <= 'safe' OR created_at <= 'shipped'",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9998,
+      "attack_type": "Boolean-based",
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9998,
+          "prediction_score": 0.0002,
+          "attack_type": "Boolean-based",
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0002
+    },
+    "is_malicious": false,
+    "confidence": 0.9998,
+    "attack_type": "Boolean-based",
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:35.946588",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "SELECT id, email FROM sessions WHERE id >= 1 LIKE IF(7423=7424) SELECT 7423 ELSE DROP FUNCTION xcjl-- --",
+        "vulnerability_status": "Yes",
+        "injection_type": "Error-Based"
+      }
+    },
+    "prediction": {
+      "is_malicious": true,
+      "confidence": 0.9997,
+      "attack_type": "Comment-based",
+      "details": [
+        {
+          "is_malicious": true,
+          "confidence": 0.9997,
+          "prediction_score": 0.9997,
+          "attack_type": "Comment-based",
+          "explanation": "Detected Comment-based SQL injection pattern | SQL comment detected - may be attempting to truncate query | High confidence detection (100%)"
+        }
+      ],
+      "prediction_score": 0.9997
+    },
+    "is_malicious": true,
+    "confidence": 0.9997,
+    "attack_type": "Comment-based",
+    "blocked": true
+  },
+  {
+    "timestamp": "2026-05-28T18:10:35.960208",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "DELETE * FROM credentials WHERE email BETWEEN 'active' OR email BETWEEN '2024-01-01'",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9997,
+      "attack_type": "Boolean-based",
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9997,
+          "prediction_score": 0.0003,
+          "attack_type": "Boolean-based",
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0003
+    },
+    "is_malicious": false,
+    "confidence": 0.9997,
+    "attack_type": "Boolean-based",
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:35.976323",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "CALL MAX(price) FROM credentials WHERE created_at != '2024-01-01' NOT created_at != NULL",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9999,
+      "attack_type": null,
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9999,
+          "prediction_score": 0.0001,
+          "attack_type": null,
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0001
+    },
+    "is_malicious": false,
+    "confidence": 0.9999,
+    "attack_type": null,
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:35.992154",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "SELECT user_id, product_id FROM passwords WHERE id != 1 NOT &&SLEEP(5) #",
+        "vulnerability_status": "Yes",
+        "injection_type": "Time-Based"
+      }
+    },
+    "prediction": {
+      "is_malicious": true,
+      "confidence": 0.9992,
+      "attack_type": "Time-based",
+      "details": [
+        {
+          "is_malicious": true,
+          "confidence": 0.9992,
+          "prediction_score": 0.9992,
+          "attack_type": "Time-based",
+          "explanation": "Detected Time-based SQL injection pattern | Time-based delay function detected - used for blind injection | SQL comment detected - may be attempting to truncate query | High confidence detection (100%)"
+        }
+      ],
+      "prediction_score": 0.9992
+    },
+    "is_malicious": true,
+    "confidence": 0.9992,
+    "attack_type": "Time-based",
+    "blocked": true
+  },
+  {
+    "timestamp": "2026-05-28T18:10:36.007918",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "EXEC created_at, updated_at FROM login WHERE created_at >= 1 AND created_at >= 'active'",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9997,
+      "attack_type": "Boolean-based",
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9997,
+          "prediction_score": 0.0003,
+          "attack_type": "Boolean-based",
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0003
+    },
+    "is_malicious": false,
+    "confidence": 0.9997,
+    "attack_type": "Boolean-based",
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:36.025966",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "CALL created_at, updated_at FROM accounts WHERE status IN 'shipped' NOT status IN 'test@example.com'",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9998,
+      "attack_type": null,
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9998,
+          "prediction_score": 0.0002,
+          "attack_type": null,
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0002
+    },
+    "is_malicious": false,
+    "confidence": 0.9998,
+    "attack_type": null,
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:36.041098",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "INSERT price, status FROM sessions WHERE product_id IN NULL AND product_id IN 'active'",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9997,
+      "attack_type": "Boolean-based",
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9997,
+          "prediction_score": 0.0003,
+          "attack_type": "Boolean-based",
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0003
+    },
+    "is_malicious": false,
+    "confidence": 0.9997,
+    "attack_type": "Boolean-based",
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:36.056719",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "INSERT id, email FROM passwords WHERE user_id LIKE 'pending' NOT user_id LIKE 'test@example.com'",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9998,
+      "attack_type": null,
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9998,
+          "prediction_score": 0.0002,
+          "attack_type": null,
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0002
+    },
+    "is_malicious": false,
+    "confidence": 0.9998,
+    "attack_type": null,
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:36.072493",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "SELECT COUNT(*) FROM credentials WHERE id != 1 LIKE \" AND (SELECT * FROM users WHERE username='admin') IS NOT NULL -- #",
+        "vulnerability_status": "Yes",
+        "injection_type": "meta_based"
+      }
+    },
+    "prediction": {
+      "is_malicious": true,
+      "confidence": 0.9998,
+      "attack_type": "Comment-based",
+      "details": [
+        {
+          "is_malicious": true,
+          "confidence": 0.9998,
+          "prediction_score": 0.9998,
+          "attack_type": "Comment-based",
+          "explanation": "Detected Comment-based SQL injection pattern | SQL comment detected - may be attempting to truncate query | High confidence detection (100%)"
+        }
+      ],
+      "prediction_score": 0.9998
+    },
+    "is_malicious": true,
+    "confidence": 0.9998,
+    "attack_type": "Comment-based",
+    "blocked": true
+  },
+  {
+    "timestamp": "2026-05-28T18:10:36.088278",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "EXEC id, email FROM sessions WHERE price = 'test@example.com' AND price = 'safe'",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9967,
+      "attack_type": "Boolean-based",
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9967,
+          "prediction_score": 0.0033,
+          "attack_type": "Boolean-based",
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0033
+    },
+    "is_malicious": false,
+    "confidence": 0.9967,
+    "attack_type": "Boolean-based",
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:36.106842",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "UPDATE users SET status='active' WHERE id > 1 OR 3409=3409 AND (1=0) AND (SUBSTRING('admin',1,1) = 'a') #",
+        "vulnerability_status": "Yes",
+        "injection_type": "boolean-based"
+      }
+    },
+    "prediction": {
+      "is_malicious": true,
+      "confidence": 0.9982,
+      "attack_type": "Comment-based",
+      "details": [
+        {
+          "is_malicious": true,
+          "confidence": 0.9982,
+          "prediction_score": 0.9982,
+          "attack_type": "Comment-based",
+          "explanation": "Detected Comment-based SQL injection pattern | SQL comment detected - may be attempting to truncate query | High confidence detection (100%)"
+        }
+      ],
+      "prediction_score": 0.9982
+    },
+    "is_malicious": true,
+    "confidence": 0.9982,
+    "attack_type": "Comment-based",
+    "blocked": true
+  },
+  {
+    "timestamp": "2026-05-28T18:10:36.122544",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "UPDATE * FROM credentials WHERE status >= 'pending' OR status >= 'shipped'",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9997,
+      "attack_type": "Boolean-based",
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9997,
+          "prediction_score": 0.0003,
+          "attack_type": "Boolean-based",
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0003
+    },
+    "is_malicious": false,
+    "confidence": 0.9997,
+    "attack_type": "Boolean-based",
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:36.138285",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "INSERT MIN(created_at) FROM employees WHERE email >= 1 OR email >= 'test@example.com'",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9995,
+      "attack_type": "Boolean-based",
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9995,
+          "prediction_score": 0.0005,
+          "attack_type": "Boolean-based",
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0005
+    },
+    "is_malicious": false,
+    "confidence": 0.9995,
+    "attack_type": "Boolean-based",
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:36.151692",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "DELETE * FROM credentials WHERE id <= 'shipped' AND id <= 'test@example.com'",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.996,
+      "attack_type": "Boolean-based",
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.996,
+          "prediction_score": 0.004,
+          "attack_type": "Boolean-based",
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.004
+    },
+    "is_malicious": false,
+    "confidence": 0.996,
+    "attack_type": "Boolean-based",
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:36.166989",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "INSERT user_id, product_id FROM payments WHERE order_id >= 'pending' OR order_id >= NULL",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9998,
+      "attack_type": "Boolean-based",
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9998,
+          "prediction_score": 0.0002,
+          "attack_type": "Boolean-based",
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0002
+    },
+    "is_malicious": false,
+    "confidence": 0.9998,
+    "attack_type": "Boolean-based",
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:36.182635",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "CALL MIN(created_at) FROM transactions WHERE price BETWEEN 'pending' NOT price BETWEEN 'shipped'",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9998,
+      "attack_type": null,
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9998,
+          "prediction_score": 0.0002,
+          "attack_type": null,
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0002
+    },
+    "is_malicious": false,
+    "confidence": 0.9998,
+    "attack_type": null,
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:36.198177",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "SELECT MAX(price) FROM users WHERE price < 'shipped' OR price < 'test@example.com'",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9997,
+      "attack_type": "Boolean-based",
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9997,
+          "prediction_score": 0.0003,
+          "attack_type": "Boolean-based",
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0003
+    },
+    "is_malicious": false,
+    "confidence": 0.9997,
+    "attack_type": "Boolean-based",
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:36.213823",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "CALL COUNT(*) FROM passwords WHERE created_at IN 'safe' NOT created_at IN 'shipped'",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9998,
+      "attack_type": null,
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9998,
+          "prediction_score": 0.0002,
+          "attack_type": null,
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0002
+    },
+    "is_malicious": false,
+    "confidence": 0.9998,
+    "attack_type": null,
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:36.230271",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "EXEC price, status FROM sessions WHERE updated_at >= 'shipped' NOT updated_at >= 'active'",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9998,
+      "attack_type": null,
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9998,
+          "prediction_score": 0.0002,
+          "attack_type": null,
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0002
+    },
+    "is_malicious": false,
+    "confidence": 0.9998,
+    "attack_type": null,
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:36.245854",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "SELECT COUNT(*) FROM credentials WHERE id != 1 OR \" OR (SELECT COUNT(*) FROM users WHERE username='admin') > 1 -- #",
+        "vulnerability_status": "Yes",
+        "injection_type": "meta_based"
+      }
+    },
+    "prediction": {
+      "is_malicious": true,
+      "confidence": 0.9998,
+      "attack_type": "Comment-based",
+      "details": [
+        {
+          "is_malicious": true,
+          "confidence": 0.9998,
+          "prediction_score": 0.9998,
+          "attack_type": "Comment-based",
+          "explanation": "Detected Comment-based SQL injection pattern | SQL comment detected - may be attempting to truncate query | High confidence detection (100%)"
+        }
+      ],
+      "prediction_score": 0.9998
+    },
+    "is_malicious": true,
+    "confidence": 0.9998,
+    "attack_type": "Comment-based",
+    "blocked": true
+  },
+  {
+    "timestamp": "2026-05-28T18:10:36.262137",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "SELECT created_at, updated_at FROM credentials WHERE email LIKE 'safe' NOT email LIKE 'active'",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9997,
+      "attack_type": null,
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9997,
+          "prediction_score": 0.0003,
+          "attack_type": null,
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0003
+    },
+    "is_malicious": false,
+    "confidence": 0.9997,
+    "attack_type": null,
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:36.276769",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "SELECT created_at, updated_at FROM credentials WHERE id < 1 LIKE sleep(5)# --",
+        "vulnerability_status": "Yes",
+        "injection_type": "Time-Based"
+      }
+    },
+    "prediction": {
+      "is_malicious": true,
+      "confidence": 0.9993,
+      "attack_type": "Time-based",
+      "details": [
+        {
+          "is_malicious": true,
+          "confidence": 0.9993,
+          "prediction_score": 0.9993,
+          "attack_type": "Time-based",
+          "explanation": "Detected Time-based SQL injection pattern | Time-based delay function detected - used for blind injection | SQL comment detected - may be attempting to truncate query | High confidence detection (100%)"
+        }
+      ],
+      "prediction_score": 0.9993
+    },
+    "is_malicious": true,
+    "confidence": 0.9993,
+    "attack_type": "Time-based",
+    "blocked": true
+  },
+  {
+    "timestamp": "2026-05-28T18:10:36.292604",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "CALL MAX(price) FROM credentials WHERE id = 'test@example.com' NOT id = NULL",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9956,
+      "attack_type": null,
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9956,
+          "prediction_score": 0.0044,
+          "attack_type": null,
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0044
+    },
+    "is_malicious": false,
+    "confidence": 0.9956,
+    "attack_type": null,
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:36.308558",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "INSERT MAX(price) FROM accounts WHERE product_id != 1 NOT product_id != '2024-01-01'",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9998,
+      "attack_type": null,
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9998,
+          "prediction_score": 0.0002,
+          "attack_type": null,
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0002
+    },
+    "is_malicious": false,
+    "confidence": 0.9998,
+    "attack_type": null,
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:36.324419",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "UPDATE * FROM users WHERE email LIKE NULL OR email LIKE '2024-01-01'",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9998,
+      "attack_type": "Boolean-based",
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9998,
+          "prediction_score": 0.0002,
+          "attack_type": "Boolean-based",
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0002
+    },
+    "is_malicious": false,
+    "confidence": 0.9998,
+    "attack_type": "Boolean-based",
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:36.340222",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "EXEC MIN(created_at) FROM employees WHERE status BETWEEN 'pending' OR status BETWEEN 'safe'",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9996,
+      "attack_type": "Boolean-based",
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9996,
+          "prediction_score": 0.0004,
+          "attack_type": "Boolean-based",
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0004
+    },
+    "is_malicious": false,
+    "confidence": 0.9996,
+    "attack_type": "Boolean-based",
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:36.355112",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "INSERT MIN(created_at) FROM employees WHERE user_id BETWEEN 'shipped' OR user_id BETWEEN 'safe'",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9998,
+      "attack_type": "Boolean-based",
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9998,
+          "prediction_score": 0.0002,
+          "attack_type": "Boolean-based",
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0002
+    },
+    "is_malicious": false,
+    "confidence": 0.9998,
+    "attack_type": "Boolean-based",
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:36.370204",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "DELETE created_at, updated_at FROM payments WHERE email LIKE 'pending' NOT email LIKE 'test@example.com'",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9961,
+      "attack_type": null,
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9961,
+          "prediction_score": 0.0039,
+          "attack_type": null,
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0039
+    },
+    "is_malicious": false,
+    "confidence": 0.9961,
+    "attack_type": null,
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:36.385076",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "UPDATE created_at, updated_at FROM accounts WHERE price = NULL OR price = 'pending'",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9999,
+      "attack_type": "Boolean-based",
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9999,
+          "prediction_score": 0.0001,
+          "attack_type": "Boolean-based",
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0001
+    },
+    "is_malicious": false,
+    "confidence": 0.9999,
+    "attack_type": "Boolean-based",
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:36.400506",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "SELECT * FROM users WHERE id >= 1 LIKE ORDER BY 18# #",
+        "vulnerability_status": "Yes",
+        "injection_type": "Error-Based"
+      }
+    },
+    "prediction": {
+      "is_malicious": true,
+      "confidence": 0.9996,
+      "attack_type": "Comment-based",
+      "details": [
+        {
+          "is_malicious": true,
+          "confidence": 0.9996,
+          "prediction_score": 0.9996,
+          "attack_type": "Comment-based",
+          "explanation": "Detected Comment-based SQL injection pattern | SQL comment detected - may be attempting to truncate query | High confidence detection (100%)"
+        }
+      ],
+      "prediction_score": 0.9996
+    },
+    "is_malicious": true,
+    "confidence": 0.9996,
+    "attack_type": "Comment-based",
+    "blocked": true
+  },
+  {
+    "timestamp": "2026-05-28T18:10:36.416251",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "INSERT created_at, updated_at FROM employees WHERE email < 'safe' AND email < 1",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9998,
+      "attack_type": "Boolean-based",
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9998,
+          "prediction_score": 0.0002,
+          "attack_type": "Boolean-based",
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0002
+    },
+    "is_malicious": false,
+    "confidence": 0.9998,
+    "attack_type": "Boolean-based",
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:36.432618",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "SELECT created_at, updated_at FROM admin WHERE id > 1 ORDER BY 9# #",
+        "vulnerability_status": "Yes",
+        "injection_type": "Error-Based"
+      }
+    },
+    "prediction": {
+      "is_malicious": true,
+      "confidence": 0.999,
+      "attack_type": "Comment-based",
+      "details": [
+        {
+          "is_malicious": true,
+          "confidence": 0.999,
+          "prediction_score": 0.999,
+          "attack_type": "Comment-based",
+          "explanation": "Detected Comment-based SQL injection pattern | SQL comment detected - may be attempting to truncate query | High confidence detection (100%)"
+        }
+      ],
+      "prediction_score": 0.999
+    },
+    "is_malicious": true,
+    "confidence": 0.999,
+    "attack_type": "Comment-based",
+    "blocked": true
+  },
+  {
+    "timestamp": "2026-05-28T18:10:36.448471",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "DELETE created_at, updated_at FROM payments WHERE updated_at >= '2024-01-01' OR updated_at >= 'test@example.com'",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9997,
+      "attack_type": "Boolean-based",
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9997,
+          "prediction_score": 0.0003,
+          "attack_type": "Boolean-based",
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0003
+    },
+    "is_malicious": false,
+    "confidence": 0.9997,
+    "attack_type": "Boolean-based",
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:36.465895",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "SELECT user_id, product_id FROM payments WHERE id <= 1 AND ORDER BY 9--",
+        "vulnerability_status": "Yes",
+        "injection_type": "Error-Based"
+      }
+    },
+    "prediction": {
+      "is_malicious": true,
+      "confidence": 0.9995,
+      "attack_type": "Comment-based",
+      "details": [
+        {
+          "is_malicious": true,
+          "confidence": 0.9995,
+          "prediction_score": 0.9995,
+          "attack_type": "Comment-based",
+          "explanation": "Detected Comment-based SQL injection pattern | SQL comment detected - may be attempting to truncate query | High confidence detection (100%)"
+        }
+      ],
+      "prediction_score": 0.9995
+    },
+    "is_malicious": true,
+    "confidence": 0.9995,
+    "attack_type": "Comment-based",
+    "blocked": true
+  },
+  {
+    "timestamp": "2026-05-28T18:10:36.480671",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "EXEC id, email FROM users WHERE price <= 'pending' OR price <= 'safe'",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9997,
+      "attack_type": "Boolean-based",
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9997,
+          "prediction_score": 0.0003,
+          "attack_type": "Boolean-based",
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0003
+    },
+    "is_malicious": false,
+    "confidence": 0.9997,
+    "attack_type": "Boolean-based",
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:36.503528",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "SELECT created_at, updated_at FROM payments WHERE email = 'safe' NOT email = 1",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9994,
+      "attack_type": null,
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9994,
+          "prediction_score": 0.0006,
+          "attack_type": null,
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0006
+    },
+    "is_malicious": false,
+    "confidence": 0.9994,
+    "attack_type": null,
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:36.517513",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "EXEC('SELECT price, status FROM credentials WHERE id <= 1 OR 3409=3409 AND (1=1) AND (SUBSTRING('password',1,1) = 'p')') #",
+        "vulnerability_status": "Yes",
+        "injection_type": "boolean-based"
+      }
+    },
+    "prediction": {
+      "is_malicious": true,
+      "confidence": 1.0,
+      "attack_type": "Comment-based",
+      "details": [
+        {
+          "is_malicious": true,
+          "confidence": 1.0,
+          "prediction_score": 1.0,
+          "attack_type": "Comment-based",
+          "explanation": "Detected Comment-based SQL injection pattern | SQL comment detected - may be attempting to truncate query | High confidence detection (100%)"
+        }
+      ],
+      "prediction_score": 1.0
+    },
+    "is_malicious": true,
+    "confidence": 1.0,
+    "attack_type": "Comment-based",
+    "blocked": true
+  },
+  {
+    "timestamp": "2026-05-28T18:10:36.534144",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "CALL MAX(price) FROM transactions WHERE email >= 1 AND email >= 'test@example.com'",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9998,
+      "attack_type": "Boolean-based",
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9998,
+          "prediction_score": 0.0002,
+          "attack_type": "Boolean-based",
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0002
+    },
+    "is_malicious": false,
+    "confidence": 0.9998,
+    "attack_type": "Boolean-based",
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:36.550668",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "INSERT id, email FROM credentials WHERE product_id > '2024-01-01' OR product_id > NULL",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9998,
+      "attack_type": "Boolean-based",
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9998,
+          "prediction_score": 0.0002,
+          "attack_type": "Boolean-based",
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0002
+    },
+    "is_malicious": false,
+    "confidence": 0.9998,
+    "attack_type": "Boolean-based",
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:36.566044",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "CALL id, email FROM sessions WHERE status LIKE 'shipped' NOT status LIKE 'test@example.com'",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9997,
+      "attack_type": null,
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9997,
+          "prediction_score": 0.0003,
+          "attack_type": null,
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0003
+    },
+    "is_malicious": false,
+    "confidence": 0.9997,
+    "attack_type": null,
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:36.582249",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "SELECT user_id, product_id FROM payments WHERE id >= 1 NOT ORDER BY 31337#",
+        "vulnerability_status": "Yes",
+        "injection_type": "Error-Based"
+      }
+    },
+    "prediction": {
+      "is_malicious": true,
+      "confidence": 0.9985,
+      "attack_type": "Comment-based",
+      "details": [
+        {
+          "is_malicious": true,
+          "confidence": 0.9985,
+          "prediction_score": 0.9985,
+          "attack_type": "Comment-based",
+          "explanation": "Detected Comment-based SQL injection pattern | SQL comment detected - may be attempting to truncate query | High confidence detection (100%)"
+        }
+      ],
+      "prediction_score": 0.9985
+    },
+    "is_malicious": true,
+    "confidence": 0.9985,
+    "attack_type": "Comment-based",
+    "blocked": true
+  },
+  {
+    "timestamp": "2026-05-28T18:10:36.598768",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "UPDATE employees SET name = 'admin' WHERE id < 1 1)) or benchmark(10000000,MD5(1))# --",
+        "vulnerability_status": "Yes",
+        "injection_type": "Time-Based"
+      }
+    },
+    "prediction": {
+      "is_malicious": true,
+      "confidence": 0.9981,
+      "attack_type": "Time-based",
+      "details": [
+        {
+          "is_malicious": true,
+          "confidence": 0.9981,
+          "prediction_score": 0.9981,
+          "attack_type": "Time-based",
+          "explanation": "Detected Time-based SQL injection pattern | Time-based delay function detected - used for blind injection | SQL comment detected - may be attempting to truncate query | High confidence detection (100%)"
+        }
+      ],
+      "prediction_score": 0.9981
+    },
+    "is_malicious": true,
+    "confidence": 0.9981,
+    "attack_type": "Time-based",
+    "blocked": true
+  },
+  {
+    "timestamp": "2026-05-28T18:10:36.615265",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "EXEC * FROM employees WHERE email = NULL OR email = NULL",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9968,
+      "attack_type": "Boolean-based",
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9968,
+          "prediction_score": 0.0032,
+          "attack_type": "Boolean-based",
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0032
+    },
+    "is_malicious": false,
+    "confidence": 0.9968,
+    "attack_type": "Boolean-based",
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:36.631874",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "UPDATE users SET name = 'admin' AND SLEEP(5)-- WHERE id > 1",
+        "vulnerability_status": "Yes",
+        "injection_type": "Time-Based"
+      }
+    },
+    "prediction": {
+      "is_malicious": true,
+      "confidence": 0.9994,
+      "attack_type": "Time-based",
+      "details": [
+        {
+          "is_malicious": true,
+          "confidence": 0.9994,
+          "prediction_score": 0.9994,
+          "attack_type": "Time-based",
+          "explanation": "Detected Time-based SQL injection pattern | Time-based delay function detected - used for blind injection | SQL comment detected - may be attempting to truncate query | High confidence detection (100%)"
+        }
+      ],
+      "prediction_score": 0.9994
+    },
+    "is_malicious": true,
+    "confidence": 0.9994,
+    "attack_type": "Time-based",
+    "blocked": true
+  },
+  {
+    "timestamp": "2026-05-28T18:10:36.647040",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "SELECT price, status FROM credentials WHERE id >= 1 LIKE ORDER BY SLEEP(5)--",
+        "vulnerability_status": "Yes",
+        "injection_type": "Time-Based"
+      }
+    },
+    "prediction": {
+      "is_malicious": true,
+      "confidence": 0.9996,
+      "attack_type": "Time-based",
+      "details": [
+        {
+          "is_malicious": true,
+          "confidence": 0.9996,
+          "prediction_score": 0.9996,
+          "attack_type": "Time-based",
+          "explanation": "Detected Time-based SQL injection pattern | Time-based delay function detected - used for blind injection | SQL comment detected - may be attempting to truncate query | High confidence detection (100%)"
+        }
+      ],
+      "prediction_score": 0.9996
+    },
+    "is_malicious": true,
+    "confidence": 0.9996,
+    "attack_type": "Time-based",
+    "blocked": true
+  },
+  {
+    "timestamp": "2026-05-28T18:10:36.663472",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "INSERT id, email FROM employees WHERE id >= 'test@example.com' OR id >= 'safe'",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9998,
+      "attack_type": "Boolean-based",
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9998,
+          "prediction_score": 0.0002,
+          "attack_type": "Boolean-based",
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0002
+    },
+    "is_malicious": false,
+    "confidence": 0.9998,
+    "attack_type": "Boolean-based",
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:36.680112",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "DELETE user_id, product_id FROM login WHERE updated_at >= '2024-01-01' OR updated_at >= '2024-01-01'",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9998,
+      "attack_type": "Boolean-based",
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9998,
+          "prediction_score": 0.0002,
+          "attack_type": "Boolean-based",
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0002
+    },
+    "is_malicious": false,
+    "confidence": 0.9998,
+    "attack_type": "Boolean-based",
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:36.697178",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "UPDATE sessions SET name = 'admin' WHERE id = 1 WHERE 1=1 AND 1=0-- --",
+        "vulnerability_status": "Yes",
+        "injection_type": "Error-Based"
+      }
+    },
+    "prediction": {
+      "is_malicious": true,
+      "confidence": 0.9994,
+      "attack_type": "Comment-based",
+      "details": [
+        {
+          "is_malicious": true,
+          "confidence": 0.9994,
+          "prediction_score": 0.9994,
+          "attack_type": "Comment-based",
+          "explanation": "Detected Comment-based SQL injection pattern | SQL comment detected - may be attempting to truncate query | High confidence detection (100%)"
+        }
+      ],
+      "prediction_score": 0.9994
+    },
+    "is_malicious": true,
+    "confidence": 0.9994,
+    "attack_type": "Comment-based",
+    "blocked": true
+  },
+  {
+    "timestamp": "2026-05-28T18:10:36.713617",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "INSERT MIN(created_at) FROM passwords WHERE user_id LIKE 'test@example.com' OR user_id LIKE 'active'",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9998,
+      "attack_type": "Boolean-based",
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9998,
+          "prediction_score": 0.0002,
+          "attack_type": "Boolean-based",
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0002
+    },
+    "is_malicious": false,
+    "confidence": 0.9998,
+    "attack_type": "Boolean-based",
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:36.729977",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "SELECT * FROM users WHERE id = 1 or benchmark(50000000,MD5(1))",
+        "vulnerability_status": "Yes",
+        "injection_type": "Time-Based"
+      }
+    },
+    "prediction": {
+      "is_malicious": true,
+      "confidence": 0.9831,
+      "attack_type": "Time-based",
+      "details": [
+        {
+          "is_malicious": true,
+          "confidence": 0.9831,
+          "prediction_score": 0.9831,
+          "attack_type": "Time-based",
+          "explanation": "Detected Time-based SQL injection pattern | Time-based delay function detected - used for blind injection | High confidence detection (98%)"
+        }
+      ],
+      "prediction_score": 0.9831
+    },
+    "is_malicious": true,
+    "confidence": 0.9831,
+    "attack_type": "Time-based",
+    "blocked": true
+  },
+  {
+    "timestamp": "2026-05-28T18:10:36.746574",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "SELECT MAX(price) FROM employees WHERE id < 1 OR ORDER BY 16 --",
+        "vulnerability_status": "Yes",
+        "injection_type": "Union-Based"
+      }
+    },
+    "prediction": {
+      "is_malicious": true,
+      "confidence": 0.9996,
+      "attack_type": "Comment-based",
+      "details": [
+        {
+          "is_malicious": true,
+          "confidence": 0.9996,
+          "prediction_score": 0.9996,
+          "attack_type": "Comment-based",
+          "explanation": "Detected Comment-based SQL injection pattern | SQL comment detected - may be attempting to truncate query | High confidence detection (100%)"
+        }
+      ],
+      "prediction_score": 0.9996
+    },
+    "is_malicious": true,
+    "confidence": 0.9996,
+    "attack_type": "Comment-based",
+    "blocked": true
+  },
+  {
+    "timestamp": "2026-05-28T18:10:36.763083",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "DELETE FROM accounts WHERE id > 1 \") or pg_sleep(5)-- #",
+        "vulnerability_status": "Yes",
+        "injection_type": "Time-Based"
+      }
+    },
+    "prediction": {
+      "is_malicious": true,
+      "confidence": 0.9996,
+      "attack_type": "Time-based",
+      "details": [
+        {
+          "is_malicious": true,
+          "confidence": 0.9996,
+          "prediction_score": 0.9996,
+          "attack_type": "Time-based",
+          "explanation": "Detected Time-based SQL injection pattern | Time-based delay function detected - used for blind injection | SQL comment detected - may be attempting to truncate query | High confidence detection (100%)"
+        }
+      ],
+      "prediction_score": 0.9996
+    },
+    "is_malicious": true,
+    "confidence": 0.9996,
+    "attack_type": "Time-based",
+    "blocked": true
+  },
+  {
+    "timestamp": "2026-05-28T18:10:36.783129",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "SELECT COUNT(*) FROM users WHERE product_id < 'shipped' OR product_id < 'test@example.com'",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9994,
+      "attack_type": "Boolean-based",
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9994,
+          "prediction_score": 0.0006,
+          "attack_type": "Boolean-based",
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0006
+    },
+    "is_malicious": false,
+    "confidence": 0.9994,
+    "attack_type": "Boolean-based",
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:36.799908",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "EXEC MAX(price) FROM login WHERE email <= NULL OR email <= 'active'",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9998,
+      "attack_type": "Boolean-based",
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9998,
+          "prediction_score": 0.0002,
+          "attack_type": "Boolean-based",
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0002
+    },
+    "is_malicious": false,
+    "confidence": 0.9998,
+    "attack_type": "Boolean-based",
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:36.816362",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "EXEC('SELECT MAX(price) FROM accounts WHERE id > 1 OR EXISTS(SELECT * FROM users)--') --",
+        "vulnerability_status": "Yes",
+        "injection_type": "stackqueries_based"
+      }
+    },
+    "prediction": {
+      "is_malicious": true,
+      "confidence": 1.0,
+      "attack_type": "Comment-based",
+      "details": [
+        {
+          "is_malicious": true,
+          "confidence": 1.0,
+          "prediction_score": 1.0,
+          "attack_type": "Comment-based",
+          "explanation": "Detected Comment-based SQL injection pattern | SQL comment detected - may be attempting to truncate query | High confidence detection (100%)"
+        }
+      ],
+      "prediction_score": 1.0
+    },
+    "is_malicious": true,
+    "confidence": 1.0,
+    "attack_type": "Comment-based",
+    "blocked": true
+  },
+  {
+    "timestamp": "2026-05-28T18:10:36.833166",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "CALL user_id, product_id FROM employees WHERE product_id != 'test@example.com' NOT product_id != 'active'",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9998,
+      "attack_type": null,
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9998,
+          "prediction_score": 0.0002,
+          "attack_type": null,
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0002
+    },
+    "is_malicious": false,
+    "confidence": 0.9998,
+    "attack_type": null,
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:36.849935",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "SELECT MAX(price) FROM payments WHERE id != 1 LIKE UNION SELECT null, null, null, null FROM information_schema.tables -- --",
+        "vulnerability_status": "Yes",
+        "injection_type": "meta_based"
+      }
+    },
+    "prediction": {
+      "is_malicious": true,
+      "confidence": 0.9992,
+      "attack_type": "Union-based",
+      "details": [
+        {
+          "is_malicious": true,
+          "confidence": 0.9992,
+          "prediction_score": 0.9992,
+          "attack_type": "Union-based",
+          "explanation": "Detected Union-based SQL injection pattern | UNION SELECT pattern detected - common for data extraction | SQL comment detected - may be attempting to truncate query | High confidence detection (100%)"
+        }
+      ],
+      "prediction_score": 0.9992
+    },
+    "is_malicious": true,
+    "confidence": 0.9992,
+    "attack_type": "Union-based",
+    "blocked": true
+  },
+  {
+    "timestamp": "2026-05-28T18:10:36.866357",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "SELECT user_id, product_id FROM login WHERE id >= 1 OR 3409=3409 AND (1=0) AND (SUBSTRING('admin',1,2) = 'ad')",
+        "vulnerability_status": "Yes",
+        "injection_type": "boolean-based"
+      }
+    },
+    "prediction": {
+      "is_malicious": true,
+      "confidence": 0.9988,
+      "attack_type": "Boolean-based",
+      "details": [
+        {
+          "is_malicious": true,
+          "confidence": 0.9988,
+          "prediction_score": 0.9988,
+          "attack_type": "Boolean-based",
+          "explanation": "Detected Boolean-based SQL injection pattern | High confidence detection (100%)"
+        }
+      ],
+      "prediction_score": 0.9988
+    },
+    "is_malicious": true,
+    "confidence": 0.9988,
+    "attack_type": "Boolean-based",
+    "blocked": true
+  },
+  {
+    "timestamp": "2026-05-28T18:10:36.883197",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "EXEC('SELECT id, email FROM payments WHERE id = 1 ORDER BY 14--')",
+        "vulnerability_status": "Yes",
+        "injection_type": "Error-Based"
+      }
+    },
+    "prediction": {
+      "is_malicious": true,
+      "confidence": 0.9997,
+      "attack_type": "Comment-based",
+      "details": [
+        {
+          "is_malicious": true,
+          "confidence": 0.9997,
+          "prediction_score": 0.9997,
+          "attack_type": "Comment-based",
+          "explanation": "Detected Comment-based SQL injection pattern | SQL comment detected - may be attempting to truncate query | High confidence detection (100%)"
+        }
+      ],
+      "prediction_score": 0.9997
+    },
+    "is_malicious": true,
+    "confidence": 0.9997,
+    "attack_type": "Comment-based",
+    "blocked": true
+  },
+  {
+    "timestamp": "2026-05-28T18:10:36.898023",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "CALL user_id, product_id FROM transactions WHERE created_at BETWEEN 'active' OR created_at BETWEEN 1",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9956,
+      "attack_type": "Boolean-based",
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9956,
+          "prediction_score": 0.0044,
+          "attack_type": "Boolean-based",
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0044
+    },
+    "is_malicious": false,
+    "confidence": 0.9956,
+    "attack_type": "Boolean-based",
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:36.925243",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "UPDATE created_at, updated_at FROM users WHERE created_at LIKE 'shipped' AND created_at LIKE 'pending'",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9998,
+      "attack_type": "Boolean-based",
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9998,
+          "prediction_score": 0.0002,
+          "attack_type": "Boolean-based",
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0002
+    },
+    "is_malicious": false,
+    "confidence": 0.9998,
+    "attack_type": "Boolean-based",
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:36.941764",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "EXEC created_at, updated_at FROM payments WHERE email IN 'pending' AND email IN '2024-01-01'",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9998,
+      "attack_type": "Boolean-based",
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9998,
+          "prediction_score": 0.0002,
+          "attack_type": "Boolean-based",
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0002
+    },
+    "is_malicious": false,
+    "confidence": 0.9998,
+    "attack_type": "Boolean-based",
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:36.960300",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "SELECT * FROM employees WHERE status LIKE 'test@example.com' AND status LIKE 'safe'",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9996,
+      "attack_type": "Boolean-based",
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9996,
+          "prediction_score": 0.0004,
+          "attack_type": "Boolean-based",
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0004
+    },
+    "is_malicious": false,
+    "confidence": 0.9996,
+    "attack_type": "Boolean-based",
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:36.979898",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "UPDATE COUNT(*) FROM payments WHERE created_at IS NOT NULL NOT created_at IS NOT NULL",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.996,
+      "attack_type": null,
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.996,
+          "prediction_score": 0.004,
+          "attack_type": null,
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.004
+    },
+    "is_malicious": false,
+    "confidence": 0.996,
+    "attack_type": null,
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:36.995736",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "CALL id, email FROM credentials WHERE price = '2024-01-01' NOT price = 'active'",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9997,
+      "attack_type": null,
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9997,
+          "prediction_score": 0.0003,
+          "attack_type": null,
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0003
+    },
+    "is_malicious": false,
+    "confidence": 0.9997,
+    "attack_type": null,
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:37.011781",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "DELETE MIN(created_at) FROM passwords WHERE created_at <= '2024-01-01' OR created_at <= 1",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9955,
+      "attack_type": "Boolean-based",
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9955,
+          "prediction_score": 0.0045,
+          "attack_type": "Boolean-based",
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0045
+    },
+    "is_malicious": false,
+    "confidence": 0.9955,
+    "attack_type": "Boolean-based",
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:37.026739",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "SELECT * FROM accounts WHERE id != 1 NOT );waitfor delay '0:0:5'-- #",
+        "vulnerability_status": "Yes",
+        "injection_type": "Time-Based"
+      }
+    },
+    "prediction": {
+      "is_malicious": true,
+      "confidence": 0.9997,
+      "attack_type": "Time-based",
+      "details": [
+        {
+          "is_malicious": true,
+          "confidence": 0.9997,
+          "prediction_score": 0.9997,
+          "attack_type": "Time-based",
+          "explanation": "Detected Time-based SQL injection pattern | SQL comment detected - may be attempting to truncate query | High confidence detection (100%)"
+        }
+      ],
+      "prediction_score": 0.9997
+    },
+    "is_malicious": true,
+    "confidence": 0.9997,
+    "attack_type": "Time-based",
+    "blocked": true
+  },
+  {
+    "timestamp": "2026-05-28T18:10:37.043564",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "UPDATE sessions SET username = 'test' AND ORDER BY 17-- WHERE id > 1",
+        "vulnerability_status": "Yes",
+        "injection_type": "Union-Based"
+      }
+    },
+    "prediction": {
+      "is_malicious": true,
+      "confidence": 1.0,
+      "attack_type": "Comment-based",
+      "details": [
+        {
+          "is_malicious": true,
+          "confidence": 1.0,
+          "prediction_score": 1.0,
+          "attack_type": "Comment-based",
+          "explanation": "Detected Comment-based SQL injection pattern | SQL comment detected - may be attempting to truncate query | High confidence detection (100%)"
+        }
+      ],
+      "prediction_score": 1.0
+    },
+    "is_malicious": true,
+    "confidence": 1.0,
+    "attack_type": "Comment-based",
+    "blocked": true
+  },
+  {
+    "timestamp": "2026-05-28T18:10:37.060629",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "INSERT created_at, updated_at FROM transactions WHERE product_id LIKE 'safe' AND product_id LIKE 1",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9961,
+      "attack_type": "Boolean-based",
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9961,
+          "prediction_score": 0.0039,
+          "attack_type": "Boolean-based",
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0039
+    },
+    "is_malicious": false,
+    "confidence": 0.9961,
+    "attack_type": "Boolean-based",
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:37.078056",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "INSERT user_id, product_id FROM admin WHERE updated_at >= 'shipped' NOT updated_at >= NULL",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9998,
+      "attack_type": null,
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9998,
+          "prediction_score": 0.0002,
+          "attack_type": null,
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0002
+    },
+    "is_malicious": false,
+    "confidence": 0.9998,
+    "attack_type": null,
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:37.095521",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "SELECT created_at, updated_at FROM login WHERE id < 1 OR 3409=3409 AND (1=1) AND (EXISTS (SELECT 1 FROM users WHERE username='admin' AND password='password123')",
+        "vulnerability_status": "Yes",
+        "injection_type": "boolean-based"
+      }
+    },
+    "prediction": {
+      "is_malicious": true,
+      "confidence": 0.9991,
+      "attack_type": "Boolean-based",
+      "details": [
+        {
+          "is_malicious": true,
+          "confidence": 0.9991,
+          "prediction_score": 0.9991,
+          "attack_type": "Boolean-based",
+          "explanation": "Detected Boolean-based SQL injection pattern | High confidence detection (100%)"
+        }
+      ],
+      "prediction_score": 0.9991
+    },
+    "is_malicious": true,
+    "confidence": 0.9991,
+    "attack_type": "Boolean-based",
+    "blocked": true
+  },
+  {
+    "timestamp": "2026-05-28T18:10:37.112795",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "CALL * FROM credentials WHERE created_at LIKE '2024-01-01' OR created_at LIKE 'safe'",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9998,
+      "attack_type": "Boolean-based",
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9998,
+          "prediction_score": 0.0002,
+          "attack_type": "Boolean-based",
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0002
+    },
+    "is_malicious": false,
+    "confidence": 0.9998,
+    "attack_type": "Boolean-based",
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:37.127987",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "CALL id, email FROM users WHERE email LIKE NULL OR email LIKE 1",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9997,
+      "attack_type": null,
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9997,
+          "prediction_score": 0.0003,
+          "attack_type": null,
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0003
+    },
+    "is_malicious": false,
+    "confidence": 0.9997,
+    "attack_type": null,
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:37.144988",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "EXEC * FROM admin WHERE status >= 'active' OR status >= NULL",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9997,
+      "attack_type": "Boolean-based",
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9997,
+          "prediction_score": 0.0003,
+          "attack_type": "Boolean-based",
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0003
+    },
+    "is_malicious": false,
+    "confidence": 0.9997,
+    "attack_type": "Boolean-based",
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:37.161851",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "INSERT MIN(created_at) FROM sessions WHERE status LIKE 1 AND status LIKE 'pending'",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9994,
+      "attack_type": "Boolean-based",
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9994,
+          "prediction_score": 0.0006,
+          "attack_type": "Boolean-based",
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0006
+    },
+    "is_malicious": false,
+    "confidence": 0.9994,
+    "attack_type": "Boolean-based",
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:37.178560",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "EXEC COUNT(*) FROM admin WHERE price LIKE 'active' OR price LIKE 'safe'",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9998,
+      "attack_type": "Boolean-based",
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9998,
+          "prediction_score": 0.0002,
+          "attack_type": "Boolean-based",
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0002
+    },
+    "is_malicious": false,
+    "confidence": 0.9998,
+    "attack_type": "Boolean-based",
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:37.195234",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "DELETE user_id, product_id FROM payments WHERE product_id > 'shipped' OR product_id > 'active'",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9997,
+      "attack_type": "Boolean-based",
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9997,
+          "prediction_score": 0.0003,
+          "attack_type": "Boolean-based",
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0003
+    },
+    "is_malicious": false,
+    "confidence": 0.9997,
+    "attack_type": "Boolean-based",
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:37.211875",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "CALL MAX(price) FROM accounts WHERE order_id LIKE NULL NOT order_id LIKE '2024-01-01'",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9997,
+      "attack_type": null,
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9997,
+          "prediction_score": 0.0003,
+          "attack_type": null,
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0003
+    },
+    "is_malicious": false,
+    "confidence": 0.9997,
+    "attack_type": null,
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:37.228759",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "DELETE created_at, updated_at FROM users WHERE price < 'safe' OR price < 1",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9998,
+      "attack_type": "Boolean-based",
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9998,
+          "prediction_score": 0.0002,
+          "attack_type": "Boolean-based",
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0002
+    },
+    "is_malicious": false,
+    "confidence": 0.9998,
+    "attack_type": "Boolean-based",
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:37.243368",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "INSERT COUNT(*) FROM admin WHERE order_id IN 'test@example.com' OR order_id IN 'test@example.com'",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9998,
+      "attack_type": "Boolean-based",
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9998,
+          "prediction_score": 0.0002,
+          "attack_type": "Boolean-based",
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0002
+    },
+    "is_malicious": false,
+    "confidence": 0.9998,
+    "attack_type": "Boolean-based",
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:37.259910",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "INSERT id, email FROM login WHERE status = 'active' OR status = '2024-01-01'",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9947,
+      "attack_type": "Boolean-based",
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9947,
+          "prediction_score": 0.0053,
+          "attack_type": "Boolean-based",
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0053
+    },
+    "is_malicious": false,
+    "confidence": 0.9947,
+    "attack_type": "Boolean-based",
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:37.276798",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "SELECT COUNT(*) FROM admin WHERE id = 1 ORDER BY 18 --",
+        "vulnerability_status": "Yes",
+        "injection_type": "Union-Based"
+      }
+    },
+    "prediction": {
+      "is_malicious": true,
+      "confidence": 0.9997,
+      "attack_type": "Comment-based",
+      "details": [
+        {
+          "is_malicious": true,
+          "confidence": 0.9997,
+          "prediction_score": 0.9997,
+          "attack_type": "Comment-based",
+          "explanation": "Detected Comment-based SQL injection pattern | SQL comment detected - may be attempting to truncate query | High confidence detection (100%)"
+        }
+      ],
+      "prediction_score": 0.9997
+    },
+    "is_malicious": true,
+    "confidence": 0.9997,
+    "attack_type": "Comment-based",
+    "blocked": true
+  },
+  {
+    "timestamp": "2026-05-28T18:10:37.292629",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "DELETE COUNT(*) FROM credentials WHERE created_at >= 'active' OR created_at >= 'shipped'",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9998,
+      "attack_type": "Boolean-based",
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9998,
+          "prediction_score": 0.0002,
+          "attack_type": "Boolean-based",
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0002
+    },
+    "is_malicious": false,
+    "confidence": 0.9998,
+    "attack_type": "Boolean-based",
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:37.309725",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "DELETE id, email FROM passwords WHERE created_at < '2024-01-01' NOT created_at < 'test@example.com'",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9997,
+      "attack_type": null,
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9997,
+          "prediction_score": 0.0003,
+          "attack_type": null,
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0003
+    },
+    "is_malicious": false,
+    "confidence": 0.9997,
+    "attack_type": null,
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:37.326529",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "DELETE user_id, product_id FROM users WHERE user_id != 'shipped' AND user_id != 'safe'",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9997,
+      "attack_type": "Boolean-based",
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9997,
+          "prediction_score": 0.0003,
+          "attack_type": "Boolean-based",
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0003
+    },
+    "is_malicious": false,
+    "confidence": 0.9997,
+    "attack_type": "Boolean-based",
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:37.343473",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "CALL MAX(price) FROM payments WHERE created_at = '2024-01-01' NOT created_at = 'pending'",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9999,
+      "attack_type": null,
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9999,
+          "prediction_score": 0.0001,
+          "attack_type": null,
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0001
+    },
+    "is_malicious": false,
+    "confidence": 0.9999,
+    "attack_type": null,
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:37.359939",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "UPDATE MAX(price) FROM admin WHERE email LIKE 'test@example.com' AND email LIKE 1",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9998,
+      "attack_type": "Boolean-based",
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9998,
+          "prediction_score": 0.0002,
+          "attack_type": "Boolean-based",
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0002
+    },
+    "is_malicious": false,
+    "confidence": 0.9998,
+    "attack_type": "Boolean-based",
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:37.376906",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "INSERT MIN(created_at) FROM login WHERE status < 'shipped' OR status < 'active'",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9998,
+      "attack_type": "Boolean-based",
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9998,
+          "prediction_score": 0.0002,
+          "attack_type": "Boolean-based",
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0002
+    },
+    "is_malicious": false,
+    "confidence": 0.9998,
+    "attack_type": "Boolean-based",
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:37.393760",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "EXEC('SELECT MAX(price) FROM transactions WHERE id = 1 LIKE ORDER BY SLEEP(5)')",
+        "vulnerability_status": "Yes",
+        "injection_type": "Time-Based"
+      }
+    },
+    "prediction": {
+      "is_malicious": true,
+      "confidence": 0.9997,
+      "attack_type": "Time-based",
+      "details": [
+        {
+          "is_malicious": true,
+          "confidence": 0.9997,
+          "prediction_score": 0.9997,
+          "attack_type": "Time-based",
+          "explanation": "Detected Time-based SQL injection pattern | Time-based delay function detected - used for blind injection | High confidence detection (100%)"
+        }
+      ],
+      "prediction_score": 0.9997
+    },
+    "is_malicious": true,
+    "confidence": 0.9997,
+    "attack_type": "Time-based",
+    "blocked": true
+  },
+  {
+    "timestamp": "2026-05-28T18:10:37.410599",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "CALL user_id, product_id FROM admin WHERE product_id < 'safe' AND product_id < 'safe'",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9998,
+      "attack_type": "Boolean-based",
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9998,
+          "prediction_score": 0.0002,
+          "attack_type": "Boolean-based",
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0002
+    },
+    "is_malicious": false,
+    "confidence": 0.9998,
+    "attack_type": "Boolean-based",
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:37.428087",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "SELECT user_id, product_id FROM payments WHERE id >= 1 AND &&SLEEP(5) --",
+        "vulnerability_status": "Yes",
+        "injection_type": "Time-Based"
+      }
+    },
+    "prediction": {
+      "is_malicious": true,
+      "confidence": 0.9988,
+      "attack_type": "Time-based",
+      "details": [
+        {
+          "is_malicious": true,
+          "confidence": 0.9988,
+          "prediction_score": 0.9988,
+          "attack_type": "Time-based",
+          "explanation": "Detected Time-based SQL injection pattern | Time-based delay function detected - used for blind injection | SQL comment detected - may be attempting to truncate query | High confidence detection (100%)"
+        }
+      ],
+      "prediction_score": 0.9988
+    },
+    "is_malicious": true,
+    "confidence": 0.9988,
+    "attack_type": "Time-based",
+    "blocked": true
+  },
+  {
+    "timestamp": "2026-05-28T18:10:37.445277",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "SELECT * FROM transactions WHERE id = 1 NOT ORDER BY 20 #",
+        "vulnerability_status": "Yes",
+        "injection_type": "Union-Based"
+      }
+    },
+    "prediction": {
+      "is_malicious": true,
+      "confidence": 0.9992,
+      "attack_type": "Comment-based",
+      "details": [
+        {
+          "is_malicious": true,
+          "confidence": 0.9992,
+          "prediction_score": 0.9992,
+          "attack_type": "Comment-based",
+          "explanation": "Detected Comment-based SQL injection pattern | SQL comment detected - may be attempting to truncate query | High confidence detection (100%)"
+        }
+      ],
+      "prediction_score": 0.9992
+    },
+    "is_malicious": true,
+    "confidence": 0.9992,
+    "attack_type": "Comment-based",
+    "blocked": true
+  },
+  {
+    "timestamp": "2026-05-28T18:10:37.462766",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "INSERT MIN(created_at) FROM credentials WHERE created_at > '2024-01-01' OR created_at > 'test@example.com'",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9998,
+      "attack_type": "Boolean-based",
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9998,
+          "prediction_score": 0.0002,
+          "attack_type": "Boolean-based",
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0002
+    },
+    "is_malicious": false,
+    "confidence": 0.9998,
+    "attack_type": "Boolean-based",
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:37.479982",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "DELETE id, email FROM credentials WHERE product_id > 'safe' OR product_id > 'test@example.com'",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9998,
+      "attack_type": "Boolean-based",
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9998,
+          "prediction_score": 0.0002,
+          "attack_type": "Boolean-based",
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0002
+    },
+    "is_malicious": false,
+    "confidence": 0.9998,
+    "attack_type": "Boolean-based",
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:37.495892",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "EXEC created_at, updated_at FROM transactions WHERE id < 'safe' OR id < 'shipped'",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9998,
+      "attack_type": "Boolean-based",
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9998,
+          "prediction_score": 0.0002,
+          "attack_type": "Boolean-based",
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0002
+    },
+    "is_malicious": false,
+    "confidence": 0.9998,
+    "attack_type": "Boolean-based",
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:37.514089",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "EXEC user_id, product_id FROM passwords WHERE status != 'test@example.com' AND status != NULL",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9998,
+      "attack_type": "Boolean-based",
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9998,
+          "prediction_score": 0.0002,
+          "attack_type": "Boolean-based",
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0002
+    },
+    "is_malicious": false,
+    "confidence": 0.9998,
+    "attack_type": "Boolean-based",
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:37.530113",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "CALL COUNT(*) FROM sessions WHERE user_id BETWEEN 'test@example.com' NOT user_id BETWEEN 'shipped'",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9997,
+      "attack_type": null,
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9997,
+          "prediction_score": 0.0003,
+          "attack_type": null,
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0003
+    },
+    "is_malicious": false,
+    "confidence": 0.9997,
+    "attack_type": null,
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:37.547574",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "UPDATE created_at, updated_at FROM payments WHERE email BETWEEN 'test@example.com' NOT email BETWEEN '2024-01-01'",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9998,
+      "attack_type": null,
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9998,
+          "prediction_score": 0.0002,
+          "attack_type": null,
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0002
+    },
+    "is_malicious": false,
+    "confidence": 0.9998,
+    "attack_type": null,
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:37.565075",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "UPDATE login SET name = 'admin' WHERE id != 1 AS INJECTX WHERE 1=1 AND 1=0-- #",
+        "vulnerability_status": "Yes",
+        "injection_type": "Error-Based"
+      }
+    },
+    "prediction": {
+      "is_malicious": true,
+      "confidence": 0.9995,
+      "attack_type": "Comment-based",
+      "details": [
+        {
+          "is_malicious": true,
+          "confidence": 0.9995,
+          "prediction_score": 0.9995,
+          "attack_type": "Comment-based",
+          "explanation": "Detected Comment-based SQL injection pattern | SQL comment detected - may be attempting to truncate query | High confidence detection (100%)"
+        }
+      ],
+      "prediction_score": 0.9995
+    },
+    "is_malicious": true,
+    "confidence": 0.9995,
+    "attack_type": "Comment-based",
+    "blocked": true
+  },
+  {
+    "timestamp": "2026-05-28T18:10:37.582439",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "SELECT MIN(created_at) FROM credentials WHERE created_at <= 'pending' NOT created_at <= 'pending'",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9996,
+      "attack_type": null,
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9996,
+          "prediction_score": 0.0004,
+          "attack_type": null,
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0004
+    },
+    "is_malicious": false,
+    "confidence": 0.9996,
+    "attack_type": null,
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:37.600146",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "SELECT user_id, product_id FROM login WHERE email IN 'safe' OR email IN 'safe'",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9995,
+      "attack_type": "Boolean-based",
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9995,
+          "prediction_score": 0.0005,
+          "attack_type": "Boolean-based",
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0005
+    },
+    "is_malicious": false,
+    "confidence": 0.9995,
+    "attack_type": "Boolean-based",
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:37.617469",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "UPDATE price, status FROM transactions WHERE updated_at <= 'shipped' OR updated_at <= 'pending'",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9997,
+      "attack_type": "Boolean-based",
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9997,
+          "prediction_score": 0.0003,
+          "attack_type": "Boolean-based",
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0003
+    },
+    "is_malicious": false,
+    "confidence": 0.9997,
+    "attack_type": "Boolean-based",
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:37.634874",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "INSERT price, status FROM sessions WHERE user_id BETWEEN 'active' NOT user_id BETWEEN 'pending'",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9998,
+      "attack_type": null,
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9998,
+          "prediction_score": 0.0002,
+          "attack_type": null,
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0002
+    },
+    "is_malicious": false,
+    "confidence": 0.9998,
+    "attack_type": null,
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:37.651287",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "SELECT user_id, product_id FROM payments WHERE id >= 1 NOT \" OR 1=1 LIMIT 0, 1 -- #",
+        "vulnerability_status": "Yes",
+        "injection_type": "meta_based"
+      }
+    },
+    "prediction": {
+      "is_malicious": true,
+      "confidence": 0.9894,
+      "attack_type": "Boolean-based",
+      "details": [
+        {
+          "is_malicious": true,
+          "confidence": 0.9894,
+          "prediction_score": 0.9894,
+          "attack_type": "Boolean-based",
+          "explanation": "Detected Boolean-based SQL injection pattern | Boolean tautology pattern detected - attempts to bypass authentication | SQL comment detected - may be attempting to truncate query | High confidence detection (99%)"
+        }
+      ],
+      "prediction_score": 0.9894
+    },
+    "is_malicious": true,
+    "confidence": 0.9894,
+    "attack_type": "Boolean-based",
+    "blocked": true
+  },
+  {
+    "timestamp": "2026-05-28T18:10:37.668507",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "CALL MIN(created_at) FROM admin WHERE product_id = 'shipped' AND product_id = 1",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9998,
+      "attack_type": "Boolean-based",
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9998,
+          "prediction_score": 0.0002,
+          "attack_type": "Boolean-based",
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0002
+    },
+    "is_malicious": false,
+    "confidence": 0.9998,
+    "attack_type": "Boolean-based",
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:37.686054",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "INSERT MAX(price) FROM login WHERE status = 'test@example.com' OR status = 'shipped'",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9997,
+      "attack_type": "Boolean-based",
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9997,
+          "prediction_score": 0.0003,
+          "attack_type": "Boolean-based",
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0003
+    },
+    "is_malicious": false,
+    "confidence": 0.9997,
+    "attack_type": "Boolean-based",
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:37.703298",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "UPDATE id, email FROM sessions WHERE price LIKE 'safe' AND price LIKE 'shipped'",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9996,
+      "attack_type": "Boolean-based",
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9996,
+          "prediction_score": 0.0004,
+          "attack_type": "Boolean-based",
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0004
+    },
+    "is_malicious": false,
+    "confidence": 0.9996,
+    "attack_type": "Boolean-based",
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:37.732451",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "SELECT created_at, updated_at FROM payments WHERE id != 1 pg_SLEEP(5)#",
+        "vulnerability_status": "Yes",
+        "injection_type": "Time-Based"
+      }
+    },
+    "prediction": {
+      "is_malicious": true,
+      "confidence": 0.9837,
+      "attack_type": "Time-based",
+      "details": [
+        {
+          "is_malicious": true,
+          "confidence": 0.9837,
+          "prediction_score": 0.9837,
+          "attack_type": "Time-based",
+          "explanation": "Detected Time-based SQL injection pattern | Time-based delay function detected - used for blind injection | SQL comment detected - may be attempting to truncate query | High confidence detection (98%)"
+        }
+      ],
+      "prediction_score": 0.9837
+    },
+    "is_malicious": true,
+    "confidence": 0.9837,
+    "attack_type": "Time-based",
+    "blocked": true
+  },
+  {
+    "timestamp": "2026-05-28T18:10:37.750520",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "UPDATE COUNT(*) FROM admin WHERE email LIKE 1 NOT email LIKE 'active'",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9996,
+      "attack_type": null,
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9996,
+          "prediction_score": 0.0004,
+          "attack_type": null,
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0004
+    },
+    "is_malicious": false,
+    "confidence": 0.9996,
+    "attack_type": null,
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:37.768542",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "SELECT MAX(price) FROM credentials WHERE price > 1 AND price > 'pending'",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9957,
+      "attack_type": "Boolean-based",
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9957,
+          "prediction_score": 0.0043,
+          "attack_type": "Boolean-based",
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0043
+    },
+    "is_malicious": false,
+    "confidence": 0.9957,
+    "attack_type": "Boolean-based",
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:37.785031",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "INSERT price, status FROM accounts WHERE updated_at >= 'test@example.com' AND updated_at >= 'pending'",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9998,
+      "attack_type": "Boolean-based",
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9998,
+          "prediction_score": 0.0002,
+          "attack_type": "Boolean-based",
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0002
+    },
+    "is_malicious": false,
+    "confidence": 0.9998,
+    "attack_type": "Boolean-based",
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:37.801706",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "SELECT created_at, updated_at FROM sessions WHERE id != 1 ORDER BY 6#",
+        "vulnerability_status": "Yes",
+        "injection_type": "Error-Based"
+      }
+    },
+    "prediction": {
+      "is_malicious": true,
+      "confidence": 0.9877,
+      "attack_type": "Comment-based",
+      "details": [
+        {
+          "is_malicious": true,
+          "confidence": 0.9877,
+          "prediction_score": 0.9877,
+          "attack_type": "Comment-based",
+          "explanation": "Detected Comment-based SQL injection pattern | SQL comment detected - may be attempting to truncate query | High confidence detection (99%)"
+        }
+      ],
+      "prediction_score": 0.9877
+    },
+    "is_malicious": true,
+    "confidence": 0.9877,
+    "attack_type": "Comment-based",
+    "blocked": true
+  },
+  {
+    "timestamp": "2026-05-28T18:10:37.819471",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "INSERT * FROM sessions WHERE user_id > 'pending' AND user_id > 'safe'",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9994,
+      "attack_type": "Boolean-based",
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9994,
+          "prediction_score": 0.0006,
+          "attack_type": "Boolean-based",
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0006
+    },
+    "is_malicious": false,
+    "confidence": 0.9994,
+    "attack_type": "Boolean-based",
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:37.837539",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "CALL MAX(price) FROM passwords WHERE id != NULL OR id != 'pending'",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9996,
+      "attack_type": "Boolean-based",
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9996,
+          "prediction_score": 0.0004,
+          "attack_type": "Boolean-based",
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0004
+    },
+    "is_malicious": false,
+    "confidence": 0.9996,
+    "attack_type": "Boolean-based",
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:37.855795",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "EXEC * FROM users WHERE user_id = '2024-01-01' AND user_id = '2024-01-01'",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9997,
+      "attack_type": "Boolean-based",
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9997,
+          "prediction_score": 0.0003,
+          "attack_type": "Boolean-based",
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0003
+    },
+    "is_malicious": false,
+    "confidence": 0.9997,
+    "attack_type": "Boolean-based",
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:37.873873",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "INSERT created_at, updated_at FROM credentials WHERE id >= NULL NOT id >= 'shipped'",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9998,
+      "attack_type": null,
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9998,
+          "prediction_score": 0.0002,
+          "attack_type": null,
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0002
+    },
+    "is_malicious": false,
+    "confidence": 0.9998,
+    "attack_type": null,
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:37.891525",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "CALL MAX(price) FROM payments WHERE user_id != 1 NOT user_id != 1",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9849,
+      "attack_type": null,
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9849,
+          "prediction_score": 0.0151,
+          "attack_type": null,
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0151
+    },
+    "is_malicious": false,
+    "confidence": 0.9849,
+    "attack_type": null,
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:37.909322",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "SELECT created_at, updated_at FROM passwords WHERE id > 1 LIKE UNION SELECT null, null, null, table_name FROM information_schema.tables -- #",
+        "vulnerability_status": "Yes",
+        "injection_type": "meta_based"
+      }
+    },
+    "prediction": {
+      "is_malicious": true,
+      "confidence": 0.9992,
+      "attack_type": "Union-based",
+      "details": [
+        {
+          "is_malicious": true,
+          "confidence": 0.9992,
+          "prediction_score": 0.9992,
+          "attack_type": "Union-based",
+          "explanation": "Detected Union-based SQL injection pattern | UNION SELECT pattern detected - common for data extraction | SQL comment detected - may be attempting to truncate query | High confidence detection (100%)"
+        }
+      ],
+      "prediction_score": 0.9992
+    },
+    "is_malicious": true,
+    "confidence": 0.9992,
+    "attack_type": "Union-based",
+    "blocked": true
+  },
+  {
+    "timestamp": "2026-05-28T18:10:37.926860",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "DELETE * FROM payments WHERE product_id BETWEEN 1 AND product_id BETWEEN '2024-01-01'",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9996,
+      "attack_type": "Boolean-based",
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9996,
+          "prediction_score": 0.0004,
+          "attack_type": "Boolean-based",
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0004
+    },
+    "is_malicious": false,
+    "confidence": 0.9996,
+    "attack_type": "Boolean-based",
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:37.943318",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "EXEC COUNT(*) FROM sessions WHERE updated_at != NULL AND updated_at != 'pending'",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9999,
+      "attack_type": "Boolean-based",
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9999,
+          "prediction_score": 0.0001,
+          "attack_type": "Boolean-based",
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0001
+    },
+    "is_malicious": false,
+    "confidence": 0.9999,
+    "attack_type": "Boolean-based",
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:37.961114",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "SELECT user_id, product_id FROM users WHERE order_id IN 'safe' OR order_id IN 'safe'",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9996,
+      "attack_type": "Boolean-based",
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9996,
+          "prediction_score": 0.0004,
+          "attack_type": "Boolean-based",
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0004
+    },
+    "is_malicious": false,
+    "confidence": 0.9996,
+    "attack_type": "Boolean-based",
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:37.976780",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "INSERT price, status FROM admin WHERE product_id BETWEEN 'active' AND product_id BETWEEN '2024-01-01'",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9997,
+      "attack_type": "Boolean-based",
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9997,
+          "prediction_score": 0.0003,
+          "attack_type": "Boolean-based",
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0003
+    },
+    "is_malicious": false,
+    "confidence": 0.9997,
+    "attack_type": "Boolean-based",
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:37.994398",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "UPDATE employees SET username = 'test' OR ORDER BY 5-- WHERE id < 1 #",
+        "vulnerability_status": "Yes",
+        "injection_type": "Union-Based"
+      }
+    },
+    "prediction": {
+      "is_malicious": true,
+      "confidence": 1.0,
+      "attack_type": "Comment-based",
+      "details": [
+        {
+          "is_malicious": true,
+          "confidence": 1.0,
+          "prediction_score": 1.0,
+          "attack_type": "Comment-based",
+          "explanation": "Detected Comment-based SQL injection pattern | SQL comment detected - may be attempting to truncate query | High confidence detection (100%)"
+        }
+      ],
+      "prediction_score": 1.0
+    },
+    "is_malicious": true,
+    "confidence": 1.0,
+    "attack_type": "Comment-based",
+    "blocked": true
+  },
+  {
+    "timestamp": "2026-05-28T18:10:38.012124",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "CALL * FROM admin WHERE email <= 'pending' AND email <= NULL",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9998,
+      "attack_type": "Boolean-based",
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9998,
+          "prediction_score": 0.0002,
+          "attack_type": "Boolean-based",
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0002
+    },
+    "is_malicious": false,
+    "confidence": 0.9998,
+    "attack_type": "Boolean-based",
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:38.030093",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "SELECT COUNT(*) FROM passwords WHERE id < 1 NOT +benchmark(3200,SHA1(1))+' --",
+        "vulnerability_status": "Yes",
+        "injection_type": "Time-Based"
+      }
+    },
+    "prediction": {
+      "is_malicious": true,
+      "confidence": 0.9997,
+      "attack_type": "Time-based",
+      "details": [
+        {
+          "is_malicious": true,
+          "confidence": 0.9997,
+          "prediction_score": 0.9997,
+          "attack_type": "Time-based",
+          "explanation": "Detected Time-based SQL injection pattern | Time-based delay function detected - used for blind injection | SQL comment detected - may be attempting to truncate query | High confidence detection (100%)"
+        }
+      ],
+      "prediction_score": 0.9997
+    },
+    "is_malicious": true,
+    "confidence": 0.9997,
+    "attack_type": "Time-based",
+    "blocked": true
+  },
+  {
+    "timestamp": "2026-05-28T18:10:38.048139",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "SELECT id, email FROM admin WHERE id != 1 AND ORDER BY 25 --",
+        "vulnerability_status": "Yes",
+        "injection_type": "Union-Based"
+      }
+    },
+    "prediction": {
+      "is_malicious": true,
+      "confidence": 0.9996,
+      "attack_type": "Comment-based",
+      "details": [
+        {
+          "is_malicious": true,
+          "confidence": 0.9996,
+          "prediction_score": 0.9996,
+          "attack_type": "Comment-based",
+          "explanation": "Detected Comment-based SQL injection pattern | SQL comment detected - may be attempting to truncate query | High confidence detection (100%)"
+        }
+      ],
+      "prediction_score": 0.9996
+    },
+    "is_malicious": true,
+    "confidence": 0.9996,
+    "attack_type": "Comment-based",
+    "blocked": true
+  },
+  {
+    "timestamp": "2026-05-28T18:10:38.064060",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "SELECT user_id, product_id FROM payments WHERE id > 1 OR AND 1=1 ORDER BY 2 -- --",
+        "vulnerability_status": "Yes",
+        "injection_type": "meta_based"
+      }
+    },
+    "prediction": {
+      "is_malicious": true,
+      "confidence": 0.9996,
+      "attack_type": "Boolean-based",
+      "details": [
+        {
+          "is_malicious": true,
+          "confidence": 0.9996,
+          "prediction_score": 0.9996,
+          "attack_type": "Boolean-based",
+          "explanation": "Detected Boolean-based SQL injection pattern | SQL comment detected - may be attempting to truncate query | High confidence detection (100%)"
+        }
+      ],
+      "prediction_score": 0.9996
+    },
+    "is_malicious": true,
+    "confidence": 0.9996,
+    "attack_type": "Boolean-based",
+    "blocked": true
+  },
+  {
+    "timestamp": "2026-05-28T18:10:38.082411",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "INSERT * FROM sessions WHERE updated_at != 'test@example.com' AND updated_at != 'shipped'",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9998,
+      "attack_type": "Boolean-based",
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9998,
+          "prediction_score": 0.0002,
+          "attack_type": "Boolean-based",
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0002
+    },
+    "is_malicious": false,
+    "confidence": 0.9998,
+    "attack_type": "Boolean-based",
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:38.100783",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "SELECT user_id, product_id FROM admin WHERE id = 1 LIKE ORDER BY 19 #",
+        "vulnerability_status": "Yes",
+        "injection_type": "Union-Based"
+      }
+    },
+    "prediction": {
+      "is_malicious": true,
+      "confidence": 0.9995,
+      "attack_type": "Comment-based",
+      "details": [
+        {
+          "is_malicious": true,
+          "confidence": 0.9995,
+          "prediction_score": 0.9995,
+          "attack_type": "Comment-based",
+          "explanation": "Detected Comment-based SQL injection pattern | SQL comment detected - may be attempting to truncate query | High confidence detection (100%)"
+        }
+      ],
+      "prediction_score": 0.9995
+    },
+    "is_malicious": true,
+    "confidence": 0.9995,
+    "attack_type": "Comment-based",
+    "blocked": true
+  },
+  {
+    "timestamp": "2026-05-28T18:10:38.119757",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "SELECT created_at, updated_at FROM transactions WHERE product_id >= 'test@example.com' NOT product_id >= 'test@example.com'",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9997,
+      "attack_type": null,
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9997,
+          "prediction_score": 0.0003,
+          "attack_type": null,
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0003
+    },
+    "is_malicious": false,
+    "confidence": 0.9997,
+    "attack_type": null,
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:38.176981",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "INSERT MAX(price) FROM transactions WHERE order_id BETWEEN 'safe' OR order_id BETWEEN 'active'",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9998,
+      "attack_type": "Boolean-based",
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9998,
+          "prediction_score": 0.0002,
+          "attack_type": "Boolean-based",
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0002
+    },
+    "is_malicious": false,
+    "confidence": 0.9998,
+    "attack_type": "Boolean-based",
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:38.196494",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "UPDATE MAX(price) FROM passwords WHERE email >= 'pending' NOT email >= 'safe'",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9998,
+      "attack_type": null,
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9998,
+          "prediction_score": 0.0002,
+          "attack_type": null,
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0002
+    },
+    "is_malicious": false,
+    "confidence": 0.9998,
+    "attack_type": null,
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:38.215563",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "EXEC MIN(created_at) FROM transactions WHERE created_at IN '2024-01-01' AND created_at IN 'active'",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9997,
+      "attack_type": "Boolean-based",
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9997,
+          "prediction_score": 0.0003,
+          "attack_type": "Boolean-based",
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0003
+    },
+    "is_malicious": false,
+    "confidence": 0.9997,
+    "attack_type": "Boolean-based",
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:38.232071",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "INSERT MAX(price) FROM admin WHERE price >= 'pending' AND price >= NULL",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9998,
+      "attack_type": "Boolean-based",
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9998,
+          "prediction_score": 0.0002,
+          "attack_type": "Boolean-based",
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0002
+    },
+    "is_malicious": false,
+    "confidence": 0.9998,
+    "attack_type": "Boolean-based",
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:38.251037",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "SELECT MIN(created_at) FROM users WHERE id >= 1 OR 3409=3409 AND (1=0) AND (SUBSTRING('password',1,1) = 'p') #",
+        "vulnerability_status": "Yes",
+        "injection_type": "boolean-based"
+      }
+    },
+    "prediction": {
+      "is_malicious": true,
+      "confidence": 0.9999,
+      "attack_type": "Comment-based",
+      "details": [
+        {
+          "is_malicious": true,
+          "confidence": 0.9999,
+          "prediction_score": 0.9999,
+          "attack_type": "Comment-based",
+          "explanation": "Detected Comment-based SQL injection pattern | SQL comment detected - may be attempting to truncate query | High confidence detection (100%)"
+        }
+      ],
+      "prediction_score": 0.9999
+    },
+    "is_malicious": true,
+    "confidence": 0.9999,
+    "attack_type": "Comment-based",
+    "blocked": true
+  },
+  {
+    "timestamp": "2026-05-28T18:10:38.281247",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "SELECT price, status FROM users WHERE id > 1 LIKE OR EXISTS(SELECT * FROM users LIMIT 1) -- #",
+        "vulnerability_status": "Yes",
+        "injection_type": "meta_based"
+      }
+    },
+    "prediction": {
+      "is_malicious": true,
+      "confidence": 0.9984,
+      "attack_type": "Comment-based",
+      "details": [
+        {
+          "is_malicious": true,
+          "confidence": 0.9984,
+          "prediction_score": 0.9984,
+          "attack_type": "Comment-based",
+          "explanation": "Detected Comment-based SQL injection pattern | SQL comment detected - may be attempting to truncate query | High confidence detection (100%)"
+        }
+      ],
+      "prediction_score": 0.9984
+    },
+    "is_malicious": true,
+    "confidence": 0.9984,
+    "attack_type": "Comment-based",
+    "blocked": true
+  },
+  {
+    "timestamp": "2026-05-28T18:10:38.297731",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "CALL price, status FROM passwords WHERE order_id = 'safe' NOT order_id = '2024-01-01'",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9998,
+      "attack_type": null,
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9998,
+          "prediction_score": 0.0002,
+          "attack_type": null,
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0002
+    },
+    "is_malicious": false,
+    "confidence": 0.9998,
+    "attack_type": null,
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:38.316261",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "CALL * FROM credentials WHERE order_id < 1 AND order_id < 1",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9777,
+      "attack_type": null,
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9777,
+          "prediction_score": 0.0223,
+          "attack_type": null,
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0223
+    },
+    "is_malicious": false,
+    "confidence": 0.9777,
+    "attack_type": null,
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:38.333949",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "SELECT price, status FROM credentials WHERE id = 1 NOT ORDER BY 31337--",
+        "vulnerability_status": "Yes",
+        "injection_type": "Error-Based"
+      }
+    },
+    "prediction": {
+      "is_malicious": true,
+      "confidence": 0.9996,
+      "attack_type": "Comment-based",
+      "details": [
+        {
+          "is_malicious": true,
+          "confidence": 0.9996,
+          "prediction_score": 0.9996,
+          "attack_type": "Comment-based",
+          "explanation": "Detected Comment-based SQL injection pattern | SQL comment detected - may be attempting to truncate query | High confidence detection (100%)"
+        }
+      ],
+      "prediction_score": 0.9996
+    },
+    "is_malicious": true,
+    "confidence": 0.9996,
+    "attack_type": "Comment-based",
+    "blocked": true
+  },
+  {
+    "timestamp": "2026-05-28T18:10:38.351636",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "INSERT MIN(created_at) FROM payments WHERE id = 'shipped' AND id = 'safe'",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9998,
+      "attack_type": "Boolean-based",
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9998,
+          "prediction_score": 0.0002,
+          "attack_type": "Boolean-based",
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0002
+    },
+    "is_malicious": false,
+    "confidence": 0.9998,
+    "attack_type": "Boolean-based",
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:38.369842",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "SELECT * FROM admin WHERE status = 'shipped' AND status = 'safe'",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9959,
+      "attack_type": "Boolean-based",
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9959,
+          "prediction_score": 0.0041,
+          "attack_type": "Boolean-based",
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0041
+    },
+    "is_malicious": false,
+    "confidence": 0.9959,
+    "attack_type": "Boolean-based",
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:38.388140",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "SELECT MAX(price) FROM credentials WHERE id >= 1 NOT ORDER BY SLEEP(5) --",
+        "vulnerability_status": "Yes",
+        "injection_type": "Time-Based"
+      }
+    },
+    "prediction": {
+      "is_malicious": true,
+      "confidence": 0.9997,
+      "attack_type": "Time-based",
+      "details": [
+        {
+          "is_malicious": true,
+          "confidence": 0.9997,
+          "prediction_score": 0.9997,
+          "attack_type": "Time-based",
+          "explanation": "Detected Time-based SQL injection pattern | Time-based delay function detected - used for blind injection | SQL comment detected - may be attempting to truncate query | High confidence detection (100%)"
+        }
+      ],
+      "prediction_score": 0.9997
+    },
+    "is_malicious": true,
+    "confidence": 0.9997,
+    "attack_type": "Time-based",
+    "blocked": true
+  },
+  {
+    "timestamp": "2026-05-28T18:10:38.406608",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "UPDATE * FROM login WHERE status != NULL NOT status != 'safe'",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9998,
+      "attack_type": null,
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9998,
+          "prediction_score": 0.0002,
+          "attack_type": null,
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0002
+    },
+    "is_malicious": false,
+    "confidence": 0.9998,
+    "attack_type": null,
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:38.426832",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "INSERT MAX(price) FROM accounts WHERE updated_at IN 'pending' OR updated_at IN 'shipped'",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9998,
+      "attack_type": "Boolean-based",
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9998,
+          "prediction_score": 0.0002,
+          "attack_type": "Boolean-based",
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0002
+    },
+    "is_malicious": false,
+    "confidence": 0.9998,
+    "attack_type": "Boolean-based",
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:38.443840",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "UPDATE COUNT(*) FROM admin WHERE order_id = 'safe' NOT order_id = 1",
+        "vulnerability_status": "No",
+        "injection_type": "None_Type"
+      }
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.9996,
+      "attack_type": null,
+      "details": [
+        {
+          "is_malicious": false,
+          "confidence": 0.9996,
+          "prediction_score": 0.0004,
+          "attack_type": null,
+          "explanation": "No SQL injection patterns detected in this query."
+        }
+      ],
+      "prediction_score": 0.0004
+    },
+    "is_malicious": false,
+    "confidence": 0.9996,
+    "attack_type": null,
+    "blocked": false
+  },
+  {
+    "timestamp": "2026-05-28T18:10:38.462546",
+    "route": "/dataset_batch_detect",
+    "method": "BATCH",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "batch_id": "20260528181035",
+      "dataset_path": "rbsqli_dataset.csv",
+      "sample_size": 150,
+      "source": "rbsqli_dataset_csv",
+      "row_preview": {
+        "sql_query": "UPDATE users SET username = 'test' LIKE ORDER BY 6 WHERE id > 1",
+        "vulnerability_status": "Yes",
+        "injection_type": "Union-Based"
+      }
+    },
+    "prediction": {
+      "is_malicious": true,
+      "confidence": 0.9999,
+      "attack_type": "Suspicious SQL Pattern",
+      "details": [
+        {
+          "is_malicious": true,
+          "confidence": 0.9999,
+          "prediction_score": 0.9999,
+          "attack_type": "Suspicious SQL Pattern",
+          "explanation": "Detected Suspicious SQL Pattern SQL injection pattern | High confidence detection (100%)"
+        }
+      ],
+      "prediction_score": 0.9999
+    },
+    "is_malicious": true,
+    "confidence": 0.9999,
+    "attack_type": "Suspicious SQL Pattern",
+    "blocked": true
   }
 ]

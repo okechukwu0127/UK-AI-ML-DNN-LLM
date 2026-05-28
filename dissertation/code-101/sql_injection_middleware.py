@@ -8,6 +8,8 @@ import os
 import re
 import json
 import pickle
+import csv
+import random
 from datetime import datetime
 from functools import wraps
 from urllib.parse import unquote
@@ -50,6 +52,7 @@ class Config:
     # Database-like storage for logs (in production, use real database)
     LOG_FILE = 'sql_injection_logs.json'
     MODEL_BUNDLE_PATH = 'best_sql_injection_model.pkl'
+    DEFAULT_DATASET_PATH = 'rbsqli_dataset.csv'
 
 
 app = Flask(__name__)
@@ -562,6 +565,177 @@ def is_sql_query(text):
     return (keyword_count >= 1 and has_sql_patterns) or obvious_injection_patterns
 
 
+def _reservoir_sample_csv(filepath, sample_size, seed=42, usecols=None):
+    """
+    Sample rows from a large CSV file without loading the entire file into memory.
+
+    Reservoir sampling gives every row an equal chance of being selected, which
+    is more defensible than always taking the first N rows from the file.
+    """
+    if sample_size <= 0:
+        return []
+
+    rng = random.Random(seed)
+    reservoir = []
+    row_count = 0
+
+    with open(filepath, "r", encoding="utf-8", errors="ignore", newline="") as file_handle:
+        reader = csv.DictReader(file_handle)
+
+        for row in reader:
+            if usecols:
+                row = {key: row.get(key) for key in usecols}
+
+            query = (row.get("sql_query") or "").strip()
+            if not query:
+                continue
+
+            row_count += 1
+            if len(reservoir) < sample_size:
+                reservoir.append(row)
+            else:
+                index = rng.randint(0, row_count - 1)
+                if index < sample_size:
+                    reservoir[index] = row
+
+    return reservoir
+
+
+def _summarise_sample_rows(rows):
+    """Return class and injection-type summaries for a sampled dataset."""
+    class_distribution = {}
+    injection_distribution = {}
+
+    for row in rows:
+        vulnerability_status = (row.get("vulnerability_status") or "Unknown").strip()
+        injection_type = (row.get("injection_type") or "Unknown").strip()
+
+        class_distribution[vulnerability_status] = class_distribution.get(vulnerability_status, 0) + 1
+        injection_distribution[injection_type] = injection_distribution.get(injection_type, 0) + 1
+
+    return class_distribution, injection_distribution
+
+
+def _log_dataset_batch_attempt(sample_row, prediction, dataset_path, sample_size, batch_id):
+    """
+    Store dataset-driven batch results using the same logging structure as the
+    rest of the middleware.
+    """
+    logger.log_attempt(
+        request_data={
+            'batch_id': batch_id,
+            'dataset_path': dataset_path,
+            'sample_size': sample_size,
+            'source': 'rbsqli_dataset_csv',
+            'row_preview': {
+                'sql_query': (sample_row.get('sql_query') or '')[:160],
+                'vulnerability_status': sample_row.get('vulnerability_status'),
+                'injection_type': sample_row.get('injection_type')
+            }
+        },
+        prediction={
+            'is_malicious': prediction.get('is_malicious', False),
+            'confidence': prediction.get('confidence', 0.0),
+            'attack_type': prediction.get('attack_type'),
+            'details': [prediction],
+            'prediction_score': prediction.get('prediction_score', prediction.get('confidence', 0.0))
+        },
+        route='/dataset_batch_detect',
+        method='BATCH',
+        ip_address='127.0.0.1'
+    )
+
+
+def run_dataset_batch_detection(dataset_path, sample_size, seed=42):
+    """
+    Pull queries from the dataset CSV and run them through the predictor.
+
+    This behaves like `/batch_detect`, but it automatically constructs the batch
+    from the dataset and returns richer analytics for dissertation reporting.
+    """
+    usecols = ['sql_query', 'vulnerability_status', 'injection_type']
+    sampled_rows = _reservoir_sample_csv(dataset_path, sample_size, seed=seed, usecols=usecols)
+
+    if not sampled_rows:
+        return {
+            'total': 0,
+            'malicious_count': 0,
+            'benign_count': 0,
+            'blocked_count': 0,
+            'allowed_count': 0,
+            'results': [],
+            'class_distribution': {},
+            'injection_type_distribution': {},
+            'attack_type_distribution': {},
+            'dataset_path': dataset_path,
+            'sample_size': sample_size,
+        }
+
+    class_distribution, injection_distribution = _summarise_sample_rows(sampled_rows)
+
+    results = []
+    malicious_count = 0
+    blocked_count = 0
+    attack_type_distribution = {}
+    confidence_total = 0.0
+    confidence_count = 0
+    batch_id = datetime.now().strftime("%Y%m%d%H%M%S")
+
+    for index, sample_row in enumerate(sampled_rows, start=1):
+        query = sample_row.get('sql_query', '')
+        if not query:
+            continue
+
+        prediction = predictor.predict(query)
+        is_malicious = bool(prediction.get('is_malicious', False))
+        blocked = bool(is_malicious and Config.BLOCK_MALICIOUS_REQUESTS)
+        attack_type = prediction.get('attack_type') or 'Unknown'
+        confidence = float(prediction.get('confidence', 0.0))
+
+        if is_malicious:
+            malicious_count += 1
+        if blocked:
+            blocked_count += 1
+
+        attack_type_distribution[attack_type] = attack_type_distribution.get(attack_type, 0) + 1
+        confidence_total += confidence
+        confidence_count += 1
+
+        _log_dataset_batch_attempt(sample_row, prediction, dataset_path, sample_size, batch_id)
+
+        results.append({
+            'row_index': index,
+            'query_preview': query[:120] + ('...' if len(query) > 120 else ''),
+            'true_label': sample_row.get('vulnerability_status'),
+            'injection_type': sample_row.get('injection_type'),
+            'is_malicious': is_malicious,
+            'blocked': blocked,
+            'confidence': confidence,
+            'attack_type': attack_type
+        })
+
+    total = len(results)
+    benign_count = total - malicious_count
+    allowed_count = total - blocked_count
+    average_confidence = round(confidence_total / confidence_count, 4) if confidence_count else 0.0
+
+    return {
+        'batch_id': batch_id,
+        'dataset_path': dataset_path,
+        'sample_size': sample_size,
+        'total': total,
+        'malicious_count': malicious_count,
+        'benign_count': benign_count,
+        'blocked_count': blocked_count,
+        'allowed_count': allowed_count,
+        'average_confidence': average_confidence,
+        'class_distribution': class_distribution,
+        'injection_type_distribution': injection_distribution,
+        'attack_type_distribution': attack_type_distribution,
+        'results': results
+    }
+
+
 def sql_injection_middleware(func):
     """
     Decorator that intercepts requests and checks for SQL injection.
@@ -914,6 +1088,65 @@ def batch_detect():
         'malicious_count': sum(1 for r in results if r['is_malicious']),
         'results': results
     })
+
+
+@app.route('/dataset_batch_detect', methods=['GET'])
+def dataset_batch_detect():
+    """
+    Automatically sample SQL queries from the RbSQLi CSV and run them through
+    the predictor.
+
+    Query parameters:
+        sample_size: number of rows to sample from the CSV
+        dataset_path: optional custom CSV path
+        seed: optional random seed for repeatable sampling
+
+    Example:
+        /dataset_batch_detect?sample_size=300
+        /dataset_batch_detect?sample_size=150&dataset_path=rbsqli_dataset.csv
+    """
+    sample_size = request.args.get('sample_size', 150, type=int)
+    dataset_path = request.args.get('dataset_path', Config.DEFAULT_DATASET_PATH, type=str)
+    seed = request.args.get('seed', 42, type=int)
+    return_results = request.args.get('return_results', 'true').lower() != 'false'
+
+    if sample_size <= 0:
+        return jsonify({'error': 'sample_size must be greater than zero'}), 400
+
+    if not os.path.exists(dataset_path):
+        return jsonify({
+            'error': 'Dataset file not found',
+            'dataset_path': dataset_path
+        }), 404
+
+    summary = run_dataset_batch_detection(
+        dataset_path=dataset_path,
+        sample_size=sample_size,
+        seed=seed
+    )
+
+    # Keep the response useful for dissertation analysis while still allowing
+    # the caller to skip the full row-level output when they only need summary
+    # metrics for larger runs.
+    response_payload = {
+        'batch_id': summary['batch_id'],
+        'dataset_path': summary['dataset_path'],
+        'sample_size': summary['sample_size'],
+        'total': summary['total'],
+        'malicious_count': summary['malicious_count'],
+        'benign_count': summary['benign_count'],
+        'blocked_count': summary['blocked_count'],
+        'allowed_count': summary['allowed_count'],
+        'average_confidence': summary['average_confidence'],
+        'class_distribution': summary['class_distribution'],
+        'injection_type_distribution': summary['injection_type_distribution'],
+        'attack_type_distribution': summary['attack_type_distribution']
+    }
+
+    if return_results:
+        response_payload['results'] = summary['results']
+
+    return jsonify(response_payload)
 
 
 # ============================================

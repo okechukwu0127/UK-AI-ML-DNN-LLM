@@ -1,0 +1,85 @@
+sample_size,best_model,accuracy,precision,recall,f1_score,weighted_f1,auc,tfidf_features,combined_features
+5000,"Random Forest
+F1 Score: 0.9950
+Accuracy: 0.9973
+Precision: 1.0000
+Recall: 0.9900
+Weighted F1: 0.9973
+AUC: 1.0000
+================================================================================
+
+Saving best model artifacts for API middleware deployment...
+✓ Saved middleware bundle to: best_sql_injection_model.pkl
+
+================================================================================
+SECTION 8: GENERATING VISUALIZATIONS
+================================================================================
+✓ Saved: sql_injection_plots/01_model_comparison.png
+✓ Saved: sql_injection_plots/02_best_model_confusion_matrix.png
+✓ Saved: sql_injection_plots/04_roc_curves.png
+
+✓ All visualizations saved to 'sql_injection_plots/' directory
+(sqli) (base) COMV-20006593:code-101 oeze$",0.9973,1.0,0.99,0.995,0.9973,1.0,1393,1434
+10000,"Random Forest
+F1 Score: 1.0000
+Accuracy: 1.0000
+Precision: 1.0000
+Recall: 1.0000
+Weighted F1: 1.0000
+AUC: 1.0000
+================================================================================
+
+Saving best model artifacts for API middleware deployment...
+✓ Saved middleware bundle to: best_sql_injection_model.pkl
+
+================================================================================
+SECTION 8: GENERATING VISUALIZATIONS
+================================================================================
+✓ Saved: sql_injection_plots/01_model_comparison.png
+✓ Saved: sql_injection_plots/02_best_model_confusion_matrix.png
+✓ Saved: sql_injection_plots/04_roc_curves.png
+
+✓ All visualizations saved to 'sql_injection_plots/' directory
+(sqli) (base) COMV-20006593:code-101 oeze$",1.0,1.0,1.0,1.0,1.0,1.0,1585,1626
+50000,"Random Forest
+F1 Score: 1.0000
+Accuracy: 1.0000
+Precision: 1.0000
+Recall: 1.0000
+Weighted F1: 1.0000
+AUC: 1.0000
+================================================================================
+
+Saving best model artifacts for API middleware deployment...
+✓ Saved middleware bundle to: best_sql_injection_model.pkl
+
+================================================================================
+SECTION 8: GENERATING VISUALIZATIONS
+================================================================================
+✓ Saved: sql_injection_plots/01_model_comparison.png
+✓ Saved: sql_injection_plots/02_best_model_confusion_matrix.png
+✓ Saved: sql_injection_plots/04_roc_curves.png
+
+✓ All visualizations saved to 'sql_injection_plots/' directory
+(sqli) (base) COMV-20006593:code-101 oeze$",1.0,1.0,1.0,1.0,1.0,1.0,1745,1786
+100000,"Random Forest
+F1 Score: 1.0000
+Accuracy: 1.0000
+Precision: 1.0000
+Recall: 1.0000
+Weighted F1: 1.0000
+AUC: 1.0000
+================================================================================
+
+Saving best model artifacts for API middleware deployment...
+✓ Saved middleware bundle to: best_sql_injection_model.pkl
+
+================================================================================
+SECTION 8: GENERATING VISUALIZATIONS
+================================================================================
+✓ Saved: sql_injection_plots/01_model_comparison.png
+✓ Saved: sql_injection_plots/02_best_model_confusion_matrix.png
+✓ Saved: sql_injection_plots/04_roc_curves.png
+
+✓ All visualizations saved to 'sql_injection_plots/' directory
+(sqli) (base) COMV-20006593:code-101 oeze$",1.0,1.0,1.0,1.0,1.0,1.0,1760,1801

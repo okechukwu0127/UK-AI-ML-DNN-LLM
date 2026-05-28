@@ -12,7 +12,7 @@ warnings.filterwarnings('ignore')
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
 # ============================================
-# SECTION 1: IMPORTS (Following Task1_DNN_250460.py style)
+# SECTION 1: IMPORTS
 # ============================================
 import numpy as np
 import pandas as pd
@@ -43,7 +43,7 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.naive_bayes import GaussianNB
 
 
-# Deep Learning imports (following Task1_DNN_250460.py style)
+# Deep Learning imports
 import tensorflow as tf
 from tensorflow.keras import Sequential
 from tensorflow.keras.layers import Input, Dense, Dropout, BatchNormalization, LSTM, GRU, Embedding
@@ -56,7 +56,7 @@ from tensorflow.keras.preprocessing.text import Tokenizer
 from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS
 
-# Set random seeds for reproducibility (following Task1_DNN_250460.py)
+# Set random seeds for reproducibility
 SEED = 42
 np.random.seed(SEED)
 tf.random.set_seed(SEED)
@@ -69,7 +69,7 @@ print("=" * 80)
 
 # ============================================
 # SECTION 2: DATA LOADING AND EXPLORATION
-# Following style from Task1_DNN_250460.py Question 1
+#
 # ============================================
 
 print("\n" + "=" * 80)
@@ -654,7 +654,6 @@ print("\n✓ Data loading complete. Proceeding to preprocessing...")
 
 # ============================================
 # SECTION 3: DATA PREPROCESSING
-# Following style from 7CS033_Assignment_Task_1 - 6.pdf (Task 2.1)
 # ============================================
 
 print("\n" + "=" * 80)
@@ -776,7 +775,7 @@ else:
 print(f"\n✓ Data preprocessing complete")
 print(f"  Feature shape: {df_processed.shape}")
 
-# Create train/validation/test split (following Task1_DNN_250460.py style)
+# Create train/validation/test split
 print("\nCreating train/validation/test split...")
 
 # First split: Separate test set (15%)
@@ -807,7 +806,6 @@ print(f"  Test class distribution: {y_test.value_counts().to_dict() if hasattr(y
 
 # ============================================
 # SECTION 4: FEATURE ENGINEERING FOR TEXT DATA
-# Following style from Task3_RNN_2504607.py and 7CS033 PDF (Task 6)
 # ============================================
 
 print("\n" + "=" * 80)
@@ -859,7 +857,6 @@ def create_numerical_features(df_train, df_val, df_test, exclude_columns=['sql_q
     """
     Extract numerical features for machine learning models.
 
-    Reference: Feature selection style from Task1_DNN_250460.py data preprocessing
 
     Args:
         df_train, df_val, df_test: DataFrames
@@ -884,7 +881,7 @@ def create_numerical_features(df_train, df_val, df_test, exclude_columns=['sql_q
     X_val_num = df_val[feature_columns].values
     X_test_num = df_test[feature_columns].values
 
-    # Standardize features (following Task1_DNN_250460.py)
+    # Standardize features
     scaler = StandardScaler()
     X_train_num_scaled = scaler.fit_transform(X_train_num)
     X_val_num_scaled = scaler.transform(X_val_num)
@@ -929,7 +926,6 @@ print(f"  Test: {X_test_combined.shape}")
 
 # ============================================
 # SECTION 5: TRADITIONAL MACHINE LEARNING MODELS
-# Following style from 7CS033 PDF Task 3.1 (lines 20-60)
 # ============================================
 
 print("\n" + "=" * 80)
@@ -1087,7 +1083,7 @@ class SQLInjectionDetector:
         Returns:
             dict: Test performance metrics
         """
-        # Find best model by validation F1 score (following Task1 style)
+        # Find best model by validation F1 score
         best_result = max(self.results, key=lambda x: x['val_f1'])
         best_model = best_result['model']
         best_name = best_result['model_name']
@@ -1141,7 +1137,6 @@ ml_test_results, best_ml_model = ml_detector.evaluate_best_on_test(X_test_combin
 
 # ============================================
 # SECTION 6: DEEP NEURAL NETWORK MODEL
-# Following style from Task1_DNN_250460.py (build_model function)
 # ============================================
 
 print("\n" + "=" * 80)
@@ -1204,7 +1199,7 @@ def build_dnn_model(input_dim, hidden_units=None, activation='relu', learning_ra
     optimizer = Adam(learning_rate=learning_rate)
 
     # Compile with binary crossentropy (appropriate for binary classification)
-    # Following Task1 style: include AUC metric
+    # include AUC metric
     model.compile(
         optimizer=optimizer,
         loss='binary_crossentropy',
@@ -1245,7 +1240,7 @@ def train_dnn_model(X_train, y_train, X_val, y_val, input_dim, experiment_name="
     print(f"  Model summary:")
     model.summary()
 
-    # Callbacks for training optimization (following Task1 style)
+    # Callbacks for training optimization
     early_stop = EarlyStopping(
         monitor='val_auc',
         patience=10,
@@ -1318,7 +1313,6 @@ print(f"  AUC:       {dnn_results['auc']:.4f}")
 
 # ============================================
 # SECTION 7: RNN/LSTM MODEL FOR SEQUENCE PATTERNS
-# Following style from Task3_RNN_2504607.py (build_simple_lstm function)
 # ============================================
 
 print("\n" + "=" * 80)
@@ -1498,7 +1492,7 @@ lstm_model = build_lstm_model(
 print("\nLSTM Model Summary:")
 lstm_model.summary()
 
-# Callbacks for LSTM training (following Task3 style)
+# Callbacks for LSTM training
 early_stop_lstm = EarlyStopping(monitor='val_auc', patience=3, restore_best_weights=True, mode='max', verbose=1)
 reduce_lr_lstm = ReduceLROnPlateau(monitor='val_auc', factor=0.5, patience=2, mode='max', min_lr=1e-6, verbose=1)
 
@@ -1578,7 +1572,6 @@ print(f"  AUC:       {gru_results['auc']:.4f}")
 
 # ============================================
 # SECTION 8: MODEL COMPARISON AND SELECTION
-# Following style from Task1_DNN_250460.py Question 4
 # ============================================
 
 print("\n" + "=" * 80)
@@ -1650,7 +1643,6 @@ saved_bundle_path = save_best_model_artifacts(
 
 # ============================================
 # SECTION 9: VISUALIZATIONS
-# Following style from Task1_DNN_250460.py Question 5
 # ============================================
 
 print("\n" + "=" * 80)
@@ -1660,7 +1652,7 @@ print("=" * 80)
 # Create a figures directory
 os.makedirs('sql_injection_plots', exist_ok=True)
 
-# PLOT 1: Model Comparison Bar Chart (following Task1 style)
+# PLOT 1: Model Comparison Bar Chart
 
 fig = plt.figure(figsize=(16, 10))
 
@@ -1735,7 +1727,7 @@ plt.savefig('sql_injection_plots/01_model_comparison.png', dpi=300, bbox_inches=
 print("✓ Saved: sql_injection_plots/01_model_comparison.png")
 plt.close()
 
-# PLOT 2: Confusion Matrix for Best Model (following Task1 style for best model)
+# PLOT 2: Confusion Matrix for Best Model
 fig, ax = plt.subplots(1, 1, figsize=(8, 6))
 cm = best_model_result['confusion_matrix']
 sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', ax=ax,
