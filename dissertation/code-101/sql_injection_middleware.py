@@ -11,6 +11,7 @@ import pickle
 import csv
 import random
 import time
+from pathlib import Path
 from datetime import datetime
 from functools import wraps
 from urllib.parse import unquote
@@ -24,6 +25,12 @@ from werkzeug.datastructures import MultiDict
 # Import the trained model components (from your main script)
 # In production, you'd load the saved model
 import joblib
+
+PROJECT_ROOT = Path(__file__).resolve().parent
+PLOTS_DIR = PROJECT_ROOT / "sql_injection_plots"
+ROOT_REPORT_FILES = {
+    "sql_injection_logs.json": PROJECT_ROOT / "sql_injection_logs.json",
+}
 
 # ============================================
 # CONFIGURATION
@@ -1102,6 +1109,116 @@ def batch_detect():
         'malicious_count': sum(1 for r in results if r['is_malicious']),
         'results': results
     })
+
+
+@app.route('/api/query-test', methods=['POST'])
+def api_query_test():
+    """
+    Frontend-friendly endpoint for testing one SQL query.
+    """
+    data = request.get_json(silent=True) or {}
+    sql_query = (data.get('query') or data.get('sql_query') or '').strip()
+
+    if not sql_query:
+        return jsonify({'error': 'No SQL query provided'}), 400
+
+    prediction = predictor.predict(sql_query)
+    return jsonify({
+        'query_preview': sql_query[:250] + ('...' if len(sql_query) > 250 else ''),
+        'is_malicious': bool(prediction.get('is_malicious', False)),
+        'confidence': float(prediction.get('confidence', 0.0)),
+        'attack_type': prediction.get('attack_type') or 'Unknown',
+        'prediction_score': float(prediction.get('prediction_score', prediction.get('confidence', 0.0))),
+        'inference_ms': float(prediction.get('inference_ms', 0.0)),
+        'message': 'Malicious SQL injection detected' if prediction.get('is_malicious', False) else 'Query appears benign',
+        'details': prediction
+    })
+
+
+def _discover_report_files():
+    csv_files = []
+    json_files = []
+    if PLOTS_DIR.exists():
+        for path in sorted(PLOTS_DIR.glob("*")):
+            if path.suffix.lower() == ".csv":
+                csv_files.append(path.name)
+            elif path.suffix.lower() == ".json":
+                json_files.append(path.name)
+    for name in ROOT_REPORT_FILES:
+        if ROOT_REPORT_FILES[name].exists():
+            json_files.append(name)
+    return sorted(set(csv_files)), sorted(set(json_files))
+
+
+def _json_safe(value):
+    """
+    Convert pandas/numpy NaN values into JSON-safe nulls and recurse through
+    nested containers so the frontend always receives valid JSON.
+    """
+    if value is None:
+        return None
+    try:
+        if pd.isna(value):
+            return None
+    except Exception:
+        pass
+
+    if isinstance(value, dict):
+        return {str(key): _json_safe(item) for key, item in value.items()}
+    if isinstance(value, list):
+        return [_json_safe(item) for item in value]
+    if isinstance(value, tuple):
+        return [_json_safe(item) for item in value]
+    return value
+
+
+@app.route('/api/reports', methods=['GET'])
+def api_reports_index():
+    """
+    Return the report files that the React dashboard can render.
+    """
+    csv_files, json_files = _discover_report_files()
+    return jsonify({
+        'csv_files': csv_files,
+        'json_files': json_files,
+        'all_files': csv_files + json_files,
+        'plots_dir': str(PLOTS_DIR),
+    })
+
+
+@app.route('/api/reports/<path:report_name>', methods=['GET'])
+def api_report_data(report_name):
+    """
+    Return the raw contents of a CSV or JSON report file as JSON.
+    """
+    if report_name in ROOT_REPORT_FILES:
+        safe_path = ROOT_REPORT_FILES[report_name].resolve()
+    else:
+        safe_path = (PLOTS_DIR / report_name).resolve()
+        plots_root = PLOTS_DIR.resolve()
+        if plots_root not in safe_path.parents and safe_path != plots_root:
+            return jsonify({'error': 'Invalid report path'}), 400
+    if not safe_path.exists():
+        return jsonify({'error': 'Report not found'}), 404
+
+    if safe_path.suffix.lower() == '.csv':
+        df = pd.read_csv(safe_path)
+        return jsonify({
+            'file': report_name,
+            'type': 'csv',
+            'columns': df.columns.tolist(),
+            'records': _json_safe(df.to_dict(orient='records')),
+            'row_count': int(len(df)),
+        })
+    if safe_path.suffix.lower() == '.json':
+        with open(safe_path, 'r', encoding='utf-8') as handle:
+            return jsonify({
+                'file': report_name,
+                'type': 'json',
+                'data': _json_safe(json.load(handle)),
+            })
+
+    return jsonify({'error': 'Unsupported report type'}), 400
 
 
 @app.route('/dataset_batch_detect', methods=['GET'])

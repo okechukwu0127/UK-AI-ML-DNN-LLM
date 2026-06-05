@@ -30572,5 +30572,97 @@
     "attack_type": "Suspicious SQL Pattern",
     "blocked": true,
     "inference_ms": 14.038
+  },
+  {
+    "timestamp": "2026-06-05T15:47:17.946976",
+    "route": "/api/login",
+    "method": "POST",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "candidate_count": 1,
+      "sql_like_candidate_count": 0,
+      "candidates": []
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.0,
+      "attack_type": null,
+      "details": [],
+      "inference_ms": 8.611
+    },
+    "is_malicious": false,
+    "confidence": 0.0,
+    "attack_type": null,
+    "blocked": false,
+    "inference_ms": 8.611
+  },
+  {
+    "timestamp": "2026-06-05T15:50:54.930260",
+    "route": "/api/login",
+    "method": "POST",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "candidate_count": 1,
+      "sql_like_candidate_count": 0,
+      "candidates": []
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.0,
+      "attack_type": null,
+      "details": [],
+      "inference_ms": 1.426
+    },
+    "is_malicious": false,
+    "confidence": 0.0,
+    "attack_type": null,
+    "blocked": false,
+    "inference_ms": 1.426
+  },
+  {
+    "timestamp": "2026-06-05T15:52:07.660759",
+    "route": "/api/login",
+    "method": "POST",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "candidate_count": 1,
+      "sql_like_candidate_count": 0,
+      "candidates": []
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.0,
+      "attack_type": null,
+      "details": [],
+      "inference_ms": 3.024
+    },
+    "is_malicious": false,
+    "confidence": 0.0,
+    "attack_type": null,
+    "blocked": false,
+    "inference_ms": 3.024
+  },
+  {
+    "timestamp": "2026-06-05T16:24:04.325542",
+    "route": "/api/login",
+    "method": "POST",
+    "ip_address": "127.0.0.1",
+    "request_data": {
+      "candidate_count": 1,
+      "sql_like_candidate_count": 0,
+      "candidates": []
+    },
+    "prediction": {
+      "is_malicious": false,
+      "confidence": 0.0,
+      "attack_type": null,
+      "details": [],
+      "inference_ms": 4.4
+    },
+    "is_malicious": false,
+    "confidence": 0.0,
+    "attack_type": null,
+    "blocked": false,
+    "inference_ms": 4.4
   }
 ]
