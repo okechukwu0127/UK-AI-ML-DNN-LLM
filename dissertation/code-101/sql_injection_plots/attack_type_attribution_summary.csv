@@ -1,0 +1,9 @@
+attack_type,count,percentage
+Boolean-based,387,47.78
+,192,23.7
+Comment-based,124,15.31
+Time-based,65,8.02
+Union-based,16,1.98
+Unknown,15,1.85
+Stack-queries-based,6,0.74
+Suspicious SQL Pattern,5,0.62

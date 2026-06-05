@@ -149,3 +149,603 @@ batch_id,sample_size,sql_query,true_label,injection_type,predicted_malicious,blo
 20260528181035,150,INSERT MAX(price) FROM accounts WHERE updated_at IN 'pending' OR updated_at IN 'shipped',No,None_Type,False,False,0.9998,Boolean-based
 20260528181035,150,UPDATE COUNT(*) FROM admin WHERE order_id = 'safe' NOT order_id = 1,No,None_Type,False,False,0.9996,Unknown
 20260528181035,150,UPDATE users SET username = 'test' LIKE ORDER BY 6 WHERE id > 1,Yes,Union-Based,True,True,0.9999,Suspicious SQL Pattern
+20260529170713,150,EXEC COUNT(*) FROM employees WHERE email LIKE NULL AND email LIKE 'pending',No,None_Type,False,False,0.9998,Boolean-based
+20260529170713,150,INSERT MAX(price) FROM accounts WHERE updated_at < 'test@example.com' AND updated_at < 'active',No,None_Type,False,False,0.9998,Boolean-based
+20260529170713,150,"UPDATE created_at, updated_at FROM users WHERE product_id < 'safe' OR product_id < '2024-01-01'",No,None_Type,False,False,0.9998,Boolean-based
+20260529170713,150,"EXEC price, status FROM passwords WHERE created_at <= 'safe' OR created_at <= 'shipped'",No,None_Type,False,False,0.9998,Boolean-based
+20260529170713,150,"SELECT id, email FROM sessions WHERE id >= 1 LIKE IF(7423=7424) SELECT 7423 ELSE DROP FUNCTION xcjl-- --",Yes,Error-Based,True,True,0.9997,Comment-based
+20260529170713,150,DELETE * FROM credentials WHERE email BETWEEN 'active' OR email BETWEEN '2024-01-01',No,None_Type,False,False,0.9997,Boolean-based
+20260529170713,150,CALL MAX(price) FROM credentials WHERE created_at != '2024-01-01' NOT created_at != NULL,No,None_Type,False,False,0.9999,Unknown
+20260529170713,150,"SELECT user_id, product_id FROM passwords WHERE id != 1 NOT &&SLEEP(5) #",Yes,Time-Based,True,True,0.9992,Time-based
+20260529170713,150,"EXEC created_at, updated_at FROM login WHERE created_at >= 1 AND created_at >= 'active'",No,None_Type,False,False,0.9997,Boolean-based
+20260529170713,150,"CALL created_at, updated_at FROM accounts WHERE status IN 'shipped' NOT status IN 'test@example.com'",No,None_Type,False,False,0.9998,Unknown
+20260529170713,150,"INSERT price, status FROM sessions WHERE product_id IN NULL AND product_id IN 'active'",No,None_Type,False,False,0.9997,Boolean-based
+20260529170713,150,"INSERT id, email FROM passwords WHERE user_id LIKE 'pending' NOT user_id LIKE 'test@example.com'",No,None_Type,False,False,0.9998,Unknown
+20260529170713,150,"SELECT COUNT(*) FROM credentials WHERE id != 1 LIKE "" AND (SELECT * FROM users WHERE username='admin') IS NOT NULL -- #",Yes,meta_based,True,True,0.9998,Comment-based
+20260529170713,150,"EXEC id, email FROM sessions WHERE price = 'test@example.com' AND price = 'safe'",No,None_Type,False,False,0.9967,Boolean-based
+20260529170713,150,"UPDATE users SET status='active' WHERE id > 1 OR 3409=3409 AND (1=0) AND (SUBSTRING('admin',1,1) = 'a') #",Yes,boolean-based,True,True,0.9982,Comment-based
+20260529170713,150,UPDATE * FROM credentials WHERE status >= 'pending' OR status >= 'shipped',No,None_Type,False,False,0.9997,Boolean-based
+20260529170713,150,INSERT MIN(created_at) FROM employees WHERE email >= 1 OR email >= 'test@example.com',No,None_Type,False,False,0.9995,Boolean-based
+20260529170713,150,DELETE * FROM credentials WHERE id <= 'shipped' AND id <= 'test@example.com',No,None_Type,False,False,0.996,Boolean-based
+20260529170713,150,"INSERT user_id, product_id FROM payments WHERE order_id >= 'pending' OR order_id >= NULL",No,None_Type,False,False,0.9998,Boolean-based
+20260529170713,150,CALL MIN(created_at) FROM transactions WHERE price BETWEEN 'pending' NOT price BETWEEN 'shipped',No,None_Type,False,False,0.9998,Unknown
+20260529170713,150,SELECT MAX(price) FROM users WHERE price < 'shipped' OR price < 'test@example.com',No,None_Type,False,False,0.9997,Boolean-based
+20260529170713,150,CALL COUNT(*) FROM passwords WHERE created_at IN 'safe' NOT created_at IN 'shipped',No,None_Type,False,False,0.9998,Unknown
+20260529170713,150,"EXEC price, status FROM sessions WHERE updated_at >= 'shipped' NOT updated_at >= 'active'",No,None_Type,False,False,0.9998,Unknown
+20260529170713,150,"SELECT COUNT(*) FROM credentials WHERE id != 1 OR "" OR (SELECT COUNT(*) FROM users WHERE username='admin') > 1 -- #",Yes,meta_based,True,True,0.9998,Comment-based
+20260529170713,150,"SELECT created_at, updated_at FROM credentials WHERE email LIKE 'safe' NOT email LIKE 'active'",No,None_Type,False,False,0.9997,Unknown
+20260529170713,150,"SELECT created_at, updated_at FROM credentials WHERE id < 1 LIKE sleep(5)# --",Yes,Time-Based,True,True,0.9993,Time-based
+20260529170713,150,CALL MAX(price) FROM credentials WHERE id = 'test@example.com' NOT id = NULL,No,None_Type,False,False,0.9956,Unknown
+20260529170713,150,INSERT MAX(price) FROM accounts WHERE product_id != 1 NOT product_id != '2024-01-01',No,None_Type,False,False,0.9998,Unknown
+20260529170713,150,UPDATE * FROM users WHERE email LIKE NULL OR email LIKE '2024-01-01',No,None_Type,False,False,0.9998,Boolean-based
+20260529170713,150,EXEC MIN(created_at) FROM employees WHERE status BETWEEN 'pending' OR status BETWEEN 'safe',No,None_Type,False,False,0.9996,Boolean-based
+20260529170713,150,INSERT MIN(created_at) FROM employees WHERE user_id BETWEEN 'shipped' OR user_id BETWEEN 'safe',No,None_Type,False,False,0.9998,Boolean-based
+20260529170713,150,"DELETE created_at, updated_at FROM payments WHERE email LIKE 'pending' NOT email LIKE 'test@example.com'",No,None_Type,False,False,0.9961,Unknown
+20260529170713,150,"UPDATE created_at, updated_at FROM accounts WHERE price = NULL OR price = 'pending'",No,None_Type,False,False,0.9999,Boolean-based
+20260529170713,150,SELECT * FROM users WHERE id >= 1 LIKE ORDER BY 18# #,Yes,Error-Based,True,True,0.9996,Comment-based
+20260529170713,150,"INSERT created_at, updated_at FROM employees WHERE email < 'safe' AND email < 1",No,None_Type,False,False,0.9998,Boolean-based
+20260529170713,150,"SELECT created_at, updated_at FROM admin WHERE id > 1 ORDER BY 9# #",Yes,Error-Based,True,True,0.999,Comment-based
+20260529170713,150,"DELETE created_at, updated_at FROM payments WHERE updated_at >= '2024-01-01' OR updated_at >= 'test@example.com'",No,None_Type,False,False,0.9997,Boolean-based
+20260529170713,150,"SELECT user_id, product_id FROM payments WHERE id <= 1 AND ORDER BY 9--",Yes,Error-Based,True,True,0.9995,Comment-based
+20260529170713,150,"EXEC id, email FROM users WHERE price <= 'pending' OR price <= 'safe'",No,None_Type,False,False,0.9997,Boolean-based
+20260529170713,150,"SELECT created_at, updated_at FROM payments WHERE email = 'safe' NOT email = 1",No,None_Type,False,False,0.9994,Unknown
+20260529170713,150,"EXEC('SELECT price, status FROM credentials WHERE id <= 1 OR 3409=3409 AND (1=1) AND (SUBSTRING('password',1,1) = 'p')') #",Yes,boolean-based,True,True,1.0,Comment-based
+20260529170713,150,CALL MAX(price) FROM transactions WHERE email >= 1 AND email >= 'test@example.com',No,None_Type,False,False,0.9998,Boolean-based
+20260529170713,150,"INSERT id, email FROM credentials WHERE product_id > '2024-01-01' OR product_id > NULL",No,None_Type,False,False,0.9998,Boolean-based
+20260529170713,150,"CALL id, email FROM sessions WHERE status LIKE 'shipped' NOT status LIKE 'test@example.com'",No,None_Type,False,False,0.9997,Unknown
+20260529170713,150,"SELECT user_id, product_id FROM payments WHERE id >= 1 NOT ORDER BY 31337#",Yes,Error-Based,True,True,0.9985,Comment-based
+20260529170713,150,"UPDATE employees SET name = 'admin' WHERE id < 1 1)) or benchmark(10000000,MD5(1))# --",Yes,Time-Based,True,True,0.9981,Time-based
+20260529170713,150,EXEC * FROM employees WHERE email = NULL OR email = NULL,No,None_Type,False,False,0.9968,Boolean-based
+20260529170713,150,UPDATE users SET name = 'admin' AND SLEEP(5)-- WHERE id > 1,Yes,Time-Based,True,True,0.9994,Time-based
+20260529170713,150,"SELECT price, status FROM credentials WHERE id >= 1 LIKE ORDER BY SLEEP(5)--",Yes,Time-Based,True,True,0.9996,Time-based
+20260529170713,150,"INSERT id, email FROM employees WHERE id >= 'test@example.com' OR id >= 'safe'",No,None_Type,False,False,0.9998,Boolean-based
+20260529170713,150,"DELETE user_id, product_id FROM login WHERE updated_at >= '2024-01-01' OR updated_at >= '2024-01-01'",No,None_Type,False,False,0.9998,Boolean-based
+20260529170713,150,UPDATE sessions SET name = 'admin' WHERE id = 1 WHERE 1=1 AND 1=0-- --,Yes,Error-Based,True,True,0.9994,Comment-based
+20260529170713,150,INSERT MIN(created_at) FROM passwords WHERE user_id LIKE 'test@example.com' OR user_id LIKE 'active',No,None_Type,False,False,0.9998,Boolean-based
+20260529170713,150,"SELECT * FROM users WHERE id = 1 or benchmark(50000000,MD5(1))",Yes,Time-Based,True,True,0.9831,Time-based
+20260529170713,150,SELECT MAX(price) FROM employees WHERE id < 1 OR ORDER BY 16 --,Yes,Union-Based,True,True,0.9996,Comment-based
+20260529170713,150,"DELETE FROM accounts WHERE id > 1 "") or pg_sleep(5)-- #",Yes,Time-Based,True,True,0.9996,Time-based
+20260529170713,150,SELECT COUNT(*) FROM users WHERE product_id < 'shipped' OR product_id < 'test@example.com',No,None_Type,False,False,0.9994,Boolean-based
+20260529170713,150,EXEC MAX(price) FROM login WHERE email <= NULL OR email <= 'active',No,None_Type,False,False,0.9998,Boolean-based
+20260529170713,150,EXEC('SELECT MAX(price) FROM accounts WHERE id > 1 OR EXISTS(SELECT * FROM users)--') --,Yes,stackqueries_based,True,True,1.0,Comment-based
+20260529170713,150,"CALL user_id, product_id FROM employees WHERE product_id != 'test@example.com' NOT product_id != 'active'",No,None_Type,False,False,0.9998,Unknown
+20260529170713,150,"SELECT MAX(price) FROM payments WHERE id != 1 LIKE UNION SELECT null, null, null, null FROM information_schema.tables -- --",Yes,meta_based,True,True,0.9992,Union-based
+20260529170713,150,"SELECT user_id, product_id FROM login WHERE id >= 1 OR 3409=3409 AND (1=0) AND (SUBSTRING('admin',1,2) = 'ad')",Yes,boolean-based,True,True,0.9988,Boolean-based
+20260529170713,150,"EXEC('SELECT id, email FROM payments WHERE id = 1 ORDER BY 14--')",Yes,Error-Based,True,True,0.9997,Comment-based
+20260529170713,150,"CALL user_id, product_id FROM transactions WHERE created_at BETWEEN 'active' OR created_at BETWEEN 1",No,None_Type,False,False,0.9956,Boolean-based
+20260529170713,150,"UPDATE created_at, updated_at FROM users WHERE created_at LIKE 'shipped' AND created_at LIKE 'pending'",No,None_Type,False,False,0.9998,Boolean-based
+20260529170713,150,"EXEC created_at, updated_at FROM payments WHERE email IN 'pending' AND email IN '2024-01-01'",No,None_Type,False,False,0.9998,Boolean-based
+20260529170713,150,SELECT * FROM employees WHERE status LIKE 'test@example.com' AND status LIKE 'safe',No,None_Type,False,False,0.9996,Boolean-based
+20260529170713,150,UPDATE COUNT(*) FROM payments WHERE created_at IS NOT NULL NOT created_at IS NOT NULL,No,None_Type,False,False,0.996,Unknown
+20260529170713,150,"CALL id, email FROM credentials WHERE price = '2024-01-01' NOT price = 'active'",No,None_Type,False,False,0.9997,Unknown
+20260529170713,150,DELETE MIN(created_at) FROM passwords WHERE created_at <= '2024-01-01' OR created_at <= 1,No,None_Type,False,False,0.9955,Boolean-based
+20260529170713,150,SELECT * FROM accounts WHERE id != 1 NOT );waitfor delay '0:0:5'-- #,Yes,Time-Based,True,True,0.9997,Time-based
+20260529170713,150,UPDATE sessions SET username = 'test' AND ORDER BY 17-- WHERE id > 1,Yes,Union-Based,True,True,1.0,Comment-based
+20260529170713,150,"INSERT created_at, updated_at FROM transactions WHERE product_id LIKE 'safe' AND product_id LIKE 1",No,None_Type,False,False,0.9961,Boolean-based
+20260529170713,150,"INSERT user_id, product_id FROM admin WHERE updated_at >= 'shipped' NOT updated_at >= NULL",No,None_Type,False,False,0.9998,Unknown
+20260529170713,150,"SELECT created_at, updated_at FROM login WHERE id < 1 OR 3409=3409 AND (1=1) AND (EXISTS (SELECT 1 FROM users WHERE username='admin' AND password='password123')",Yes,boolean-based,True,True,0.9991,Boolean-based
+20260529170713,150,CALL * FROM credentials WHERE created_at LIKE '2024-01-01' OR created_at LIKE 'safe',No,None_Type,False,False,0.9998,Boolean-based
+20260529170713,150,"CALL id, email FROM users WHERE email LIKE NULL OR email LIKE 1",No,None_Type,False,False,0.9997,Unknown
+20260529170713,150,EXEC * FROM admin WHERE status >= 'active' OR status >= NULL,No,None_Type,False,False,0.9997,Boolean-based
+20260529170713,150,INSERT MIN(created_at) FROM sessions WHERE status LIKE 1 AND status LIKE 'pending',No,None_Type,False,False,0.9994,Boolean-based
+20260529170713,150,EXEC COUNT(*) FROM admin WHERE price LIKE 'active' OR price LIKE 'safe',No,None_Type,False,False,0.9998,Boolean-based
+20260529170713,150,"DELETE user_id, product_id FROM payments WHERE product_id > 'shipped' OR product_id > 'active'",No,None_Type,False,False,0.9997,Boolean-based
+20260529170713,150,CALL MAX(price) FROM accounts WHERE order_id LIKE NULL NOT order_id LIKE '2024-01-01',No,None_Type,False,False,0.9997,Unknown
+20260529170713,150,"DELETE created_at, updated_at FROM users WHERE price < 'safe' OR price < 1",No,None_Type,False,False,0.9998,Boolean-based
+20260529170713,150,INSERT COUNT(*) FROM admin WHERE order_id IN 'test@example.com' OR order_id IN 'test@example.com',No,None_Type,False,False,0.9998,Boolean-based
+20260529170713,150,"INSERT id, email FROM login WHERE status = 'active' OR status = '2024-01-01'",No,None_Type,False,False,0.9947,Boolean-based
+20260529170713,150,SELECT COUNT(*) FROM admin WHERE id = 1 ORDER BY 18 --,Yes,Union-Based,True,True,0.9997,Comment-based
+20260529170713,150,DELETE COUNT(*) FROM credentials WHERE created_at >= 'active' OR created_at >= 'shipped',No,None_Type,False,False,0.9998,Boolean-based
+20260529170713,150,"DELETE id, email FROM passwords WHERE created_at < '2024-01-01' NOT created_at < 'test@example.com'",No,None_Type,False,False,0.9997,Unknown
+20260529170713,150,"DELETE user_id, product_id FROM users WHERE user_id != 'shipped' AND user_id != 'safe'",No,None_Type,False,False,0.9997,Boolean-based
+20260529170713,150,CALL MAX(price) FROM payments WHERE created_at = '2024-01-01' NOT created_at = 'pending',No,None_Type,False,False,0.9999,Unknown
+20260529170713,150,UPDATE MAX(price) FROM admin WHERE email LIKE 'test@example.com' AND email LIKE 1,No,None_Type,False,False,0.9998,Boolean-based
+20260529170713,150,INSERT MIN(created_at) FROM login WHERE status < 'shipped' OR status < 'active',No,None_Type,False,False,0.9998,Boolean-based
+20260529170713,150,EXEC('SELECT MAX(price) FROM transactions WHERE id = 1 LIKE ORDER BY SLEEP(5)'),Yes,Time-Based,True,True,0.9997,Time-based
+20260529170713,150,"CALL user_id, product_id FROM admin WHERE product_id < 'safe' AND product_id < 'safe'",No,None_Type,False,False,0.9998,Boolean-based
+20260529170713,150,"SELECT user_id, product_id FROM payments WHERE id >= 1 AND &&SLEEP(5) --",Yes,Time-Based,True,True,0.9988,Time-based
+20260529170713,150,SELECT * FROM transactions WHERE id = 1 NOT ORDER BY 20 #,Yes,Union-Based,True,True,0.9992,Comment-based
+20260529170713,150,INSERT MIN(created_at) FROM credentials WHERE created_at > '2024-01-01' OR created_at > 'test@example.com',No,None_Type,False,False,0.9998,Boolean-based
+20260529170713,150,"DELETE id, email FROM credentials WHERE product_id > 'safe' OR product_id > 'test@example.com'",No,None_Type,False,False,0.9998,Boolean-based
+20260529170713,150,"EXEC created_at, updated_at FROM transactions WHERE id < 'safe' OR id < 'shipped'",No,None_Type,False,False,0.9998,Boolean-based
+20260529170713,150,"EXEC user_id, product_id FROM passwords WHERE status != 'test@example.com' AND status != NULL",No,None_Type,False,False,0.9998,Boolean-based
+20260529170713,150,CALL COUNT(*) FROM sessions WHERE user_id BETWEEN 'test@example.com' NOT user_id BETWEEN 'shipped',No,None_Type,False,False,0.9997,Unknown
+20260529170713,150,"UPDATE created_at, updated_at FROM payments WHERE email BETWEEN 'test@example.com' NOT email BETWEEN '2024-01-01'",No,None_Type,False,False,0.9998,Unknown
+20260529170713,150,UPDATE login SET name = 'admin' WHERE id != 1 AS INJECTX WHERE 1=1 AND 1=0-- #,Yes,Error-Based,True,True,0.9995,Comment-based
+20260529170713,150,SELECT MIN(created_at) FROM credentials WHERE created_at <= 'pending' NOT created_at <= 'pending',No,None_Type,False,False,0.9996,Unknown
+20260529170713,150,"SELECT user_id, product_id FROM login WHERE email IN 'safe' OR email IN 'safe'",No,None_Type,False,False,0.9995,Boolean-based
+20260529170713,150,"UPDATE price, status FROM transactions WHERE updated_at <= 'shipped' OR updated_at <= 'pending'",No,None_Type,False,False,0.9997,Boolean-based
+20260529170713,150,"INSERT price, status FROM sessions WHERE user_id BETWEEN 'active' NOT user_id BETWEEN 'pending'",No,None_Type,False,False,0.9998,Unknown
+20260529170713,150,"SELECT user_id, product_id FROM payments WHERE id >= 1 NOT "" OR 1=1 LIMIT 0, 1 -- #",Yes,meta_based,True,True,0.9894,Boolean-based
+20260529170713,150,CALL MIN(created_at) FROM admin WHERE product_id = 'shipped' AND product_id = 1,No,None_Type,False,False,0.9998,Boolean-based
+20260529170713,150,INSERT MAX(price) FROM login WHERE status = 'test@example.com' OR status = 'shipped',No,None_Type,False,False,0.9997,Boolean-based
+20260529170713,150,"UPDATE id, email FROM sessions WHERE price LIKE 'safe' AND price LIKE 'shipped'",No,None_Type,False,False,0.9996,Boolean-based
+20260529170713,150,"SELECT created_at, updated_at FROM payments WHERE id != 1 pg_SLEEP(5)#",Yes,Time-Based,True,True,0.9837,Time-based
+20260529170713,150,UPDATE COUNT(*) FROM admin WHERE email LIKE 1 NOT email LIKE 'active',No,None_Type,False,False,0.9996,Unknown
+20260529170713,150,SELECT MAX(price) FROM credentials WHERE price > 1 AND price > 'pending',No,None_Type,False,False,0.9957,Boolean-based
+20260529170713,150,"INSERT price, status FROM accounts WHERE updated_at >= 'test@example.com' AND updated_at >= 'pending'",No,None_Type,False,False,0.9998,Boolean-based
+20260529170713,150,"SELECT created_at, updated_at FROM sessions WHERE id != 1 ORDER BY 6#",Yes,Error-Based,True,True,0.9877,Comment-based
+20260529170713,150,INSERT * FROM sessions WHERE user_id > 'pending' AND user_id > 'safe',No,None_Type,False,False,0.9994,Boolean-based
+20260529170713,150,CALL MAX(price) FROM passwords WHERE id != NULL OR id != 'pending',No,None_Type,False,False,0.9996,Boolean-based
+20260529170713,150,EXEC * FROM users WHERE user_id = '2024-01-01' AND user_id = '2024-01-01',No,None_Type,False,False,0.9997,Boolean-based
+20260529170713,150,"INSERT created_at, updated_at FROM credentials WHERE id >= NULL NOT id >= 'shipped'",No,None_Type,False,False,0.9998,Unknown
+20260529170713,150,CALL MAX(price) FROM payments WHERE user_id != 1 NOT user_id != 1,No,None_Type,False,False,0.9849,Unknown
+20260529170713,150,"SELECT created_at, updated_at FROM passwords WHERE id > 1 LIKE UNION SELECT null, null, null, table_name FROM information_schema.tables -- #",Yes,meta_based,True,True,0.9992,Union-based
+20260529170713,150,DELETE * FROM payments WHERE product_id BETWEEN 1 AND product_id BETWEEN '2024-01-01',No,None_Type,False,False,0.9996,Boolean-based
+20260529170713,150,EXEC COUNT(*) FROM sessions WHERE updated_at != NULL AND updated_at != 'pending',No,None_Type,False,False,0.9999,Boolean-based
+20260529170713,150,"SELECT user_id, product_id FROM users WHERE order_id IN 'safe' OR order_id IN 'safe'",No,None_Type,False,False,0.9996,Boolean-based
+20260529170713,150,"INSERT price, status FROM admin WHERE product_id BETWEEN 'active' AND product_id BETWEEN '2024-01-01'",No,None_Type,False,False,0.9997,Boolean-based
+20260529170713,150,UPDATE employees SET username = 'test' OR ORDER BY 5-- WHERE id < 1 #,Yes,Union-Based,True,True,1.0,Comment-based
+20260529170713,150,CALL * FROM admin WHERE email <= 'pending' AND email <= NULL,No,None_Type,False,False,0.9998,Boolean-based
+20260529170713,150,"SELECT COUNT(*) FROM passwords WHERE id < 1 NOT +benchmark(3200,SHA1(1))+' --",Yes,Time-Based,True,True,0.9997,Time-based
+20260529170713,150,"SELECT id, email FROM admin WHERE id != 1 AND ORDER BY 25 --",Yes,Union-Based,True,True,0.9996,Comment-based
+20260529170713,150,"SELECT user_id, product_id FROM payments WHERE id > 1 OR AND 1=1 ORDER BY 2 -- --",Yes,meta_based,True,True,0.9996,Boolean-based
+20260529170713,150,INSERT * FROM sessions WHERE updated_at != 'test@example.com' AND updated_at != 'shipped',No,None_Type,False,False,0.9998,Boolean-based
+20260529170713,150,"SELECT user_id, product_id FROM admin WHERE id = 1 LIKE ORDER BY 19 #",Yes,Union-Based,True,True,0.9995,Comment-based
+20260529170713,150,"SELECT created_at, updated_at FROM transactions WHERE product_id >= 'test@example.com' NOT product_id >= 'test@example.com'",No,None_Type,False,False,0.9997,Unknown
+20260529170713,150,INSERT MAX(price) FROM transactions WHERE order_id BETWEEN 'safe' OR order_id BETWEEN 'active',No,None_Type,False,False,0.9998,Boolean-based
+20260529170713,150,UPDATE MAX(price) FROM passwords WHERE email >= 'pending' NOT email >= 'safe',No,None_Type,False,False,0.9998,Unknown
+20260529170713,150,EXEC MIN(created_at) FROM transactions WHERE created_at IN '2024-01-01' AND created_at IN 'active',No,None_Type,False,False,0.9997,Boolean-based
+20260529170713,150,INSERT MAX(price) FROM admin WHERE price >= 'pending' AND price >= NULL,No,None_Type,False,False,0.9998,Boolean-based
+20260529170713,150,"SELECT MIN(created_at) FROM users WHERE id >= 1 OR 3409=3409 AND (1=0) AND (SUBSTRING('password',1,1) = 'p') #",Yes,boolean-based,True,True,0.9999,Comment-based
+20260529170713,150,"SELECT price, status FROM users WHERE id > 1 LIKE OR EXISTS(SELECT * FROM users LIMIT 1) -- #",Yes,meta_based,True,True,0.9984,Comment-based
+20260529170713,150,"CALL price, status FROM passwords WHERE order_id = 'safe' NOT order_id = '2024-01-01'",No,None_Type,False,False,0.9998,Unknown
+20260529170713,150,CALL * FROM credentials WHERE order_id < 1 AND order_id < 1,No,None_Type,False,False,0.9777,Unknown
+20260529170713,150,"SELECT price, status FROM credentials WHERE id = 1 NOT ORDER BY 31337--",Yes,Error-Based,True,True,0.9996,Comment-based
+20260529170713,150,INSERT MIN(created_at) FROM payments WHERE id = 'shipped' AND id = 'safe',No,None_Type,False,False,0.9998,Boolean-based
+20260529170713,150,SELECT * FROM admin WHERE status = 'shipped' AND status = 'safe',No,None_Type,False,False,0.9959,Boolean-based
+20260529170713,150,SELECT MAX(price) FROM credentials WHERE id >= 1 NOT ORDER BY SLEEP(5) --,Yes,Time-Based,True,True,0.9997,Time-based
+20260529170713,150,UPDATE * FROM login WHERE status != NULL NOT status != 'safe',No,None_Type,False,False,0.9998,Unknown
+20260529170713,150,INSERT MAX(price) FROM accounts WHERE updated_at IN 'pending' OR updated_at IN 'shipped',No,None_Type,False,False,0.9998,Boolean-based
+20260529170713,150,UPDATE COUNT(*) FROM admin WHERE order_id = 'safe' NOT order_id = 1,No,None_Type,False,False,0.9996,Unknown
+20260529170713,150,UPDATE users SET username = 'test' LIKE ORDER BY 6 WHERE id > 1,Yes,Union-Based,True,True,0.9999,Suspicious SQL Pattern
+20260529172735,150,EXEC COUNT(*) FROM employees WHERE email LIKE NULL AND email LIKE 'pending',No,None_Type,False,False,0.9998,Boolean-based
+20260529172735,150,INSERT MAX(price) FROM accounts WHERE updated_at < 'test@example.com' AND updated_at < 'active',No,None_Type,False,False,0.9998,Boolean-based
+20260529172735,150,"UPDATE created_at, updated_at FROM users WHERE product_id < 'safe' OR product_id < '2024-01-01'",No,None_Type,False,False,0.9998,Boolean-based
+20260529172735,150,"EXEC price, status FROM passwords WHERE created_at <= 'safe' OR created_at <= 'shipped'",No,None_Type,False,False,0.9998,Boolean-based
+20260529172735,150,"SELECT id, email FROM sessions WHERE id >= 1 LIKE IF(7423=7424) SELECT 7423 ELSE DROP FUNCTION xcjl-- --",Yes,Error-Based,True,True,0.9997,Comment-based
+20260529172735,150,DELETE * FROM credentials WHERE email BETWEEN 'active' OR email BETWEEN '2024-01-01',No,None_Type,False,False,0.9997,Boolean-based
+20260529172735,150,CALL MAX(price) FROM credentials WHERE created_at != '2024-01-01' NOT created_at != NULL,No,None_Type,False,False,0.9999,Unknown
+20260529172735,150,"SELECT user_id, product_id FROM passwords WHERE id != 1 NOT &&SLEEP(5) #",Yes,Time-Based,True,True,0.9992,Time-based
+20260529172735,150,"EXEC created_at, updated_at FROM login WHERE created_at >= 1 AND created_at >= 'active'",No,None_Type,False,False,0.9997,Boolean-based
+20260529172735,150,"CALL created_at, updated_at FROM accounts WHERE status IN 'shipped' NOT status IN 'test@example.com'",No,None_Type,False,False,0.9998,Unknown
+20260529172735,150,"INSERT price, status FROM sessions WHERE product_id IN NULL AND product_id IN 'active'",No,None_Type,False,False,0.9997,Boolean-based
+20260529172735,150,"INSERT id, email FROM passwords WHERE user_id LIKE 'pending' NOT user_id LIKE 'test@example.com'",No,None_Type,False,False,0.9998,Unknown
+20260529172735,150,"SELECT COUNT(*) FROM credentials WHERE id != 1 LIKE "" AND (SELECT * FROM users WHERE username='admin') IS NOT NULL -- #",Yes,meta_based,True,True,0.9998,Comment-based
+20260529172735,150,"EXEC id, email FROM sessions WHERE price = 'test@example.com' AND price = 'safe'",No,None_Type,False,False,0.9967,Boolean-based
+20260529172735,150,"UPDATE users SET status='active' WHERE id > 1 OR 3409=3409 AND (1=0) AND (SUBSTRING('admin',1,1) = 'a') #",Yes,boolean-based,True,True,0.9982,Comment-based
+20260529172735,150,UPDATE * FROM credentials WHERE status >= 'pending' OR status >= 'shipped',No,None_Type,False,False,0.9997,Boolean-based
+20260529172735,150,INSERT MIN(created_at) FROM employees WHERE email >= 1 OR email >= 'test@example.com',No,None_Type,False,False,0.9995,Boolean-based
+20260529172735,150,DELETE * FROM credentials WHERE id <= 'shipped' AND id <= 'test@example.com',No,None_Type,False,False,0.996,Boolean-based
+20260529172735,150,"INSERT user_id, product_id FROM payments WHERE order_id >= 'pending' OR order_id >= NULL",No,None_Type,False,False,0.9998,Boolean-based
+20260529172735,150,CALL MIN(created_at) FROM transactions WHERE price BETWEEN 'pending' NOT price BETWEEN 'shipped',No,None_Type,False,False,0.9998,Unknown
+20260529172735,150,SELECT MAX(price) FROM users WHERE price < 'shipped' OR price < 'test@example.com',No,None_Type,False,False,0.9997,Boolean-based
+20260529172735,150,CALL COUNT(*) FROM passwords WHERE created_at IN 'safe' NOT created_at IN 'shipped',No,None_Type,False,False,0.9998,Unknown
+20260529172735,150,"EXEC price, status FROM sessions WHERE updated_at >= 'shipped' NOT updated_at >= 'active'",No,None_Type,False,False,0.9998,Unknown
+20260529172735,150,"SELECT COUNT(*) FROM credentials WHERE id != 1 OR "" OR (SELECT COUNT(*) FROM users WHERE username='admin') > 1 -- #",Yes,meta_based,True,True,0.9998,Comment-based
+20260529172735,150,"SELECT created_at, updated_at FROM credentials WHERE email LIKE 'safe' NOT email LIKE 'active'",No,None_Type,False,False,0.9997,Unknown
+20260529172735,150,"SELECT created_at, updated_at FROM credentials WHERE id < 1 LIKE sleep(5)# --",Yes,Time-Based,True,True,0.9993,Time-based
+20260529172735,150,CALL MAX(price) FROM credentials WHERE id = 'test@example.com' NOT id = NULL,No,None_Type,False,False,0.9956,Unknown
+20260529172735,150,INSERT MAX(price) FROM accounts WHERE product_id != 1 NOT product_id != '2024-01-01',No,None_Type,False,False,0.9998,Unknown
+20260529172735,150,UPDATE * FROM users WHERE email LIKE NULL OR email LIKE '2024-01-01',No,None_Type,False,False,0.9998,Boolean-based
+20260529172735,150,EXEC MIN(created_at) FROM employees WHERE status BETWEEN 'pending' OR status BETWEEN 'safe',No,None_Type,False,False,0.9996,Boolean-based
+20260529172735,150,INSERT MIN(created_at) FROM employees WHERE user_id BETWEEN 'shipped' OR user_id BETWEEN 'safe',No,None_Type,False,False,0.9998,Boolean-based
+20260529172735,150,"DELETE created_at, updated_at FROM payments WHERE email LIKE 'pending' NOT email LIKE 'test@example.com'",No,None_Type,False,False,0.9961,Unknown
+20260529172735,150,"UPDATE created_at, updated_at FROM accounts WHERE price = NULL OR price = 'pending'",No,None_Type,False,False,0.9999,Boolean-based
+20260529172735,150,SELECT * FROM users WHERE id >= 1 LIKE ORDER BY 18# #,Yes,Error-Based,True,True,0.9996,Comment-based
+20260529172735,150,"INSERT created_at, updated_at FROM employees WHERE email < 'safe' AND email < 1",No,None_Type,False,False,0.9998,Boolean-based
+20260529172735,150,"SELECT created_at, updated_at FROM admin WHERE id > 1 ORDER BY 9# #",Yes,Error-Based,True,True,0.999,Comment-based
+20260529172735,150,"DELETE created_at, updated_at FROM payments WHERE updated_at >= '2024-01-01' OR updated_at >= 'test@example.com'",No,None_Type,False,False,0.9997,Boolean-based
+20260529172735,150,"SELECT user_id, product_id FROM payments WHERE id <= 1 AND ORDER BY 9--",Yes,Error-Based,True,True,0.9995,Comment-based
+20260529172735,150,"EXEC id, email FROM users WHERE price <= 'pending' OR price <= 'safe'",No,None_Type,False,False,0.9997,Boolean-based
+20260529172735,150,"SELECT created_at, updated_at FROM payments WHERE email = 'safe' NOT email = 1",No,None_Type,False,False,0.9994,Unknown
+20260529172735,150,"EXEC('SELECT price, status FROM credentials WHERE id <= 1 OR 3409=3409 AND (1=1) AND (SUBSTRING('password',1,1) = 'p')') #",Yes,boolean-based,True,True,1.0,Comment-based
+20260529172735,150,CALL MAX(price) FROM transactions WHERE email >= 1 AND email >= 'test@example.com',No,None_Type,False,False,0.9998,Boolean-based
+20260529172735,150,"INSERT id, email FROM credentials WHERE product_id > '2024-01-01' OR product_id > NULL",No,None_Type,False,False,0.9998,Boolean-based
+20260529172735,150,"CALL id, email FROM sessions WHERE status LIKE 'shipped' NOT status LIKE 'test@example.com'",No,None_Type,False,False,0.9997,Unknown
+20260529172735,150,"SELECT user_id, product_id FROM payments WHERE id >= 1 NOT ORDER BY 31337#",Yes,Error-Based,True,True,0.9985,Comment-based
+20260529172735,150,"UPDATE employees SET name = 'admin' WHERE id < 1 1)) or benchmark(10000000,MD5(1))# --",Yes,Time-Based,True,True,0.9981,Time-based
+20260529172735,150,EXEC * FROM employees WHERE email = NULL OR email = NULL,No,None_Type,False,False,0.9968,Boolean-based
+20260529172735,150,UPDATE users SET name = 'admin' AND SLEEP(5)-- WHERE id > 1,Yes,Time-Based,True,True,0.9994,Time-based
+20260529172735,150,"SELECT price, status FROM credentials WHERE id >= 1 LIKE ORDER BY SLEEP(5)--",Yes,Time-Based,True,True,0.9996,Time-based
+20260529172735,150,"INSERT id, email FROM employees WHERE id >= 'test@example.com' OR id >= 'safe'",No,None_Type,False,False,0.9998,Boolean-based
+20260529172735,150,"DELETE user_id, product_id FROM login WHERE updated_at >= '2024-01-01' OR updated_at >= '2024-01-01'",No,None_Type,False,False,0.9998,Boolean-based
+20260529172735,150,UPDATE sessions SET name = 'admin' WHERE id = 1 WHERE 1=1 AND 1=0-- --,Yes,Error-Based,True,True,0.9994,Comment-based
+20260529172735,150,INSERT MIN(created_at) FROM passwords WHERE user_id LIKE 'test@example.com' OR user_id LIKE 'active',No,None_Type,False,False,0.9998,Boolean-based
+20260529172735,150,"SELECT * FROM users WHERE id = 1 or benchmark(50000000,MD5(1))",Yes,Time-Based,True,True,0.9831,Time-based
+20260529172735,150,SELECT MAX(price) FROM employees WHERE id < 1 OR ORDER BY 16 --,Yes,Union-Based,True,True,0.9996,Comment-based
+20260529172735,150,"DELETE FROM accounts WHERE id > 1 "") or pg_sleep(5)-- #",Yes,Time-Based,True,True,0.9996,Time-based
+20260529172735,150,SELECT COUNT(*) FROM users WHERE product_id < 'shipped' OR product_id < 'test@example.com',No,None_Type,False,False,0.9994,Boolean-based
+20260529172735,150,EXEC MAX(price) FROM login WHERE email <= NULL OR email <= 'active',No,None_Type,False,False,0.9998,Boolean-based
+20260529172735,150,EXEC('SELECT MAX(price) FROM accounts WHERE id > 1 OR EXISTS(SELECT * FROM users)--') --,Yes,stackqueries_based,True,True,1.0,Comment-based
+20260529172735,150,"CALL user_id, product_id FROM employees WHERE product_id != 'test@example.com' NOT product_id != 'active'",No,None_Type,False,False,0.9998,Unknown
+20260529172735,150,"SELECT MAX(price) FROM payments WHERE id != 1 LIKE UNION SELECT null, null, null, null FROM information_schema.tables -- --",Yes,meta_based,True,True,0.9992,Union-based
+20260529172735,150,"SELECT user_id, product_id FROM login WHERE id >= 1 OR 3409=3409 AND (1=0) AND (SUBSTRING('admin',1,2) = 'ad')",Yes,boolean-based,True,True,0.9988,Boolean-based
+20260529172735,150,"EXEC('SELECT id, email FROM payments WHERE id = 1 ORDER BY 14--')",Yes,Error-Based,True,True,0.9997,Comment-based
+20260529172735,150,"CALL user_id, product_id FROM transactions WHERE created_at BETWEEN 'active' OR created_at BETWEEN 1",No,None_Type,False,False,0.9956,Boolean-based
+20260529172735,150,"UPDATE created_at, updated_at FROM users WHERE created_at LIKE 'shipped' AND created_at LIKE 'pending'",No,None_Type,False,False,0.9998,Boolean-based
+20260529172735,150,"EXEC created_at, updated_at FROM payments WHERE email IN 'pending' AND email IN '2024-01-01'",No,None_Type,False,False,0.9998,Boolean-based
+20260529172735,150,SELECT * FROM employees WHERE status LIKE 'test@example.com' AND status LIKE 'safe',No,None_Type,False,False,0.9996,Boolean-based
+20260529172735,150,UPDATE COUNT(*) FROM payments WHERE created_at IS NOT NULL NOT created_at IS NOT NULL,No,None_Type,False,False,0.996,Unknown
+20260529172735,150,"CALL id, email FROM credentials WHERE price = '2024-01-01' NOT price = 'active'",No,None_Type,False,False,0.9997,Unknown
+20260529172735,150,DELETE MIN(created_at) FROM passwords WHERE created_at <= '2024-01-01' OR created_at <= 1,No,None_Type,False,False,0.9955,Boolean-based
+20260529172735,150,SELECT * FROM accounts WHERE id != 1 NOT );waitfor delay '0:0:5'-- #,Yes,Time-Based,True,True,0.9997,Time-based
+20260529172735,150,UPDATE sessions SET username = 'test' AND ORDER BY 17-- WHERE id > 1,Yes,Union-Based,True,True,1.0,Comment-based
+20260529172735,150,"INSERT created_at, updated_at FROM transactions WHERE product_id LIKE 'safe' AND product_id LIKE 1",No,None_Type,False,False,0.9961,Boolean-based
+20260529172735,150,"INSERT user_id, product_id FROM admin WHERE updated_at >= 'shipped' NOT updated_at >= NULL",No,None_Type,False,False,0.9998,Unknown
+20260529172735,150,"SELECT created_at, updated_at FROM login WHERE id < 1 OR 3409=3409 AND (1=1) AND (EXISTS (SELECT 1 FROM users WHERE username='admin' AND password='password123')",Yes,boolean-based,True,True,0.9991,Boolean-based
+20260529172735,150,CALL * FROM credentials WHERE created_at LIKE '2024-01-01' OR created_at LIKE 'safe',No,None_Type,False,False,0.9998,Boolean-based
+20260529172735,150,"CALL id, email FROM users WHERE email LIKE NULL OR email LIKE 1",No,None_Type,False,False,0.9997,Unknown
+20260529172735,150,EXEC * FROM admin WHERE status >= 'active' OR status >= NULL,No,None_Type,False,False,0.9997,Boolean-based
+20260529172735,150,INSERT MIN(created_at) FROM sessions WHERE status LIKE 1 AND status LIKE 'pending',No,None_Type,False,False,0.9994,Boolean-based
+20260529172735,150,EXEC COUNT(*) FROM admin WHERE price LIKE 'active' OR price LIKE 'safe',No,None_Type,False,False,0.9998,Boolean-based
+20260529172735,150,"DELETE user_id, product_id FROM payments WHERE product_id > 'shipped' OR product_id > 'active'",No,None_Type,False,False,0.9997,Boolean-based
+20260529172735,150,CALL MAX(price) FROM accounts WHERE order_id LIKE NULL NOT order_id LIKE '2024-01-01',No,None_Type,False,False,0.9997,Unknown
+20260529172735,150,"DELETE created_at, updated_at FROM users WHERE price < 'safe' OR price < 1",No,None_Type,False,False,0.9998,Boolean-based
+20260529172735,150,INSERT COUNT(*) FROM admin WHERE order_id IN 'test@example.com' OR order_id IN 'test@example.com',No,None_Type,False,False,0.9998,Boolean-based
+20260529172735,150,"INSERT id, email FROM login WHERE status = 'active' OR status = '2024-01-01'",No,None_Type,False,False,0.9947,Boolean-based
+20260529172735,150,SELECT COUNT(*) FROM admin WHERE id = 1 ORDER BY 18 --,Yes,Union-Based,True,True,0.9997,Comment-based
+20260529172735,150,DELETE COUNT(*) FROM credentials WHERE created_at >= 'active' OR created_at >= 'shipped',No,None_Type,False,False,0.9998,Boolean-based
+20260529172735,150,"DELETE id, email FROM passwords WHERE created_at < '2024-01-01' NOT created_at < 'test@example.com'",No,None_Type,False,False,0.9997,Unknown
+20260529172735,150,"DELETE user_id, product_id FROM users WHERE user_id != 'shipped' AND user_id != 'safe'",No,None_Type,False,False,0.9997,Boolean-based
+20260529172735,150,CALL MAX(price) FROM payments WHERE created_at = '2024-01-01' NOT created_at = 'pending',No,None_Type,False,False,0.9999,Unknown
+20260529172735,150,UPDATE MAX(price) FROM admin WHERE email LIKE 'test@example.com' AND email LIKE 1,No,None_Type,False,False,0.9998,Boolean-based
+20260529172735,150,INSERT MIN(created_at) FROM login WHERE status < 'shipped' OR status < 'active',No,None_Type,False,False,0.9998,Boolean-based
+20260529172735,150,EXEC('SELECT MAX(price) FROM transactions WHERE id = 1 LIKE ORDER BY SLEEP(5)'),Yes,Time-Based,True,True,0.9997,Time-based
+20260529172735,150,"CALL user_id, product_id FROM admin WHERE product_id < 'safe' AND product_id < 'safe'",No,None_Type,False,False,0.9998,Boolean-based
+20260529172735,150,"SELECT user_id, product_id FROM payments WHERE id >= 1 AND &&SLEEP(5) --",Yes,Time-Based,True,True,0.9988,Time-based
+20260529172735,150,SELECT * FROM transactions WHERE id = 1 NOT ORDER BY 20 #,Yes,Union-Based,True,True,0.9992,Comment-based
+20260529172735,150,INSERT MIN(created_at) FROM credentials WHERE created_at > '2024-01-01' OR created_at > 'test@example.com',No,None_Type,False,False,0.9998,Boolean-based
+20260529172735,150,"DELETE id, email FROM credentials WHERE product_id > 'safe' OR product_id > 'test@example.com'",No,None_Type,False,False,0.9998,Boolean-based
+20260529172735,150,"EXEC created_at, updated_at FROM transactions WHERE id < 'safe' OR id < 'shipped'",No,None_Type,False,False,0.9998,Boolean-based
+20260529172735,150,"EXEC user_id, product_id FROM passwords WHERE status != 'test@example.com' AND status != NULL",No,None_Type,False,False,0.9998,Boolean-based
+20260529172735,150,CALL COUNT(*) FROM sessions WHERE user_id BETWEEN 'test@example.com' NOT user_id BETWEEN 'shipped',No,None_Type,False,False,0.9997,Unknown
+20260529172735,150,"UPDATE created_at, updated_at FROM payments WHERE email BETWEEN 'test@example.com' NOT email BETWEEN '2024-01-01'",No,None_Type,False,False,0.9998,Unknown
+20260529172735,150,UPDATE login SET name = 'admin' WHERE id != 1 AS INJECTX WHERE 1=1 AND 1=0-- #,Yes,Error-Based,True,True,0.9995,Comment-based
+20260529172735,150,SELECT MIN(created_at) FROM credentials WHERE created_at <= 'pending' NOT created_at <= 'pending',No,None_Type,False,False,0.9996,Unknown
+20260529172735,150,"SELECT user_id, product_id FROM login WHERE email IN 'safe' OR email IN 'safe'",No,None_Type,False,False,0.9995,Boolean-based
+20260529172735,150,"UPDATE price, status FROM transactions WHERE updated_at <= 'shipped' OR updated_at <= 'pending'",No,None_Type,False,False,0.9997,Boolean-based
+20260529172735,150,"INSERT price, status FROM sessions WHERE user_id BETWEEN 'active' NOT user_id BETWEEN 'pending'",No,None_Type,False,False,0.9998,Unknown
+20260529172735,150,"SELECT user_id, product_id FROM payments WHERE id >= 1 NOT "" OR 1=1 LIMIT 0, 1 -- #",Yes,meta_based,True,True,0.9894,Boolean-based
+20260529172735,150,CALL MIN(created_at) FROM admin WHERE product_id = 'shipped' AND product_id = 1,No,None_Type,False,False,0.9998,Boolean-based
+20260529172735,150,INSERT MAX(price) FROM login WHERE status = 'test@example.com' OR status = 'shipped',No,None_Type,False,False,0.9997,Boolean-based
+20260529172735,150,"UPDATE id, email FROM sessions WHERE price LIKE 'safe' AND price LIKE 'shipped'",No,None_Type,False,False,0.9996,Boolean-based
+20260529172735,150,"SELECT created_at, updated_at FROM payments WHERE id != 1 pg_SLEEP(5)#",Yes,Time-Based,True,True,0.9837,Time-based
+20260529172735,150,UPDATE COUNT(*) FROM admin WHERE email LIKE 1 NOT email LIKE 'active',No,None_Type,False,False,0.9996,Unknown
+20260529172735,150,SELECT MAX(price) FROM credentials WHERE price > 1 AND price > 'pending',No,None_Type,False,False,0.9957,Boolean-based
+20260529172735,150,"INSERT price, status FROM accounts WHERE updated_at >= 'test@example.com' AND updated_at >= 'pending'",No,None_Type,False,False,0.9998,Boolean-based
+20260529172735,150,"SELECT created_at, updated_at FROM sessions WHERE id != 1 ORDER BY 6#",Yes,Error-Based,True,True,0.9877,Comment-based
+20260529172735,150,INSERT * FROM sessions WHERE user_id > 'pending' AND user_id > 'safe',No,None_Type,False,False,0.9994,Boolean-based
+20260529172735,150,CALL MAX(price) FROM passwords WHERE id != NULL OR id != 'pending',No,None_Type,False,False,0.9996,Boolean-based
+20260529172735,150,EXEC * FROM users WHERE user_id = '2024-01-01' AND user_id = '2024-01-01',No,None_Type,False,False,0.9997,Boolean-based
+20260529172735,150,"INSERT created_at, updated_at FROM credentials WHERE id >= NULL NOT id >= 'shipped'",No,None_Type,False,False,0.9998,Unknown
+20260529172735,150,CALL MAX(price) FROM payments WHERE user_id != 1 NOT user_id != 1,No,None_Type,False,False,0.9849,Unknown
+20260529172735,150,"SELECT created_at, updated_at FROM passwords WHERE id > 1 LIKE UNION SELECT null, null, null, table_name FROM information_schema.tables -- #",Yes,meta_based,True,True,0.9992,Union-based
+20260529172735,150,DELETE * FROM payments WHERE product_id BETWEEN 1 AND product_id BETWEEN '2024-01-01',No,None_Type,False,False,0.9996,Boolean-based
+20260529172735,150,EXEC COUNT(*) FROM sessions WHERE updated_at != NULL AND updated_at != 'pending',No,None_Type,False,False,0.9999,Boolean-based
+20260529172735,150,"SELECT user_id, product_id FROM users WHERE order_id IN 'safe' OR order_id IN 'safe'",No,None_Type,False,False,0.9996,Boolean-based
+20260529172735,150,"INSERT price, status FROM admin WHERE product_id BETWEEN 'active' AND product_id BETWEEN '2024-01-01'",No,None_Type,False,False,0.9997,Boolean-based
+20260529172735,150,UPDATE employees SET username = 'test' OR ORDER BY 5-- WHERE id < 1 #,Yes,Union-Based,True,True,1.0,Comment-based
+20260529172735,150,CALL * FROM admin WHERE email <= 'pending' AND email <= NULL,No,None_Type,False,False,0.9998,Boolean-based
+20260529172735,150,"SELECT COUNT(*) FROM passwords WHERE id < 1 NOT +benchmark(3200,SHA1(1))+' --",Yes,Time-Based,True,True,0.9997,Time-based
+20260529172735,150,"SELECT id, email FROM admin WHERE id != 1 AND ORDER BY 25 --",Yes,Union-Based,True,True,0.9996,Comment-based
+20260529172735,150,"SELECT user_id, product_id FROM payments WHERE id > 1 OR AND 1=1 ORDER BY 2 -- --",Yes,meta_based,True,True,0.9996,Boolean-based
+20260529172735,150,INSERT * FROM sessions WHERE updated_at != 'test@example.com' AND updated_at != 'shipped',No,None_Type,False,False,0.9998,Boolean-based
+20260529172735,150,"SELECT user_id, product_id FROM admin WHERE id = 1 LIKE ORDER BY 19 #",Yes,Union-Based,True,True,0.9995,Comment-based
+20260529172735,150,"SELECT created_at, updated_at FROM transactions WHERE product_id >= 'test@example.com' NOT product_id >= 'test@example.com'",No,None_Type,False,False,0.9997,Unknown
+20260529172735,150,INSERT MAX(price) FROM transactions WHERE order_id BETWEEN 'safe' OR order_id BETWEEN 'active',No,None_Type,False,False,0.9998,Boolean-based
+20260529172735,150,UPDATE MAX(price) FROM passwords WHERE email >= 'pending' NOT email >= 'safe',No,None_Type,False,False,0.9998,Unknown
+20260529172735,150,EXEC MIN(created_at) FROM transactions WHERE created_at IN '2024-01-01' AND created_at IN 'active',No,None_Type,False,False,0.9997,Boolean-based
+20260529172735,150,INSERT MAX(price) FROM admin WHERE price >= 'pending' AND price >= NULL,No,None_Type,False,False,0.9998,Boolean-based
+20260529172735,150,"SELECT MIN(created_at) FROM users WHERE id >= 1 OR 3409=3409 AND (1=0) AND (SUBSTRING('password',1,1) = 'p') #",Yes,boolean-based,True,True,0.9999,Comment-based
+20260529172735,150,"SELECT price, status FROM users WHERE id > 1 LIKE OR EXISTS(SELECT * FROM users LIMIT 1) -- #",Yes,meta_based,True,True,0.9984,Comment-based
+20260529172735,150,"CALL price, status FROM passwords WHERE order_id = 'safe' NOT order_id = '2024-01-01'",No,None_Type,False,False,0.9998,Unknown
+20260529172735,150,CALL * FROM credentials WHERE order_id < 1 AND order_id < 1,No,None_Type,False,False,0.9777,Unknown
+20260529172735,150,"SELECT price, status FROM credentials WHERE id = 1 NOT ORDER BY 31337--",Yes,Error-Based,True,True,0.9996,Comment-based
+20260529172735,150,INSERT MIN(created_at) FROM payments WHERE id = 'shipped' AND id = 'safe',No,None_Type,False,False,0.9998,Boolean-based
+20260529172735,150,SELECT * FROM admin WHERE status = 'shipped' AND status = 'safe',No,None_Type,False,False,0.9959,Boolean-based
+20260529172735,150,SELECT MAX(price) FROM credentials WHERE id >= 1 NOT ORDER BY SLEEP(5) --,Yes,Time-Based,True,True,0.9997,Time-based
+20260529172735,150,UPDATE * FROM login WHERE status != NULL NOT status != 'safe',No,None_Type,False,False,0.9998,Unknown
+20260529172735,150,INSERT MAX(price) FROM accounts WHERE updated_at IN 'pending' OR updated_at IN 'shipped',No,None_Type,False,False,0.9998,Boolean-based
+20260529172735,150,UPDATE COUNT(*) FROM admin WHERE order_id = 'safe' NOT order_id = 1,No,None_Type,False,False,0.9996,Unknown
+20260529172735,150,UPDATE users SET username = 'test' LIKE ORDER BY 6 WHERE id > 1,Yes,Union-Based,True,True,0.9999,Suspicious SQL Pattern
+20260529175544,150,EXEC COUNT(*) FROM employees WHERE email LIKE NULL AND email LIKE 'pending',No,None_Type,False,False,0.9998,Boolean-based
+20260529175544,150,INSERT MAX(price) FROM accounts WHERE updated_at < 'test@example.com' AND updated_at < 'active',No,None_Type,False,False,0.9998,Boolean-based
+20260529175544,150,"UPDATE created_at, updated_at FROM users WHERE product_id < 'safe' OR product_id < '2024-01-01'",No,None_Type,False,False,0.9998,Boolean-based
+20260529175544,150,"EXEC price, status FROM passwords WHERE created_at <= 'safe' OR created_at <= 'shipped'",No,None_Type,False,False,0.9998,Boolean-based
+20260529175544,150,"SELECT id, email FROM sessions WHERE id >= 1 LIKE IF(7423=7424) SELECT 7423 ELSE DROP FUNCTION xcjl-- --",Yes,Error-Based,True,True,0.9997,Comment-based
+20260529175544,150,DELETE * FROM credentials WHERE email BETWEEN 'active' OR email BETWEEN '2024-01-01',No,None_Type,False,False,0.9997,Boolean-based
+20260529175544,150,CALL MAX(price) FROM credentials WHERE created_at != '2024-01-01' NOT created_at != NULL,No,None_Type,False,False,0.9999,Unknown
+20260529175544,150,"SELECT user_id, product_id FROM passwords WHERE id != 1 NOT &&SLEEP(5) #",Yes,Time-Based,True,True,0.9992,Time-based
+20260529175544,150,"EXEC created_at, updated_at FROM login WHERE created_at >= 1 AND created_at >= 'active'",No,None_Type,False,False,0.9997,Boolean-based
+20260529175544,150,"CALL created_at, updated_at FROM accounts WHERE status IN 'shipped' NOT status IN 'test@example.com'",No,None_Type,False,False,0.9998,Unknown
+20260529175544,150,"INSERT price, status FROM sessions WHERE product_id IN NULL AND product_id IN 'active'",No,None_Type,False,False,0.9997,Boolean-based
+20260529175544,150,"INSERT id, email FROM passwords WHERE user_id LIKE 'pending' NOT user_id LIKE 'test@example.com'",No,None_Type,False,False,0.9998,Unknown
+20260529175544,150,"SELECT COUNT(*) FROM credentials WHERE id != 1 LIKE "" AND (SELECT * FROM users WHERE username='admin') IS NOT NULL -- #",Yes,meta_based,True,True,0.9998,Comment-based
+20260529175544,150,"EXEC id, email FROM sessions WHERE price = 'test@example.com' AND price = 'safe'",No,None_Type,False,False,0.9967,Boolean-based
+20260529175544,150,"UPDATE users SET status='active' WHERE id > 1 OR 3409=3409 AND (1=0) AND (SUBSTRING('admin',1,1) = 'a') #",Yes,boolean-based,True,True,0.9982,Comment-based
+20260529175544,150,UPDATE * FROM credentials WHERE status >= 'pending' OR status >= 'shipped',No,None_Type,False,False,0.9997,Boolean-based
+20260529175544,150,INSERT MIN(created_at) FROM employees WHERE email >= 1 OR email >= 'test@example.com',No,None_Type,False,False,0.9995,Boolean-based
+20260529175544,150,DELETE * FROM credentials WHERE id <= 'shipped' AND id <= 'test@example.com',No,None_Type,False,False,0.996,Boolean-based
+20260529175544,150,"INSERT user_id, product_id FROM payments WHERE order_id >= 'pending' OR order_id >= NULL",No,None_Type,False,False,0.9998,Boolean-based
+20260529175544,150,CALL MIN(created_at) FROM transactions WHERE price BETWEEN 'pending' NOT price BETWEEN 'shipped',No,None_Type,False,False,0.9998,Unknown
+20260529175544,150,SELECT MAX(price) FROM users WHERE price < 'shipped' OR price < 'test@example.com',No,None_Type,False,False,0.9997,Boolean-based
+20260529175544,150,CALL COUNT(*) FROM passwords WHERE created_at IN 'safe' NOT created_at IN 'shipped',No,None_Type,False,False,0.9998,Unknown
+20260529175544,150,"EXEC price, status FROM sessions WHERE updated_at >= 'shipped' NOT updated_at >= 'active'",No,None_Type,False,False,0.9998,Unknown
+20260529175544,150,"SELECT COUNT(*) FROM credentials WHERE id != 1 OR "" OR (SELECT COUNT(*) FROM users WHERE username='admin') > 1 -- #",Yes,meta_based,True,True,0.9998,Comment-based
+20260529175544,150,"SELECT created_at, updated_at FROM credentials WHERE email LIKE 'safe' NOT email LIKE 'active'",No,None_Type,False,False,0.9997,Unknown
+20260529175544,150,"SELECT created_at, updated_at FROM credentials WHERE id < 1 LIKE sleep(5)# --",Yes,Time-Based,True,True,0.9993,Time-based
+20260529175544,150,CALL MAX(price) FROM credentials WHERE id = 'test@example.com' NOT id = NULL,No,None_Type,False,False,0.9956,Unknown
+20260529175544,150,INSERT MAX(price) FROM accounts WHERE product_id != 1 NOT product_id != '2024-01-01',No,None_Type,False,False,0.9998,Unknown
+20260529175544,150,UPDATE * FROM users WHERE email LIKE NULL OR email LIKE '2024-01-01',No,None_Type,False,False,0.9998,Boolean-based
+20260529175544,150,EXEC MIN(created_at) FROM employees WHERE status BETWEEN 'pending' OR status BETWEEN 'safe',No,None_Type,False,False,0.9996,Boolean-based
+20260529175544,150,INSERT MIN(created_at) FROM employees WHERE user_id BETWEEN 'shipped' OR user_id BETWEEN 'safe',No,None_Type,False,False,0.9998,Boolean-based
+20260529175544,150,"DELETE created_at, updated_at FROM payments WHERE email LIKE 'pending' NOT email LIKE 'test@example.com'",No,None_Type,False,False,0.9961,Unknown
+20260529175544,150,"UPDATE created_at, updated_at FROM accounts WHERE price = NULL OR price = 'pending'",No,None_Type,False,False,0.9999,Boolean-based
+20260529175544,150,SELECT * FROM users WHERE id >= 1 LIKE ORDER BY 18# #,Yes,Error-Based,True,True,0.9996,Comment-based
+20260529175544,150,"INSERT created_at, updated_at FROM employees WHERE email < 'safe' AND email < 1",No,None_Type,False,False,0.9998,Boolean-based
+20260529175544,150,"SELECT created_at, updated_at FROM admin WHERE id > 1 ORDER BY 9# #",Yes,Error-Based,True,True,0.999,Comment-based
+20260529175544,150,"DELETE created_at, updated_at FROM payments WHERE updated_at >= '2024-01-01' OR updated_at >= 'test@example.com'",No,None_Type,False,False,0.9997,Boolean-based
+20260529175544,150,"SELECT user_id, product_id FROM payments WHERE id <= 1 AND ORDER BY 9--",Yes,Error-Based,True,True,0.9995,Comment-based
+20260529175544,150,"EXEC id, email FROM users WHERE price <= 'pending' OR price <= 'safe'",No,None_Type,False,False,0.9997,Boolean-based
+20260529175544,150,"SELECT created_at, updated_at FROM payments WHERE email = 'safe' NOT email = 1",No,None_Type,False,False,0.9994,Unknown
+20260529175544,150,"EXEC('SELECT price, status FROM credentials WHERE id <= 1 OR 3409=3409 AND (1=1) AND (SUBSTRING('password',1,1) = 'p')') #",Yes,boolean-based,True,True,1.0,Comment-based
+20260529175544,150,CALL MAX(price) FROM transactions WHERE email >= 1 AND email >= 'test@example.com',No,None_Type,False,False,0.9998,Boolean-based
+20260529175544,150,"INSERT id, email FROM credentials WHERE product_id > '2024-01-01' OR product_id > NULL",No,None_Type,False,False,0.9998,Boolean-based
+20260529175544,150,"CALL id, email FROM sessions WHERE status LIKE 'shipped' NOT status LIKE 'test@example.com'",No,None_Type,False,False,0.9997,Unknown
+20260529175544,150,"SELECT user_id, product_id FROM payments WHERE id >= 1 NOT ORDER BY 31337#",Yes,Error-Based,True,True,0.9985,Comment-based
+20260529175544,150,"UPDATE employees SET name = 'admin' WHERE id < 1 1)) or benchmark(10000000,MD5(1))# --",Yes,Time-Based,True,True,0.9981,Time-based
+20260529175544,150,EXEC * FROM employees WHERE email = NULL OR email = NULL,No,None_Type,False,False,0.9968,Boolean-based
+20260529175544,150,UPDATE users SET name = 'admin' AND SLEEP(5)-- WHERE id > 1,Yes,Time-Based,True,True,0.9994,Time-based
+20260529175544,150,"SELECT price, status FROM credentials WHERE id >= 1 LIKE ORDER BY SLEEP(5)--",Yes,Time-Based,True,True,0.9996,Time-based
+20260529175544,150,"INSERT id, email FROM employees WHERE id >= 'test@example.com' OR id >= 'safe'",No,None_Type,False,False,0.9998,Boolean-based
+20260529175544,150,"DELETE user_id, product_id FROM login WHERE updated_at >= '2024-01-01' OR updated_at >= '2024-01-01'",No,None_Type,False,False,0.9998,Boolean-based
+20260529175544,150,UPDATE sessions SET name = 'admin' WHERE id = 1 WHERE 1=1 AND 1=0-- --,Yes,Error-Based,True,True,0.9994,Comment-based
+20260529175544,150,INSERT MIN(created_at) FROM passwords WHERE user_id LIKE 'test@example.com' OR user_id LIKE 'active',No,None_Type,False,False,0.9998,Boolean-based
+20260529175544,150,"SELECT * FROM users WHERE id = 1 or benchmark(50000000,MD5(1))",Yes,Time-Based,True,True,0.9831,Time-based
+20260529175544,150,SELECT MAX(price) FROM employees WHERE id < 1 OR ORDER BY 16 --,Yes,Union-Based,True,True,0.9996,Comment-based
+20260529175544,150,"DELETE FROM accounts WHERE id > 1 "") or pg_sleep(5)-- #",Yes,Time-Based,True,True,0.9996,Time-based
+20260529175544,150,SELECT COUNT(*) FROM users WHERE product_id < 'shipped' OR product_id < 'test@example.com',No,None_Type,False,False,0.9994,Boolean-based
+20260529175544,150,EXEC MAX(price) FROM login WHERE email <= NULL OR email <= 'active',No,None_Type,False,False,0.9998,Boolean-based
+20260529175544,150,EXEC('SELECT MAX(price) FROM accounts WHERE id > 1 OR EXISTS(SELECT * FROM users)--') --,Yes,stackqueries_based,True,True,1.0,Comment-based
+20260529175544,150,"CALL user_id, product_id FROM employees WHERE product_id != 'test@example.com' NOT product_id != 'active'",No,None_Type,False,False,0.9998,Unknown
+20260529175544,150,"SELECT MAX(price) FROM payments WHERE id != 1 LIKE UNION SELECT null, null, null, null FROM information_schema.tables -- --",Yes,meta_based,True,True,0.9992,Union-based
+20260529175544,150,"SELECT user_id, product_id FROM login WHERE id >= 1 OR 3409=3409 AND (1=0) AND (SUBSTRING('admin',1,2) = 'ad')",Yes,boolean-based,True,True,0.9988,Boolean-based
+20260529175544,150,"EXEC('SELECT id, email FROM payments WHERE id = 1 ORDER BY 14--')",Yes,Error-Based,True,True,0.9997,Comment-based
+20260529175544,150,"CALL user_id, product_id FROM transactions WHERE created_at BETWEEN 'active' OR created_at BETWEEN 1",No,None_Type,False,False,0.9956,Boolean-based
+20260529175544,150,"UPDATE created_at, updated_at FROM users WHERE created_at LIKE 'shipped' AND created_at LIKE 'pending'",No,None_Type,False,False,0.9998,Boolean-based
+20260529175544,150,"EXEC created_at, updated_at FROM payments WHERE email IN 'pending' AND email IN '2024-01-01'",No,None_Type,False,False,0.9998,Boolean-based
+20260529175544,150,SELECT * FROM employees WHERE status LIKE 'test@example.com' AND status LIKE 'safe',No,None_Type,False,False,0.9996,Boolean-based
+20260529175544,150,UPDATE COUNT(*) FROM payments WHERE created_at IS NOT NULL NOT created_at IS NOT NULL,No,None_Type,False,False,0.996,Unknown
+20260529175544,150,"CALL id, email FROM credentials WHERE price = '2024-01-01' NOT price = 'active'",No,None_Type,False,False,0.9997,Unknown
+20260529175544,150,DELETE MIN(created_at) FROM passwords WHERE created_at <= '2024-01-01' OR created_at <= 1,No,None_Type,False,False,0.9955,Boolean-based
+20260529175544,150,SELECT * FROM accounts WHERE id != 1 NOT );waitfor delay '0:0:5'-- #,Yes,Time-Based,True,True,0.9997,Time-based
+20260529175544,150,UPDATE sessions SET username = 'test' AND ORDER BY 17-- WHERE id > 1,Yes,Union-Based,True,True,1.0,Comment-based
+20260529175544,150,"INSERT created_at, updated_at FROM transactions WHERE product_id LIKE 'safe' AND product_id LIKE 1",No,None_Type,False,False,0.9961,Boolean-based
+20260529175544,150,"INSERT user_id, product_id FROM admin WHERE updated_at >= 'shipped' NOT updated_at >= NULL",No,None_Type,False,False,0.9998,Unknown
+20260529175544,150,"SELECT created_at, updated_at FROM login WHERE id < 1 OR 3409=3409 AND (1=1) AND (EXISTS (SELECT 1 FROM users WHERE username='admin' AND password='password123')",Yes,boolean-based,True,True,0.9991,Boolean-based
+20260529175544,150,CALL * FROM credentials WHERE created_at LIKE '2024-01-01' OR created_at LIKE 'safe',No,None_Type,False,False,0.9998,Boolean-based
+20260529175544,150,"CALL id, email FROM users WHERE email LIKE NULL OR email LIKE 1",No,None_Type,False,False,0.9997,Unknown
+20260529175544,150,EXEC * FROM admin WHERE status >= 'active' OR status >= NULL,No,None_Type,False,False,0.9997,Boolean-based
+20260529175544,150,INSERT MIN(created_at) FROM sessions WHERE status LIKE 1 AND status LIKE 'pending',No,None_Type,False,False,0.9994,Boolean-based
+20260529175544,150,EXEC COUNT(*) FROM admin WHERE price LIKE 'active' OR price LIKE 'safe',No,None_Type,False,False,0.9998,Boolean-based
+20260529175544,150,"DELETE user_id, product_id FROM payments WHERE product_id > 'shipped' OR product_id > 'active'",No,None_Type,False,False,0.9997,Boolean-based
+20260529175544,150,CALL MAX(price) FROM accounts WHERE order_id LIKE NULL NOT order_id LIKE '2024-01-01',No,None_Type,False,False,0.9997,Unknown
+20260529175544,150,"DELETE created_at, updated_at FROM users WHERE price < 'safe' OR price < 1",No,None_Type,False,False,0.9998,Boolean-based
+20260529175544,150,INSERT COUNT(*) FROM admin WHERE order_id IN 'test@example.com' OR order_id IN 'test@example.com',No,None_Type,False,False,0.9998,Boolean-based
+20260529175544,150,"INSERT id, email FROM login WHERE status = 'active' OR status = '2024-01-01'",No,None_Type,False,False,0.9947,Boolean-based
+20260529175544,150,SELECT COUNT(*) FROM admin WHERE id = 1 ORDER BY 18 --,Yes,Union-Based,True,True,0.9997,Comment-based
+20260529175544,150,DELETE COUNT(*) FROM credentials WHERE created_at >= 'active' OR created_at >= 'shipped',No,None_Type,False,False,0.9998,Boolean-based
+20260529175544,150,"DELETE id, email FROM passwords WHERE created_at < '2024-01-01' NOT created_at < 'test@example.com'",No,None_Type,False,False,0.9997,Unknown
+20260529175544,150,"DELETE user_id, product_id FROM users WHERE user_id != 'shipped' AND user_id != 'safe'",No,None_Type,False,False,0.9997,Boolean-based
+20260529175544,150,CALL MAX(price) FROM payments WHERE created_at = '2024-01-01' NOT created_at = 'pending',No,None_Type,False,False,0.9999,Unknown
+20260529175544,150,UPDATE MAX(price) FROM admin WHERE email LIKE 'test@example.com' AND email LIKE 1,No,None_Type,False,False,0.9998,Boolean-based
+20260529175544,150,INSERT MIN(created_at) FROM login WHERE status < 'shipped' OR status < 'active',No,None_Type,False,False,0.9998,Boolean-based
+20260529175544,150,EXEC('SELECT MAX(price) FROM transactions WHERE id = 1 LIKE ORDER BY SLEEP(5)'),Yes,Time-Based,True,True,0.9997,Time-based
+20260529175544,150,"CALL user_id, product_id FROM admin WHERE product_id < 'safe' AND product_id < 'safe'",No,None_Type,False,False,0.9998,Boolean-based
+20260529175544,150,"SELECT user_id, product_id FROM payments WHERE id >= 1 AND &&SLEEP(5) --",Yes,Time-Based,True,True,0.9988,Time-based
+20260529175544,150,SELECT * FROM transactions WHERE id = 1 NOT ORDER BY 20 #,Yes,Union-Based,True,True,0.9992,Comment-based
+20260529175544,150,INSERT MIN(created_at) FROM credentials WHERE created_at > '2024-01-01' OR created_at > 'test@example.com',No,None_Type,False,False,0.9998,Boolean-based
+20260529175544,150,"DELETE id, email FROM credentials WHERE product_id > 'safe' OR product_id > 'test@example.com'",No,None_Type,False,False,0.9998,Boolean-based
+20260529175544,150,"EXEC created_at, updated_at FROM transactions WHERE id < 'safe' OR id < 'shipped'",No,None_Type,False,False,0.9998,Boolean-based
+20260529175544,150,"EXEC user_id, product_id FROM passwords WHERE status != 'test@example.com' AND status != NULL",No,None_Type,False,False,0.9998,Boolean-based
+20260529175544,150,CALL COUNT(*) FROM sessions WHERE user_id BETWEEN 'test@example.com' NOT user_id BETWEEN 'shipped',No,None_Type,False,False,0.9997,Unknown
+20260529175544,150,"UPDATE created_at, updated_at FROM payments WHERE email BETWEEN 'test@example.com' NOT email BETWEEN '2024-01-01'",No,None_Type,False,False,0.9998,Unknown
+20260529175544,150,UPDATE login SET name = 'admin' WHERE id != 1 AS INJECTX WHERE 1=1 AND 1=0-- #,Yes,Error-Based,True,True,0.9995,Comment-based
+20260529175544,150,SELECT MIN(created_at) FROM credentials WHERE created_at <= 'pending' NOT created_at <= 'pending',No,None_Type,False,False,0.9996,Unknown
+20260529175544,150,"SELECT user_id, product_id FROM login WHERE email IN 'safe' OR email IN 'safe'",No,None_Type,False,False,0.9995,Boolean-based
+20260529175544,150,"UPDATE price, status FROM transactions WHERE updated_at <= 'shipped' OR updated_at <= 'pending'",No,None_Type,False,False,0.9997,Boolean-based
+20260529175544,150,"INSERT price, status FROM sessions WHERE user_id BETWEEN 'active' NOT user_id BETWEEN 'pending'",No,None_Type,False,False,0.9998,Unknown
+20260529175544,150,"SELECT user_id, product_id FROM payments WHERE id >= 1 NOT "" OR 1=1 LIMIT 0, 1 -- #",Yes,meta_based,True,True,0.9894,Boolean-based
+20260529175544,150,CALL MIN(created_at) FROM admin WHERE product_id = 'shipped' AND product_id = 1,No,None_Type,False,False,0.9998,Boolean-based
+20260529175544,150,INSERT MAX(price) FROM login WHERE status = 'test@example.com' OR status = 'shipped',No,None_Type,False,False,0.9997,Boolean-based
+20260529175544,150,"UPDATE id, email FROM sessions WHERE price LIKE 'safe' AND price LIKE 'shipped'",No,None_Type,False,False,0.9996,Boolean-based
+20260529175544,150,"SELECT created_at, updated_at FROM payments WHERE id != 1 pg_SLEEP(5)#",Yes,Time-Based,True,True,0.9837,Time-based
+20260529175544,150,UPDATE COUNT(*) FROM admin WHERE email LIKE 1 NOT email LIKE 'active',No,None_Type,False,False,0.9996,Unknown
+20260529175544,150,SELECT MAX(price) FROM credentials WHERE price > 1 AND price > 'pending',No,None_Type,False,False,0.9957,Boolean-based
+20260529175544,150,"INSERT price, status FROM accounts WHERE updated_at >= 'test@example.com' AND updated_at >= 'pending'",No,None_Type,False,False,0.9998,Boolean-based
+20260529175544,150,"SELECT created_at, updated_at FROM sessions WHERE id != 1 ORDER BY 6#",Yes,Error-Based,True,True,0.9877,Comment-based
+20260529175544,150,INSERT * FROM sessions WHERE user_id > 'pending' AND user_id > 'safe',No,None_Type,False,False,0.9994,Boolean-based
+20260529175544,150,CALL MAX(price) FROM passwords WHERE id != NULL OR id != 'pending',No,None_Type,False,False,0.9996,Boolean-based
+20260529175544,150,EXEC * FROM users WHERE user_id = '2024-01-01' AND user_id = '2024-01-01',No,None_Type,False,False,0.9997,Boolean-based
+20260529175544,150,"INSERT created_at, updated_at FROM credentials WHERE id >= NULL NOT id >= 'shipped'",No,None_Type,False,False,0.9998,Unknown
+20260529175544,150,CALL MAX(price) FROM payments WHERE user_id != 1 NOT user_id != 1,No,None_Type,False,False,0.9849,Unknown
+20260529175544,150,"SELECT created_at, updated_at FROM passwords WHERE id > 1 LIKE UNION SELECT null, null, null, table_name FROM information_schema.tables -- #",Yes,meta_based,True,True,0.9992,Union-based
+20260529175544,150,DELETE * FROM payments WHERE product_id BETWEEN 1 AND product_id BETWEEN '2024-01-01',No,None_Type,False,False,0.9996,Boolean-based
+20260529175544,150,EXEC COUNT(*) FROM sessions WHERE updated_at != NULL AND updated_at != 'pending',No,None_Type,False,False,0.9999,Boolean-based
+20260529175544,150,"SELECT user_id, product_id FROM users WHERE order_id IN 'safe' OR order_id IN 'safe'",No,None_Type,False,False,0.9996,Boolean-based
+20260529175544,150,"INSERT price, status FROM admin WHERE product_id BETWEEN 'active' AND product_id BETWEEN '2024-01-01'",No,None_Type,False,False,0.9997,Boolean-based
+20260529175544,150,UPDATE employees SET username = 'test' OR ORDER BY 5-- WHERE id < 1 #,Yes,Union-Based,True,True,1.0,Comment-based
+20260529175544,150,CALL * FROM admin WHERE email <= 'pending' AND email <= NULL,No,None_Type,False,False,0.9998,Boolean-based
+20260529175544,150,"SELECT COUNT(*) FROM passwords WHERE id < 1 NOT +benchmark(3200,SHA1(1))+' --",Yes,Time-Based,True,True,0.9997,Time-based
+20260529175544,150,"SELECT id, email FROM admin WHERE id != 1 AND ORDER BY 25 --",Yes,Union-Based,True,True,0.9996,Comment-based
+20260529175544,150,"SELECT user_id, product_id FROM payments WHERE id > 1 OR AND 1=1 ORDER BY 2 -- --",Yes,meta_based,True,True,0.9996,Boolean-based
+20260529175544,150,INSERT * FROM sessions WHERE updated_at != 'test@example.com' AND updated_at != 'shipped',No,None_Type,False,False,0.9998,Boolean-based
+20260529175544,150,"SELECT user_id, product_id FROM admin WHERE id = 1 LIKE ORDER BY 19 #",Yes,Union-Based,True,True,0.9995,Comment-based
+20260529175544,150,"SELECT created_at, updated_at FROM transactions WHERE product_id >= 'test@example.com' NOT product_id >= 'test@example.com'",No,None_Type,False,False,0.9997,Unknown
+20260529175544,150,INSERT MAX(price) FROM transactions WHERE order_id BETWEEN 'safe' OR order_id BETWEEN 'active',No,None_Type,False,False,0.9998,Boolean-based
+20260529175544,150,UPDATE MAX(price) FROM passwords WHERE email >= 'pending' NOT email >= 'safe',No,None_Type,False,False,0.9998,Unknown
+20260529175544,150,EXEC MIN(created_at) FROM transactions WHERE created_at IN '2024-01-01' AND created_at IN 'active',No,None_Type,False,False,0.9997,Boolean-based
+20260529175544,150,INSERT MAX(price) FROM admin WHERE price >= 'pending' AND price >= NULL,No,None_Type,False,False,0.9998,Boolean-based
+20260529175544,150,"SELECT MIN(created_at) FROM users WHERE id >= 1 OR 3409=3409 AND (1=0) AND (SUBSTRING('password',1,1) = 'p') #",Yes,boolean-based,True,True,0.9999,Comment-based
+20260529175544,150,"SELECT price, status FROM users WHERE id > 1 LIKE OR EXISTS(SELECT * FROM users LIMIT 1) -- #",Yes,meta_based,True,True,0.9984,Comment-based
+20260529175544,150,"CALL price, status FROM passwords WHERE order_id = 'safe' NOT order_id = '2024-01-01'",No,None_Type,False,False,0.9998,Unknown
+20260529175544,150,CALL * FROM credentials WHERE order_id < 1 AND order_id < 1,No,None_Type,False,False,0.9777,Unknown
+20260529175544,150,"SELECT price, status FROM credentials WHERE id = 1 NOT ORDER BY 31337--",Yes,Error-Based,True,True,0.9996,Comment-based
+20260529175544,150,INSERT MIN(created_at) FROM payments WHERE id = 'shipped' AND id = 'safe',No,None_Type,False,False,0.9998,Boolean-based
+20260529175544,150,SELECT * FROM admin WHERE status = 'shipped' AND status = 'safe',No,None_Type,False,False,0.9959,Boolean-based
+20260529175544,150,SELECT MAX(price) FROM credentials WHERE id >= 1 NOT ORDER BY SLEEP(5) --,Yes,Time-Based,True,True,0.9997,Time-based
+20260529175544,150,UPDATE * FROM login WHERE status != NULL NOT status != 'safe',No,None_Type,False,False,0.9998,Unknown
+20260529175544,150,INSERT MAX(price) FROM accounts WHERE updated_at IN 'pending' OR updated_at IN 'shipped',No,None_Type,False,False,0.9998,Boolean-based
+20260529175544,150,UPDATE COUNT(*) FROM admin WHERE order_id = 'safe' NOT order_id = 1,No,None_Type,False,False,0.9996,Unknown
+20260529175544,150,UPDATE users SET username = 'test' LIKE ORDER BY 6 WHERE id > 1,Yes,Union-Based,True,True,0.9999,Suspicious SQL Pattern
+20260529180448,150,EXEC COUNT(*) FROM employees WHERE email LIKE NULL AND email LIKE 'pending',No,None_Type,False,False,0.9998,Boolean-based
+20260529180448,150,INSERT MAX(price) FROM accounts WHERE updated_at < 'test@example.com' AND updated_at < 'active',No,None_Type,False,False,0.9998,Boolean-based
+20260529180448,150,"UPDATE created_at, updated_at FROM users WHERE product_id < 'safe' OR product_id < '2024-01-01'",No,None_Type,False,False,0.9998,Boolean-based
+20260529180448,150,"EXEC price, status FROM passwords WHERE created_at <= 'safe' OR created_at <= 'shipped'",No,None_Type,False,False,0.9998,Boolean-based
+20260529180448,150,"SELECT id, email FROM sessions WHERE id >= 1 LIKE IF(7423=7424) SELECT 7423 ELSE DROP FUNCTION xcjl-- --",Yes,Error-Based,True,True,0.9997,Comment-based
+20260529180448,150,DELETE * FROM credentials WHERE email BETWEEN 'active' OR email BETWEEN '2024-01-01',No,None_Type,False,False,0.9997,Boolean-based
+20260529180448,150,CALL MAX(price) FROM credentials WHERE created_at != '2024-01-01' NOT created_at != NULL,No,None_Type,False,False,0.9999,Unknown
+20260529180448,150,"SELECT user_id, product_id FROM passwords WHERE id != 1 NOT &&SLEEP(5) #",Yes,Time-Based,True,True,0.9992,Time-based
+20260529180448,150,"EXEC created_at, updated_at FROM login WHERE created_at >= 1 AND created_at >= 'active'",No,None_Type,False,False,0.9997,Boolean-based
+20260529180448,150,"CALL created_at, updated_at FROM accounts WHERE status IN 'shipped' NOT status IN 'test@example.com'",No,None_Type,False,False,0.9998,Unknown
+20260529180448,150,"INSERT price, status FROM sessions WHERE product_id IN NULL AND product_id IN 'active'",No,None_Type,False,False,0.9997,Boolean-based
+20260529180448,150,"INSERT id, email FROM passwords WHERE user_id LIKE 'pending' NOT user_id LIKE 'test@example.com'",No,None_Type,False,False,0.9998,Unknown
+20260529180448,150,"SELECT COUNT(*) FROM credentials WHERE id != 1 LIKE "" AND (SELECT * FROM users WHERE username='admin') IS NOT NULL -- #",Yes,meta_based,True,True,0.9998,Comment-based
+20260529180448,150,"EXEC id, email FROM sessions WHERE price = 'test@example.com' AND price = 'safe'",No,None_Type,False,False,0.9967,Boolean-based
+20260529180448,150,"UPDATE users SET status='active' WHERE id > 1 OR 3409=3409 AND (1=0) AND (SUBSTRING('admin',1,1) = 'a') #",Yes,boolean-based,True,True,0.9982,Comment-based
+20260529180448,150,UPDATE * FROM credentials WHERE status >= 'pending' OR status >= 'shipped',No,None_Type,False,False,0.9997,Boolean-based
+20260529180448,150,INSERT MIN(created_at) FROM employees WHERE email >= 1 OR email >= 'test@example.com',No,None_Type,False,False,0.9995,Boolean-based
+20260529180448,150,DELETE * FROM credentials WHERE id <= 'shipped' AND id <= 'test@example.com',No,None_Type,False,False,0.996,Boolean-based
+20260529180448,150,"INSERT user_id, product_id FROM payments WHERE order_id >= 'pending' OR order_id >= NULL",No,None_Type,False,False,0.9998,Boolean-based
+20260529180448,150,CALL MIN(created_at) FROM transactions WHERE price BETWEEN 'pending' NOT price BETWEEN 'shipped',No,None_Type,False,False,0.9998,Unknown
+20260529180448,150,SELECT MAX(price) FROM users WHERE price < 'shipped' OR price < 'test@example.com',No,None_Type,False,False,0.9997,Boolean-based
+20260529180448,150,CALL COUNT(*) FROM passwords WHERE created_at IN 'safe' NOT created_at IN 'shipped',No,None_Type,False,False,0.9998,Unknown
+20260529180448,150,"EXEC price, status FROM sessions WHERE updated_at >= 'shipped' NOT updated_at >= 'active'",No,None_Type,False,False,0.9998,Unknown
+20260529180448,150,"SELECT COUNT(*) FROM credentials WHERE id != 1 OR "" OR (SELECT COUNT(*) FROM users WHERE username='admin') > 1 -- #",Yes,meta_based,True,True,0.9998,Comment-based
+20260529180448,150,"SELECT created_at, updated_at FROM credentials WHERE email LIKE 'safe' NOT email LIKE 'active'",No,None_Type,False,False,0.9997,Unknown
+20260529180448,150,"SELECT created_at, updated_at FROM credentials WHERE id < 1 LIKE sleep(5)# --",Yes,Time-Based,True,True,0.9993,Time-based
+20260529180448,150,CALL MAX(price) FROM credentials WHERE id = 'test@example.com' NOT id = NULL,No,None_Type,False,False,0.9956,Unknown
+20260529180448,150,INSERT MAX(price) FROM accounts WHERE product_id != 1 NOT product_id != '2024-01-01',No,None_Type,False,False,0.9998,Unknown
+20260529180448,150,UPDATE * FROM users WHERE email LIKE NULL OR email LIKE '2024-01-01',No,None_Type,False,False,0.9998,Boolean-based
+20260529180448,150,EXEC MIN(created_at) FROM employees WHERE status BETWEEN 'pending' OR status BETWEEN 'safe',No,None_Type,False,False,0.9996,Boolean-based
+20260529180448,150,INSERT MIN(created_at) FROM employees WHERE user_id BETWEEN 'shipped' OR user_id BETWEEN 'safe',No,None_Type,False,False,0.9998,Boolean-based
+20260529180448,150,"DELETE created_at, updated_at FROM payments WHERE email LIKE 'pending' NOT email LIKE 'test@example.com'",No,None_Type,False,False,0.9961,Unknown
+20260529180448,150,"UPDATE created_at, updated_at FROM accounts WHERE price = NULL OR price = 'pending'",No,None_Type,False,False,0.9999,Boolean-based
+20260529180448,150,SELECT * FROM users WHERE id >= 1 LIKE ORDER BY 18# #,Yes,Error-Based,True,True,0.9996,Comment-based
+20260529180448,150,"INSERT created_at, updated_at FROM employees WHERE email < 'safe' AND email < 1",No,None_Type,False,False,0.9998,Boolean-based
+20260529180448,150,"SELECT created_at, updated_at FROM admin WHERE id > 1 ORDER BY 9# #",Yes,Error-Based,True,True,0.999,Comment-based
+20260529180448,150,"DELETE created_at, updated_at FROM payments WHERE updated_at >= '2024-01-01' OR updated_at >= 'test@example.com'",No,None_Type,False,False,0.9997,Boolean-based
+20260529180448,150,"SELECT user_id, product_id FROM payments WHERE id <= 1 AND ORDER BY 9--",Yes,Error-Based,True,True,0.9995,Comment-based
+20260529180448,150,"EXEC id, email FROM users WHERE price <= 'pending' OR price <= 'safe'",No,None_Type,False,False,0.9997,Boolean-based
+20260529180448,150,"SELECT created_at, updated_at FROM payments WHERE email = 'safe' NOT email = 1",No,None_Type,False,False,0.9994,Unknown
+20260529180448,150,"EXEC('SELECT price, status FROM credentials WHERE id <= 1 OR 3409=3409 AND (1=1) AND (SUBSTRING('password',1,1) = 'p')') #",Yes,boolean-based,True,True,1.0,Comment-based
+20260529180448,150,CALL MAX(price) FROM transactions WHERE email >= 1 AND email >= 'test@example.com',No,None_Type,False,False,0.9998,Boolean-based
+20260529180448,150,"INSERT id, email FROM credentials WHERE product_id > '2024-01-01' OR product_id > NULL",No,None_Type,False,False,0.9998,Boolean-based
+20260529180448,150,"CALL id, email FROM sessions WHERE status LIKE 'shipped' NOT status LIKE 'test@example.com'",No,None_Type,False,False,0.9997,Unknown
+20260529180448,150,"SELECT user_id, product_id FROM payments WHERE id >= 1 NOT ORDER BY 31337#",Yes,Error-Based,True,True,0.9985,Comment-based
+20260529180448,150,"UPDATE employees SET name = 'admin' WHERE id < 1 1)) or benchmark(10000000,MD5(1))# --",Yes,Time-Based,True,True,0.9981,Time-based
+20260529180448,150,EXEC * FROM employees WHERE email = NULL OR email = NULL,No,None_Type,False,False,0.9968,Boolean-based
+20260529180448,150,UPDATE users SET name = 'admin' AND SLEEP(5)-- WHERE id > 1,Yes,Time-Based,True,True,0.9994,Time-based
+20260529180448,150,"SELECT price, status FROM credentials WHERE id >= 1 LIKE ORDER BY SLEEP(5)--",Yes,Time-Based,True,True,0.9996,Time-based
+20260529180448,150,"INSERT id, email FROM employees WHERE id >= 'test@example.com' OR id >= 'safe'",No,None_Type,False,False,0.9998,Boolean-based
+20260529180448,150,"DELETE user_id, product_id FROM login WHERE updated_at >= '2024-01-01' OR updated_at >= '2024-01-01'",No,None_Type,False,False,0.9998,Boolean-based
+20260529180448,150,UPDATE sessions SET name = 'admin' WHERE id = 1 WHERE 1=1 AND 1=0-- --,Yes,Error-Based,True,True,0.9994,Comment-based
+20260529180448,150,INSERT MIN(created_at) FROM passwords WHERE user_id LIKE 'test@example.com' OR user_id LIKE 'active',No,None_Type,False,False,0.9998,Boolean-based
+20260529180448,150,"SELECT * FROM users WHERE id = 1 or benchmark(50000000,MD5(1))",Yes,Time-Based,True,True,0.9831,Time-based
+20260529180448,150,SELECT MAX(price) FROM employees WHERE id < 1 OR ORDER BY 16 --,Yes,Union-Based,True,True,0.9996,Comment-based
+20260529180448,150,"DELETE FROM accounts WHERE id > 1 "") or pg_sleep(5)-- #",Yes,Time-Based,True,True,0.9996,Time-based
+20260529180448,150,SELECT COUNT(*) FROM users WHERE product_id < 'shipped' OR product_id < 'test@example.com',No,None_Type,False,False,0.9994,Boolean-based
+20260529180448,150,EXEC MAX(price) FROM login WHERE email <= NULL OR email <= 'active',No,None_Type,False,False,0.9998,Boolean-based
+20260529180448,150,EXEC('SELECT MAX(price) FROM accounts WHERE id > 1 OR EXISTS(SELECT * FROM users)--') --,Yes,stackqueries_based,True,True,1.0,Comment-based
+20260529180448,150,"CALL user_id, product_id FROM employees WHERE product_id != 'test@example.com' NOT product_id != 'active'",No,None_Type,False,False,0.9998,Unknown
+20260529180448,150,"SELECT MAX(price) FROM payments WHERE id != 1 LIKE UNION SELECT null, null, null, null FROM information_schema.tables -- --",Yes,meta_based,True,True,0.9992,Union-based
+20260529180448,150,"SELECT user_id, product_id FROM login WHERE id >= 1 OR 3409=3409 AND (1=0) AND (SUBSTRING('admin',1,2) = 'ad')",Yes,boolean-based,True,True,0.9988,Boolean-based
+20260529180448,150,"EXEC('SELECT id, email FROM payments WHERE id = 1 ORDER BY 14--')",Yes,Error-Based,True,True,0.9997,Comment-based
+20260529180448,150,"CALL user_id, product_id FROM transactions WHERE created_at BETWEEN 'active' OR created_at BETWEEN 1",No,None_Type,False,False,0.9956,Boolean-based
+20260529180448,150,"UPDATE created_at, updated_at FROM users WHERE created_at LIKE 'shipped' AND created_at LIKE 'pending'",No,None_Type,False,False,0.9998,Boolean-based
+20260529180448,150,"EXEC created_at, updated_at FROM payments WHERE email IN 'pending' AND email IN '2024-01-01'",No,None_Type,False,False,0.9998,Boolean-based
+20260529180448,150,SELECT * FROM employees WHERE status LIKE 'test@example.com' AND status LIKE 'safe',No,None_Type,False,False,0.9996,Boolean-based
+20260529180448,150,UPDATE COUNT(*) FROM payments WHERE created_at IS NOT NULL NOT created_at IS NOT NULL,No,None_Type,False,False,0.996,Unknown
+20260529180448,150,"CALL id, email FROM credentials WHERE price = '2024-01-01' NOT price = 'active'",No,None_Type,False,False,0.9997,Unknown
+20260529180448,150,DELETE MIN(created_at) FROM passwords WHERE created_at <= '2024-01-01' OR created_at <= 1,No,None_Type,False,False,0.9955,Boolean-based
+20260529180448,150,SELECT * FROM accounts WHERE id != 1 NOT );waitfor delay '0:0:5'-- #,Yes,Time-Based,True,True,0.9997,Time-based
+20260529180448,150,UPDATE sessions SET username = 'test' AND ORDER BY 17-- WHERE id > 1,Yes,Union-Based,True,True,1.0,Comment-based
+20260529180448,150,"INSERT created_at, updated_at FROM transactions WHERE product_id LIKE 'safe' AND product_id LIKE 1",No,None_Type,False,False,0.9961,Boolean-based
+20260529180448,150,"INSERT user_id, product_id FROM admin WHERE updated_at >= 'shipped' NOT updated_at >= NULL",No,None_Type,False,False,0.9998,Unknown
+20260529180448,150,"SELECT created_at, updated_at FROM login WHERE id < 1 OR 3409=3409 AND (1=1) AND (EXISTS (SELECT 1 FROM users WHERE username='admin' AND password='password123')",Yes,boolean-based,True,True,0.9991,Boolean-based
+20260529180448,150,CALL * FROM credentials WHERE created_at LIKE '2024-01-01' OR created_at LIKE 'safe',No,None_Type,False,False,0.9998,Boolean-based
+20260529180448,150,"CALL id, email FROM users WHERE email LIKE NULL OR email LIKE 1",No,None_Type,False,False,0.9997,Unknown
+20260529180448,150,EXEC * FROM admin WHERE status >= 'active' OR status >= NULL,No,None_Type,False,False,0.9997,Boolean-based
+20260529180448,150,INSERT MIN(created_at) FROM sessions WHERE status LIKE 1 AND status LIKE 'pending',No,None_Type,False,False,0.9994,Boolean-based
+20260529180448,150,EXEC COUNT(*) FROM admin WHERE price LIKE 'active' OR price LIKE 'safe',No,None_Type,False,False,0.9998,Boolean-based
+20260529180448,150,"DELETE user_id, product_id FROM payments WHERE product_id > 'shipped' OR product_id > 'active'",No,None_Type,False,False,0.9997,Boolean-based
+20260529180448,150,CALL MAX(price) FROM accounts WHERE order_id LIKE NULL NOT order_id LIKE '2024-01-01',No,None_Type,False,False,0.9997,Unknown
+20260529180448,150,"DELETE created_at, updated_at FROM users WHERE price < 'safe' OR price < 1",No,None_Type,False,False,0.9998,Boolean-based
+20260529180448,150,INSERT COUNT(*) FROM admin WHERE order_id IN 'test@example.com' OR order_id IN 'test@example.com',No,None_Type,False,False,0.9998,Boolean-based
+20260529180448,150,"INSERT id, email FROM login WHERE status = 'active' OR status = '2024-01-01'",No,None_Type,False,False,0.9947,Boolean-based
+20260529180448,150,SELECT COUNT(*) FROM admin WHERE id = 1 ORDER BY 18 --,Yes,Union-Based,True,True,0.9997,Comment-based
+20260529180448,150,DELETE COUNT(*) FROM credentials WHERE created_at >= 'active' OR created_at >= 'shipped',No,None_Type,False,False,0.9998,Boolean-based
+20260529180448,150,"DELETE id, email FROM passwords WHERE created_at < '2024-01-01' NOT created_at < 'test@example.com'",No,None_Type,False,False,0.9997,Unknown
+20260529180448,150,"DELETE user_id, product_id FROM users WHERE user_id != 'shipped' AND user_id != 'safe'",No,None_Type,False,False,0.9997,Boolean-based
+20260529180448,150,CALL MAX(price) FROM payments WHERE created_at = '2024-01-01' NOT created_at = 'pending',No,None_Type,False,False,0.9999,Unknown
+20260529180448,150,UPDATE MAX(price) FROM admin WHERE email LIKE 'test@example.com' AND email LIKE 1,No,None_Type,False,False,0.9998,Boolean-based
+20260529180448,150,INSERT MIN(created_at) FROM login WHERE status < 'shipped' OR status < 'active',No,None_Type,False,False,0.9998,Boolean-based
+20260529180448,150,EXEC('SELECT MAX(price) FROM transactions WHERE id = 1 LIKE ORDER BY SLEEP(5)'),Yes,Time-Based,True,True,0.9997,Time-based
+20260529180448,150,"CALL user_id, product_id FROM admin WHERE product_id < 'safe' AND product_id < 'safe'",No,None_Type,False,False,0.9998,Boolean-based
+20260529180448,150,"SELECT user_id, product_id FROM payments WHERE id >= 1 AND &&SLEEP(5) --",Yes,Time-Based,True,True,0.9988,Time-based
+20260529180448,150,SELECT * FROM transactions WHERE id = 1 NOT ORDER BY 20 #,Yes,Union-Based,True,True,0.9992,Comment-based
+20260529180448,150,INSERT MIN(created_at) FROM credentials WHERE created_at > '2024-01-01' OR created_at > 'test@example.com',No,None_Type,False,False,0.9998,Boolean-based
+20260529180448,150,"DELETE id, email FROM credentials WHERE product_id > 'safe' OR product_id > 'test@example.com'",No,None_Type,False,False,0.9998,Boolean-based
+20260529180448,150,"EXEC created_at, updated_at FROM transactions WHERE id < 'safe' OR id < 'shipped'",No,None_Type,False,False,0.9998,Boolean-based
+20260529180448,150,"EXEC user_id, product_id FROM passwords WHERE status != 'test@example.com' AND status != NULL",No,None_Type,False,False,0.9998,Boolean-based
+20260529180448,150,CALL COUNT(*) FROM sessions WHERE user_id BETWEEN 'test@example.com' NOT user_id BETWEEN 'shipped',No,None_Type,False,False,0.9997,Unknown
+20260529180448,150,"UPDATE created_at, updated_at FROM payments WHERE email BETWEEN 'test@example.com' NOT email BETWEEN '2024-01-01'",No,None_Type,False,False,0.9998,Unknown
+20260529180448,150,UPDATE login SET name = 'admin' WHERE id != 1 AS INJECTX WHERE 1=1 AND 1=0-- #,Yes,Error-Based,True,True,0.9995,Comment-based
+20260529180448,150,SELECT MIN(created_at) FROM credentials WHERE created_at <= 'pending' NOT created_at <= 'pending',No,None_Type,False,False,0.9996,Unknown
+20260529180448,150,"SELECT user_id, product_id FROM login WHERE email IN 'safe' OR email IN 'safe'",No,None_Type,False,False,0.9995,Boolean-based
+20260529180448,150,"UPDATE price, status FROM transactions WHERE updated_at <= 'shipped' OR updated_at <= 'pending'",No,None_Type,False,False,0.9997,Boolean-based
+20260529180448,150,"INSERT price, status FROM sessions WHERE user_id BETWEEN 'active' NOT user_id BETWEEN 'pending'",No,None_Type,False,False,0.9998,Unknown
+20260529180448,150,"SELECT user_id, product_id FROM payments WHERE id >= 1 NOT "" OR 1=1 LIMIT 0, 1 -- #",Yes,meta_based,True,True,0.9894,Boolean-based
+20260529180448,150,CALL MIN(created_at) FROM admin WHERE product_id = 'shipped' AND product_id = 1,No,None_Type,False,False,0.9998,Boolean-based
+20260529180448,150,INSERT MAX(price) FROM login WHERE status = 'test@example.com' OR status = 'shipped',No,None_Type,False,False,0.9997,Boolean-based
+20260529180448,150,"UPDATE id, email FROM sessions WHERE price LIKE 'safe' AND price LIKE 'shipped'",No,None_Type,False,False,0.9996,Boolean-based
+20260529180448,150,"SELECT created_at, updated_at FROM payments WHERE id != 1 pg_SLEEP(5)#",Yes,Time-Based,True,True,0.9837,Time-based
+20260529180448,150,UPDATE COUNT(*) FROM admin WHERE email LIKE 1 NOT email LIKE 'active',No,None_Type,False,False,0.9996,Unknown
+20260529180448,150,SELECT MAX(price) FROM credentials WHERE price > 1 AND price > 'pending',No,None_Type,False,False,0.9957,Boolean-based
+20260529180448,150,"INSERT price, status FROM accounts WHERE updated_at >= 'test@example.com' AND updated_at >= 'pending'",No,None_Type,False,False,0.9998,Boolean-based
+20260529180448,150,"SELECT created_at, updated_at FROM sessions WHERE id != 1 ORDER BY 6#",Yes,Error-Based,True,True,0.9877,Comment-based
+20260529180448,150,INSERT * FROM sessions WHERE user_id > 'pending' AND user_id > 'safe',No,None_Type,False,False,0.9994,Boolean-based
+20260529180448,150,CALL MAX(price) FROM passwords WHERE id != NULL OR id != 'pending',No,None_Type,False,False,0.9996,Boolean-based
+20260529180448,150,EXEC * FROM users WHERE user_id = '2024-01-01' AND user_id = '2024-01-01',No,None_Type,False,False,0.9997,Boolean-based
+20260529180448,150,"INSERT created_at, updated_at FROM credentials WHERE id >= NULL NOT id >= 'shipped'",No,None_Type,False,False,0.9998,Unknown
+20260529180448,150,CALL MAX(price) FROM payments WHERE user_id != 1 NOT user_id != 1,No,None_Type,False,False,0.9849,Unknown
+20260529180448,150,"SELECT created_at, updated_at FROM passwords WHERE id > 1 LIKE UNION SELECT null, null, null, table_name FROM information_schema.tables -- #",Yes,meta_based,True,True,0.9992,Union-based
+20260529180448,150,DELETE * FROM payments WHERE product_id BETWEEN 1 AND product_id BETWEEN '2024-01-01',No,None_Type,False,False,0.9996,Boolean-based
+20260529180448,150,EXEC COUNT(*) FROM sessions WHERE updated_at != NULL AND updated_at != 'pending',No,None_Type,False,False,0.9999,Boolean-based
+20260529180448,150,"SELECT user_id, product_id FROM users WHERE order_id IN 'safe' OR order_id IN 'safe'",No,None_Type,False,False,0.9996,Boolean-based
+20260529180448,150,"INSERT price, status FROM admin WHERE product_id BETWEEN 'active' AND product_id BETWEEN '2024-01-01'",No,None_Type,False,False,0.9997,Boolean-based
+20260529180448,150,UPDATE employees SET username = 'test' OR ORDER BY 5-- WHERE id < 1 #,Yes,Union-Based,True,True,1.0,Comment-based
+20260529180448,150,CALL * FROM admin WHERE email <= 'pending' AND email <= NULL,No,None_Type,False,False,0.9998,Boolean-based
+20260529180448,150,"SELECT COUNT(*) FROM passwords WHERE id < 1 NOT +benchmark(3200,SHA1(1))+' --",Yes,Time-Based,True,True,0.9997,Time-based
+20260529180448,150,"SELECT id, email FROM admin WHERE id != 1 AND ORDER BY 25 --",Yes,Union-Based,True,True,0.9996,Comment-based
+20260529180448,150,"SELECT user_id, product_id FROM payments WHERE id > 1 OR AND 1=1 ORDER BY 2 -- --",Yes,meta_based,True,True,0.9996,Boolean-based
+20260529180448,150,INSERT * FROM sessions WHERE updated_at != 'test@example.com' AND updated_at != 'shipped',No,None_Type,False,False,0.9998,Boolean-based
+20260529180448,150,"SELECT user_id, product_id FROM admin WHERE id = 1 LIKE ORDER BY 19 #",Yes,Union-Based,True,True,0.9995,Comment-based
+20260529180448,150,"SELECT created_at, updated_at FROM transactions WHERE product_id >= 'test@example.com' NOT product_id >= 'test@example.com'",No,None_Type,False,False,0.9997,Unknown
+20260529180448,150,INSERT MAX(price) FROM transactions WHERE order_id BETWEEN 'safe' OR order_id BETWEEN 'active',No,None_Type,False,False,0.9998,Boolean-based
+20260529180448,150,UPDATE MAX(price) FROM passwords WHERE email >= 'pending' NOT email >= 'safe',No,None_Type,False,False,0.9998,Unknown
+20260529180448,150,EXEC MIN(created_at) FROM transactions WHERE created_at IN '2024-01-01' AND created_at IN 'active',No,None_Type,False,False,0.9997,Boolean-based
+20260529180448,150,INSERT MAX(price) FROM admin WHERE price >= 'pending' AND price >= NULL,No,None_Type,False,False,0.9998,Boolean-based
+20260529180448,150,"SELECT MIN(created_at) FROM users WHERE id >= 1 OR 3409=3409 AND (1=0) AND (SUBSTRING('password',1,1) = 'p') #",Yes,boolean-based,True,True,0.9999,Comment-based
+20260529180448,150,"SELECT price, status FROM users WHERE id > 1 LIKE OR EXISTS(SELECT * FROM users LIMIT 1) -- #",Yes,meta_based,True,True,0.9984,Comment-based
+20260529180448,150,"CALL price, status FROM passwords WHERE order_id = 'safe' NOT order_id = '2024-01-01'",No,None_Type,False,False,0.9998,Unknown
+20260529180448,150,CALL * FROM credentials WHERE order_id < 1 AND order_id < 1,No,None_Type,False,False,0.9777,Unknown
+20260529180448,150,"SELECT price, status FROM credentials WHERE id = 1 NOT ORDER BY 31337--",Yes,Error-Based,True,True,0.9996,Comment-based
+20260529180448,150,INSERT MIN(created_at) FROM payments WHERE id = 'shipped' AND id = 'safe',No,None_Type,False,False,0.9998,Boolean-based
+20260529180448,150,SELECT * FROM admin WHERE status = 'shipped' AND status = 'safe',No,None_Type,False,False,0.9959,Boolean-based
+20260529180448,150,SELECT MAX(price) FROM credentials WHERE id >= 1 NOT ORDER BY SLEEP(5) --,Yes,Time-Based,True,True,0.9997,Time-based
+20260529180448,150,UPDATE * FROM login WHERE status != NULL NOT status != 'safe',No,None_Type,False,False,0.9998,Unknown
+20260529180448,150,INSERT MAX(price) FROM accounts WHERE updated_at IN 'pending' OR updated_at IN 'shipped',No,None_Type,False,False,0.9998,Boolean-based
+20260529180448,150,UPDATE COUNT(*) FROM admin WHERE order_id = 'safe' NOT order_id = 1,No,None_Type,False,False,0.9996,Unknown
+20260529180448,150,UPDATE users SET username = 'test' LIKE ORDER BY 6 WHERE id > 1,Yes,Union-Based,True,True,0.9999,Suspicious SQL Pattern

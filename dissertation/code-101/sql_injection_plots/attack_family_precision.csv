@@ -1,0 +1,9 @@
+attack_family,true_positives,predicted_positives,precision
+Time-based,65,65,1.0
+Boolean-based,10,20,0.5
+Comment-based,0,120,0.0
+Error-based,0,0,0.0
+Meta-based,0,0,0.0
+Stack-queries-based,0,0,0.0
+Suspicious SQL Pattern,0,5,0.0
+Union-based,0,10,0.0

@@ -1,0 +1,8 @@
+route,blocked_requests,allowed_requests
+/dataset_batch_detect,220,530
+/api/orders,10,4
+/api/login,7,7
+/api/users,6,6
+/api/search,4,6
+/api/products/1,3,4
+/api/products/1' OR '1'='1,3,0

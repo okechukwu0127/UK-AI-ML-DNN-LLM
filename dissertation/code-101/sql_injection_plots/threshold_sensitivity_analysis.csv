@@ -1,0 +1,4 @@
+threshold,blocked_requests,allowed_requests,total_requests
+0.5,253,557,810
+0.6,253,557,810
+0.7,251,559,810

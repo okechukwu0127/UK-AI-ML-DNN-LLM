@@ -1,0 +1,8 @@
+route,avg_inference_ms,median_inference_ms,request_count
+/dataset_batch_detect,14.547268333333335,14.235,750
+/api/search,7.145857142857143,0.107,10
+/api/orders,6.2418,0.225,14
+/api/users,0.5163333333333333,0.124,12
+/api/login,0.23,0.23,14
+/api/products/1,0.11833333333333333,0.104,7
+/api/products/1' OR '1'='1,,,3

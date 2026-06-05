@@ -1,2 +1,2 @@
 sample_size,total_queries,malicious_predictions,blocked_requests,avg_confidence
-150,150,44,44,0.9987313333333333
+150,750,220,220,0.9987313333333333

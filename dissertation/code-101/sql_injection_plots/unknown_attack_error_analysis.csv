@@ -1,0 +1,7 @@
+route,count
+/api/login,5
+/api/products/1,3
+/api/users,3
+/api/orders,2
+/api/products/1' OR '1'='1,1
+/api/search,1

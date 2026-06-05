@@ -1,0 +1,8 @@
+route,total_requests,blocked_requests,allowed_requests,malicious_predictions,benign_predictions,top_attack_type,block_rate_pct
+/dataset_batch_detect,750,220,530,220,530,Boolean-based,29.33
+/api/orders,14,10,4,10,4,Stack-queries-based,71.43
+/api/login,14,7,7,7,7,Unknown,50.0
+/api/users,12,6,6,6,6,Unknown,50.0
+/api/search,10,4,6,4,6,Union-based,40.0
+/api/products/1,7,3,4,3,4,Unknown,42.86
+/api/products/1' OR '1'='1,3,3,0,3,0,Boolean-based,100.0

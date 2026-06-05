@@ -18,6 +18,7 @@ import re
 from collections import Counter
 
 import matplotlib.pyplot as plt
+import joblib
 import pandas as pd
 import seaborn as sns
 
@@ -26,6 +27,7 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 PLOTS_DIR = os.path.join(BASE_DIR, "sql_injection_plots")
 DATASET_PATH = os.path.join(BASE_DIR, "rbsqli_dataset_1k.csv")
 LOG_PATH = os.path.join(BASE_DIR, "sql_injection_logs.json")
+MODEL_BUNDLE_PATH = os.path.join(BASE_DIR, "best_sql_injection_model.pkl")
 
 SAMPLE_REPORTS = {
     5000: "/Users/oeze/Downloads/SAMPLE_SIZE_5000.txt",
@@ -269,6 +271,31 @@ def normalise_attack_type(log_entry):
     return top_level or "Benign/No Attack"
 
 
+def normalise_family_label(value):
+    """Map label variants to a small set of canonical SQLi family names."""
+    if value is None:
+        return "Unknown"
+
+    text = str(value).strip().lower().replace("_", "-")
+    if not text or text in {"none", "none-type", "no", "benign", "unknown"}:
+        return "Unknown"
+    if "union" in text:
+        return "Union-based"
+    if "stack" in text or "stackquery" in text or "stack-queries" in text:
+        return "Stack-queries-based"
+    if "time" in text or "sleep" in text:
+        return "Time-based"
+    if "meta" in text:
+        return "Meta-based"
+    if "boolean" in text or "bool" in text:
+        return "Boolean-based"
+    if "error" in text:
+        return "Error-based"
+    if "comment" in text:
+        return "Comment-based"
+    return value if isinstance(value, str) else "Unknown"
+
+
 def generate_runtime_dashboard(logs, output_name="runtime_dashboard_summary", title_suffix=""):
     """Generate a four-panel runtime dashboard from middleware logs."""
     if not logs:
@@ -323,6 +350,70 @@ def generate_runtime_dashboard(logs, output_name="runtime_dashboard_summary", ti
     runtime_summary.to_csv(os.path.join(PLOTS_DIR, f"{output_name}.csv"), index=False)
 
     return output_path
+
+
+def generate_route_level_testing_summary(logs):
+    """
+    Generate a compact route-level summary from middleware logs.
+
+    This is useful for dissertation tables because it captures the number of
+    attempts, block/allow decisions, and attack-type coverage per route.
+    """
+    if not logs:
+        return None
+
+    runtime_df = pd.DataFrame(logs)
+    if runtime_df.empty or "route" not in runtime_df.columns:
+        return None
+
+    runtime_df["blocked"] = runtime_df["blocked"].astype(bool)
+    runtime_df["is_malicious"] = runtime_df["is_malicious"].astype(bool)
+    runtime_df["attack_type_clean"] = runtime_df.apply(normalise_attack_type, axis=1)
+
+    summary = (
+        runtime_df.groupby("route")
+        .agg(
+            total_requests=("route", "count"),
+            blocked_requests=("blocked", "sum"),
+            allowed_requests=("blocked", lambda s: int((~s).sum())),
+            malicious_predictions=("is_malicious", "sum"),
+            benign_predictions=("is_malicious", lambda s: int((~s).sum())),
+            top_attack_type=("attack_type_clean", lambda s: s.value_counts().index[0] if not s.value_counts().empty else "Unknown"),
+        )
+        .reset_index()
+        .sort_values(["blocked_requests", "total_requests"], ascending=[False, False])
+    )
+
+    summary["block_rate_pct"] = (summary["blocked_requests"] / summary["total_requests"] * 100).round(2)
+    summary.to_csv(os.path.join(PLOTS_DIR, "route_level_testing_summary.csv"), index=False)
+    return summary
+
+
+def generate_attack_type_attribution_summary(logs):
+    """
+    Generate an attack-type attribution table from middleware logs.
+
+    The summary is intended for the dissertation discussion of how the model
+    labels suspicious payloads after the binary malicious/benign decision.
+    """
+    if not logs:
+        return None
+
+    runtime_df = pd.DataFrame(logs)
+    if runtime_df.empty:
+        return None
+
+    runtime_df["attack_type_clean"] = runtime_df.apply(normalise_attack_type, axis=1)
+
+    summary = (
+        runtime_df["attack_type_clean"]
+        .value_counts(dropna=False)
+        .rename_axis("attack_type")
+        .reset_index(name="count")
+    )
+    summary["percentage"] = (summary["count"] / summary["count"].sum() * 100).round(2)
+    summary.to_csv(os.path.join(PLOTS_DIR, "attack_type_attribution_summary.csv"), index=False)
+    return summary
 
 
 def build_dataset_batch_dataframe(logs):
@@ -467,6 +558,262 @@ def generate_dataset_batch_reports(logs):
     }
 
 
+def generate_false_positive_negative_reports():
+    """Generate false-positive and false-negative analyses from batch logs."""
+    batch_path = os.path.join(PLOTS_DIR, "dataset_batch_logs.csv")
+    if not os.path.exists(batch_path):
+        return None
+
+    df = pd.read_csv(batch_path)
+    if df.empty or "true_label" not in df.columns:
+        return None
+
+    false_positive = df[(df["true_label"].astype(str).str.lower() == "no") & (df["predicted_malicious"] == True)].copy()
+    false_negative = df[(df["true_label"].astype(str).str.lower() == "yes") & (df["predicted_malicious"] == False)].copy()
+
+    fp_summary = false_positive.groupby("injection_type").size().reset_index(name="count").sort_values("count", ascending=False)
+    fn_summary = false_negative.groupby("injection_type").size().reset_index(name="count").sort_values("count", ascending=False)
+
+    fp_summary.to_csv(os.path.join(PLOTS_DIR, "false_positive_analysis.csv"), index=False)
+    fn_summary.to_csv(os.path.join(PLOTS_DIR, "false_negative_analysis.csv"), index=False)
+
+    if not fp_summary.empty:
+        plt.figure(figsize=(9, 5))
+        sns.barplot(x="count", y="injection_type", data=fp_summary, palette="Reds_r")
+        plt.title("False-Positive Analysis on Benign Requests")
+        plt.xlabel("Count")
+        plt.ylabel("Injection Type")
+        plt.tight_layout()
+        plt.savefig(os.path.join(PLOTS_DIR, "false_positive_analysis.png"), dpi=300, bbox_inches="tight")
+        plt.close()
+
+    if not fn_summary.empty:
+        plt.figure(figsize=(9, 5))
+        sns.barplot(x="count", y="injection_type", data=fn_summary, palette="Blues_r")
+        plt.title("False-Negative Analysis on Malicious Requests")
+        plt.xlabel("Count")
+        plt.ylabel("Injection Type")
+        plt.tight_layout()
+        plt.savefig(os.path.join(PLOTS_DIR, "false_negative_analysis.png"), dpi=300, bbox_inches="tight")
+        plt.close()
+
+    return {"false_positive": fp_summary, "false_negative": fn_summary}
+
+
+def generate_threshold_sensitivity_report():
+    """Estimate blocking behaviour at multiple confidence thresholds."""
+    if not os.path.exists(LOG_PATH):
+        return None
+
+    logs = load_runtime_logs()
+    if not logs:
+        return None
+
+    df = pd.DataFrame(logs)
+    if df.empty or "prediction" not in df.columns:
+        return None
+
+    def get_score(pred):
+        if isinstance(pred, dict):
+            return pred.get("prediction_score", pred.get("confidence", 0.0))
+        return 0.0
+
+    df["score"] = df["prediction"].apply(get_score).astype(float)
+    thresholds = [0.5, 0.6, 0.7]
+    rows = []
+    for thr in thresholds:
+        predicted_blocked = df["score"] >= thr
+        rows.append({
+            "threshold": thr,
+            "blocked_requests": int(predicted_blocked.sum()),
+            "allowed_requests": int((~predicted_blocked).sum()),
+            "total_requests": int(len(df)),
+        })
+
+    out = pd.DataFrame(rows)
+    out.to_csv(os.path.join(PLOTS_DIR, "threshold_sensitivity_analysis.csv"), index=False)
+
+    plt.figure(figsize=(8, 5))
+    plt.plot(out["threshold"], out["blocked_requests"], marker="o", label="Blocked")
+    plt.plot(out["threshold"], out["allowed_requests"], marker="s", label="Allowed")
+    plt.title("Threshold Sensitivity Analysis")
+    plt.xlabel("Confidence Threshold")
+    plt.ylabel("Request Count")
+    plt.grid(True, alpha=0.3)
+    plt.legend()
+    plt.tight_layout()
+    plt.savefig(os.path.join(PLOTS_DIR, "threshold_sensitivity_analysis.png"), dpi=300, bbox_inches="tight")
+    plt.close()
+
+    return out
+
+
+def generate_route_block_allow_frequency():
+    """Create a route-level block/allow frequency table and chart."""
+    logs = load_runtime_logs()
+    if not logs:
+        return None
+
+    df = pd.DataFrame(logs)
+    if df.empty or "route" not in df.columns:
+        return None
+
+    summary = (
+        df.groupby("route")
+        .agg(
+            blocked_requests=("blocked", "sum"),
+            allowed_requests=("blocked", lambda s: int((~s.astype(bool)).sum())),
+        )
+        .reset_index()
+        .sort_values("blocked_requests", ascending=False)
+    )
+    summary.to_csv(os.path.join(PLOTS_DIR, "route_block_allow_frequency.csv"), index=False)
+
+    plt.figure(figsize=(10, 6))
+    x = range(len(summary))
+    plt.bar(x, summary["blocked_requests"], label="Blocked", color="#d32f2f")
+    plt.bar(x, summary["allowed_requests"], bottom=summary["blocked_requests"], label="Allowed", color="#388e3c")
+    plt.xticks(list(x), summary["route"], rotation=25, ha="right")
+    plt.title("Route-Level Block/Allow Frequencies")
+    plt.ylabel("Count")
+    plt.legend()
+    plt.tight_layout()
+    plt.savefig(os.path.join(PLOTS_DIR, "route_block_allow_frequency.png"), dpi=300, bbox_inches="tight")
+    plt.close()
+    return summary
+
+
+def generate_attack_family_precision_report():
+    """Estimate attack-family precision using dataset batch logs."""
+    batch_path = os.path.join(PLOTS_DIR, "dataset_batch_logs.csv")
+    if not os.path.exists(batch_path):
+        return None
+
+    df = pd.read_csv(batch_path)
+    if df.empty or "injection_type" not in df.columns or "attack_type" not in df.columns:
+        return None
+
+    df["true_family"] = df["injection_type"].apply(normalise_family_label)
+    df["pred_family"] = df["attack_type"].apply(normalise_family_label)
+    malicious = df[df["true_label"].astype(str).str.lower() == "yes"].copy()
+
+    rows = []
+    for fam in sorted(set(malicious["true_family"]).union(set(malicious["pred_family"]))):
+        predicted = malicious[malicious["pred_family"] == fam]
+        tp = int((predicted["true_family"] == fam).sum())
+        precision = round(tp / len(predicted), 4) if len(predicted) else 0.0
+        rows.append({"attack_family": fam, "true_positives": tp, "predicted_positives": int(len(predicted)), "precision": precision})
+
+    out = pd.DataFrame(rows).sort_values("precision", ascending=False)
+    out.to_csv(os.path.join(PLOTS_DIR, "attack_family_precision.csv"), index=False)
+
+    plt.figure(figsize=(9, 5))
+    sns.barplot(x="precision", y="attack_family", data=out, palette="viridis")
+    plt.title("Attack-Family Recognition Precision")
+    plt.xlabel("Precision")
+    plt.ylabel("Attack Family")
+    plt.xlim(0, 1)
+    plt.tight_layout()
+    plt.savefig(os.path.join(PLOTS_DIR, "attack_family_precision.png"), dpi=300, bbox_inches="tight")
+    plt.close()
+    return out
+
+
+def generate_unknown_attack_error_analysis():
+    """Summarise Unknown attack labels so they can be discussed as errors."""
+    logs = load_runtime_logs()
+    if not logs:
+        return None
+
+    df = pd.DataFrame(logs)
+    if df.empty:
+        return None
+
+    df["attack_type_clean"] = df.apply(normalise_attack_type, axis=1)
+    unknown = df[df["attack_type_clean"].isin(["Unknown", "Benign/No Attack"])].copy()
+    if unknown.empty:
+        return None
+
+    summary = unknown.groupby("route").size().reset_index(name="count").sort_values("count", ascending=False)
+    summary.to_csv(os.path.join(PLOTS_DIR, "unknown_attack_error_analysis.csv"), index=False)
+
+    plt.figure(figsize=(9, 5))
+    sns.barplot(x="count", y="route", data=summary, palette="magma")
+    plt.title("Unknown Attack-Type Error Analysis")
+    plt.xlabel("Count")
+    plt.ylabel("Route")
+    plt.tight_layout()
+    plt.savefig(os.path.join(PLOTS_DIR, "unknown_attack_error_analysis.png"), dpi=300, bbox_inches="tight")
+    plt.close()
+    return summary
+
+
+def generate_random_forest_feature_importance():
+    """Generate feature importance plots from the saved Random Forest bundle."""
+    if not os.path.exists(MODEL_BUNDLE_PATH):
+        return None
+
+    bundle = joblib.load(MODEL_BUNDLE_PATH)
+    model = bundle.get("model")
+    vectorizer = bundle.get("tfidf_vectorizer")
+    feature_columns = bundle.get("feature_columns", [])
+    if model is None or not hasattr(model, "feature_importances_") or vectorizer is None:
+        return None
+
+    tfidf_features = list(vectorizer.get_feature_names_out())
+    feature_names = tfidf_features + list(feature_columns)
+    importances = pd.DataFrame({
+        "feature": feature_names,
+        "importance": model.feature_importances_
+    }).sort_values("importance", ascending=False)
+
+    importances.to_csv(os.path.join(PLOTS_DIR, "random_forest_feature_importance.csv"), index=False)
+
+    top = importances.head(20).sort_values("importance")
+    plt.figure(figsize=(10, 7))
+    sns.barplot(x="importance", y="feature", data=top, palette="crest")
+    plt.title("Random Forest Feature Importance")
+    plt.xlabel("Importance")
+    plt.ylabel("Feature")
+    plt.tight_layout()
+    plt.savefig(os.path.join(PLOTS_DIR, "random_forest_feature_importance.png"), dpi=300, bbox_inches="tight")
+    plt.close()
+    return importances
+
+
+def generate_inference_latency_report():
+    """
+    Generate a latency report if runtime logs include timing information.
+
+    This becomes available once the middleware stores inference_ms in logs.
+    """
+    logs = load_runtime_logs()
+    if not logs:
+        return None
+
+    df = pd.DataFrame(logs)
+    if df.empty or "inference_ms" not in df.columns:
+        return None
+
+    summary = (
+        df.groupby("route")
+        .agg(avg_inference_ms=("inference_ms", "mean"), median_inference_ms=("inference_ms", "median"), request_count=("route", "count"))
+        .reset_index()
+        .sort_values("avg_inference_ms", ascending=False)
+    )
+    summary.to_csv(os.path.join(PLOTS_DIR, "inference_latency_summary.csv"), index=False)
+
+    plt.figure(figsize=(10, 6))
+    sns.barplot(x="avg_inference_ms", y="route", data=summary, palette="Blues_r")
+    plt.title("Average Inference Latency per Route")
+    plt.xlabel("Milliseconds")
+    plt.ylabel("Route")
+    plt.tight_layout()
+    plt.savefig(os.path.join(PLOTS_DIR, "inference_latency_summary.png"), dpi=300, bbox_inches="tight")
+    plt.close()
+    return summary
+
+
 def main():
     """Generate all requested Chapter 3 figures."""
     ensure_output_dir()
@@ -483,7 +830,16 @@ def main():
 
     logs = load_runtime_logs()
     runtime_plot = generate_runtime_dashboard(logs)
+    route_summary = generate_route_level_testing_summary(logs)
+    attack_summary = generate_attack_type_attribution_summary(logs)
     dataset_batch_reports = generate_dataset_batch_reports(logs)
+    generate_false_positive_negative_reports()
+    generate_threshold_sensitivity_report()
+    generate_route_block_allow_frequency()
+    generate_attack_family_precision_report()
+    generate_unknown_attack_error_analysis()
+    generate_random_forest_feature_importance()
+    generate_inference_latency_report()
 
     print("Generated figures:")
     for path in [sample_plot, model_f1_plot, class_plot, injection_plot, runtime_plot]:
@@ -499,6 +855,10 @@ def main():
         print(" - dataset_batch_sample_size_behaviour.png")
         print(" - runtime_dashboard_summary_dataset_batch.png")
         print(" - runtime_dashboard_summary_dataset_batch.csv")
+    if route_summary is not None:
+        print(" - route_level_testing_summary.csv")
+    if attack_summary is not None:
+        print(" - attack_type_attribution_summary.csv")
 
 
 if __name__ == "__main__":

@@ -10,13 +10,13 @@ import json
 import pickle
 import csv
 import random
+import time
 from datetime import datetime
 from functools import wraps
 from urllib.parse import unquote
 
 import numpy as np
 import pandas as pd
-import tensorflow as tf
 from flask import Flask, request, jsonify, g, make_response
 from flask_cors import CORS
 from werkzeug.datastructures import MultiDict
@@ -117,6 +117,7 @@ class SQLInjectionPredictor:
             self.keras_model_path = pipeline.get('keras_model_path')
 
             if self.model is None and self.keras_model_path:
+                import tensorflow as tf
                 self.model = tf.keras.models.load_model(self.keras_model_path)
 
             self.model_loaded = True
@@ -243,6 +244,8 @@ class SQLInjectionPredictor:
                 'explanation': str
             }
         """
+        start_time = time.perf_counter()
+
         if not sql_query or len(sql_query) > Config.MAX_QUERY_LENGTH:
             return self._to_native_prediction(False, 0.0, 0.0, None, 'Empty or oversized query')
 
@@ -274,17 +277,21 @@ class SQLInjectionPredictor:
             # Generate explanation
             explanation = self._generate_explanation(sql_query, is_malicious, confidence, attack_type)
 
-            return self._to_native_prediction(
+            result = self._to_native_prediction(
                 is_malicious=is_malicious,
                 confidence=confidence,
                 prediction_score=prediction_score,
                 attack_type=attack_type,
                 explanation=explanation
             )
+            result['inference_ms'] = round((time.perf_counter() - start_time) * 1000.0, 3)
+            return result
 
         except Exception as e:
             print(f"Prediction error: {e}")
-            return self._to_native_prediction(False, 0.0, 0.0, None, f'Prediction error: {str(e)}')
+            result = self._to_native_prediction(False, 0.0, 0.0, None, f'Prediction error: {str(e)}')
+            result['inference_ms'] = round((time.perf_counter() - start_time) * 1000.0, 3)
+            return result
 
     def _rule_based_detection(self, sql_query):
         """
@@ -440,7 +447,8 @@ class SQLInjectionLogger:
             'is_malicious': prediction.get('is_malicious', False),
             'confidence': prediction.get('confidence', 0),
             'attack_type': prediction.get('attack_type'),
-            'blocked': Config.BLOCK_MALICIOUS_REQUESTS and prediction.get('is_malicious', False)
+            'blocked': Config.BLOCK_MALICIOUS_REQUESTS and prediction.get('is_malicious', False),
+            'inference_ms': prediction.get('inference_ms')
         }
 
         self.attempts.append(log_entry)
@@ -638,7 +646,8 @@ def _log_dataset_batch_attempt(sample_row, prediction, dataset_path, sample_size
             'confidence': prediction.get('confidence', 0.0),
             'attack_type': prediction.get('attack_type'),
             'details': [prediction],
-            'prediction_score': prediction.get('prediction_score', prediction.get('confidence', 0.0))
+            'prediction_score': prediction.get('prediction_score', prediction.get('confidence', 0.0)),
+            'inference_ms': prediction.get('inference_ms')
         },
         route='/dataset_batch_detect',
         method='BATCH',
@@ -743,6 +752,7 @@ def sql_injection_middleware(func):
     """
     @wraps(func)
     def wrapper(*args, **kwargs):
+        request_start = time.perf_counter()
         g.sql_injection_detected = False
         g.sql_injection_confidence = 0.0
         g.sql_injection_details = []
@@ -785,6 +795,8 @@ def sql_injection_middleware(func):
                     highest_confidence = prediction['confidence']
                     worst_attack = prediction.get('attack_type')
 
+        request_inference_ms = round((time.perf_counter() - request_start) * 1000.0, 3)
+
         log_data = {
             'candidate_count': len(sql_candidates),
             'sql_like_candidate_count': len(detection_results),
@@ -798,7 +810,9 @@ def sql_injection_middleware(func):
             'is_malicious': bool(is_malicious),
             'confidence': float(highest_confidence),
             'attack_type': worst_attack,
-            'details': [r.get('prediction', {}) for r in detection_results if r.get('prediction')]
+            'details': [r.get('prediction', {}) for r in detection_results if r.get('prediction')],
+            'inference_ms': request_inference_ms
+
         }
 
         logger.log_attempt(
